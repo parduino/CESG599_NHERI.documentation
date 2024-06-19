@@ -229,26 +229,16 @@ Information on the seven ground motions to be used in this example is shown in T
      - dT (sec)
      - Duration (sec)
      - N° of steps
-   * - Conception-L
-     - 0.82
-     - 0.01
-     - 141.67
-     - 28335.00
-   * - RSN727_SUPER
-     - 0.96
-     - 0.01
-     - 22.20
-     - 2221.00
    * - Tohoku 41207-EW
      - 0.58
      - 0.01
      - 359.98
      - 35999.00
-   * - Tohoku Ishinomaki-NS
-     - 0.77
+   * - RSN6911_DARFIELD_HORCN18E
+     - 0.61
      - 0.01
-     - 299.98
-     - 29999.00
+     - 60.17
+     - 12036.00
    * - RSN803_LOMAP_WVC270
      - 0.67
      - 0.01
@@ -259,11 +249,21 @@ Information on the seven ground motions to be used in this example is shown in T
      - 0.01
      - 40.39
      - 4040.00
-   * - RSN6911_DARFIELD_HORCN18E
-     - 0.61
+   * - Tohoku Ishinomaki-NS
+     - 0.77
      - 0.01
-     - 60.17
-     - 12036.00
+     - 299.98
+     - 29999.00
+   * - Conception-L
+     - 0.82
+     - 0.01
+     - 141.67
+     - 28335.00
+   * - RSN727_SUPER
+     - 0.96
+     - 0.01
+     - 22.20
+     - 2221.00
 
 .. figure:: ./images/Case3_logSpectraCombined.png
     :scale: 60 %
@@ -277,64 +277,17 @@ The rock motions, in SimCenter format, can be downloaded from the `rock motions 
 Results
 ~~~~~~~
 
-The following table shows the peak ground acceleration (PGA) and peak ground velocity (PGV) in the bedrock and on the ground surface corresponding to each of the seven earthquakes obtained from S\ :sup:`3` HARK.
-
-.. list-table:: *Table 3. Peak Ground Acceleration and Peak Ground Velocity*
-   :widths: 10 10 10 10 10
-   :header-rows: 1
-
-   * - 
-     - PGA (m/s\ :sup:`2`)
-     - PGA (m/s\ :sup:`2`)
-     - PGV (m/s)
-     - PGV (m/s)
-   * - Motion
-     - Rock
-     - Surface
-     - Rock
-     - Surface
-   * - Conception-L
-     - 8.00
-     - 1.52
-     - 1.28
-     - 0.56
-   * - RSN727_SUPER
-     - 7.85
-     - 1.71
-     - 0.47
-     - 0.29
-   * - Tohoku 41207-EW
-     - 5.59
-     - 1.44
-     - 0.61
-     - 0.53
-   * - Tohoku Ishinomaki-NS
-     - 7.09
-     - 1.76
-     - 9.26
-     - 4.62
-   * - RSN803_LOMAP_WVC270
-     - 5.96
-     - 1.64
-     - 1.27
-     - 0.76
-   * - RSN4457_MONTENE
-     - 6.47
-     - 1.93
-     - 0.80
-     - 0.86
-   * - RSN6911_DARFIELD_HORCN18E
-     - 5.84
-     - 1.69
-     - 1.4
-     - 1.07
-
 The below images present the PGA, maximum shear strain, maximum displacement, maximum excess pore pressure ratio, ground surface response and rock motions results obtained from S\ :sup:`3` HARK.
 
 *Peak Ground Acceleration*
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. figure:: ./images/Case3_PGA.png
+.. figure:: ./images/Case3_PGA_1.png
+    :scale: 45 %
+    :align: center
+    :figclass: align-center>
+
+.. figure:: ./images/Case3_PGA_2.png
     :scale: 45 %
     :align: center
     :figclass: align-center>
@@ -344,7 +297,12 @@ The below images present the PGA, maximum shear strain, maximum displacement, ma
 *Maximum Shear Strain*
 ^^^^^^^^^^^^^^
 
-.. figure:: ./images/Case3_Shear_strain.png
+.. figure:: ./images/Case3_Shear_strain_1.png
+    :scale: 45 %
+    :align: center
+    :figclass: align-center>
+
+.. figure:: ./images/Case3_Shear_strain_2.png
     :scale: 45 %
     :align: center
     :figclass: align-center>
@@ -354,7 +312,12 @@ The below images present the PGA, maximum shear strain, maximum displacement, ma
 *Maximum Displacement*
 ^^^^^^^^^^^^^^
 
-.. figure:: ./images/Case3_Displacement.png
+.. figure:: ./images/Case3_Displacement_1.png
+    :scale: 45 %
+    :align: center
+    :figclass: align-center>
+
+.. figure:: ./images/Case3_Displacement_2.png
     :scale: 45 %
     :align: center
     :figclass: align-center>
@@ -364,7 +327,12 @@ The below images present the PGA, maximum shear strain, maximum displacement, ma
 *Maximum Excess Pore Pressure Ratio*
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. figure:: ./images/Case3_Ru.png
+.. figure:: ./images/Case3_Ru_1.png
+    :scale: 45 %
+    :align: center
+    :figclass: align-center>
+
+.. figure:: ./images/Case3_Ru_2.png
     :scale: 45 %
     :align: center
     :figclass: align-center>
@@ -378,7 +346,7 @@ The below images present the PGA, maximum shear strain, maximum displacement, ma
     :scale: 45 %
     :align: center
     :figclass: align-center>
-
+    
 .. figure:: ./images/Case3_Ground_surface_response_2.png
     :scale: 45 %
     :align: center
