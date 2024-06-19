@@ -97,20 +97,6 @@ The presented problem can be solved using SimCenter's Regional Resilience Determ
 
 The updated :cite:`Zhu2017` model (:cite:`RB2020`) is implemented in the R2D tool (version 4.2.0), whereas the :cite:`Sanger2024` model is not yet implemented in the R2D tool. In this project, the :cite:`Sanger2024` model was implemented in the R2D tool using the `applications.py` file. 
 
-
-Example Application
--------------------
-
-This example demonstrates the application of the :cite:`Zhu2017` liquefaction-induced ground failure model (really the :cite:`RB2020` model) currently implemented in R2D, and the implementation of the next-generation :cite:`Sanger2024` model described in the **Solution Strategy**. 
-
-.. note::
-    In R2D, ground failure models are considered intermediate results that are accessible only through the Earthquake Event Generator tool, and they cannot be executed within the damage and loss assessment tools. Future development in R2D should consider (1) implementing ground failure models with other earthquake hazard source options (e.g., Shakemap Earthquake Scenario), (2) extending the implementation of the ground failure modeling beyond California, and (3) incorporating ground failure models into the damage and loss assessment tools.
-
-Zhu et al. (2017)
-.................
-
-**WORKFLOW**
-
 The workflow for the :cite:`Zhu2017` model in the Earthquake Event Generator tool in R2D is as follows:
 
 **1. Define Analysis Grid**: Define the analysis grid for the study area. Here, an area of downtown San Francisco is selected for the analysis. The grid is defined with a resolution of approximately 100 meters, the true model resolution of the :cite:`Sanger2024` model.
@@ -179,9 +165,23 @@ The workflow for the :cite:`Zhu2017` model in the Earthquake Event Generator too
 
     <br>
     
-**7. View Results**: The results of the :cite:`Zhu2017` model for the probability of liquefaction are shown in Fig 4.
+**7. View Results**
+
+Example Application
+-------------------
+
+This example demonstrates the application of the :cite:`Zhu2017` liquefaction-induced ground failure model (really the :cite:`RB2020` model) currently implemented in R2D, and the implementation of the next-generation :cite:`Sanger2024` model described in the **Solution Strategy**. 
+
+.. note::
+    In R2D, ground failure models are considered intermediate results that are accessible only through the Earthquake Event Generator tool, and they cannot be executed within the damage and loss assessment tools. Future development in R2D should consider (1) implementing ground failure models with other earthquake hazard source options (e.g., Shakemap Earthquake Scenario), (2) extending the implementation of the ground failure modeling beyond California, and (3) incorporating ground failure models into the damage and loss assessment tools.
+
+    
+.. note::
+    The implementation of the :cite:`Zhu2017` and :cite:`Sanger2024` models in the Earthquake Event Generator tool employs grid sampling of the geospatial parameters, which is not the most efficient method for large-scale applications. Future development in R2D should consider implementing the models as raster-based models for more efficient, higher resolution, spatially continuous predictions in accordance with the model development.
 
 
+Zhu et al. (2017)
+.................
 
 **CODE**
 
@@ -435,7 +435,6 @@ The following code snippet shows the implementation of the :cite:`Zhu2017` model
 
 Sanger et al. (2024)
 .....................
-**WORKFLOW**
 
 The workflow for the :cite:`Sanger2024` model follows the same steps as the :cite:`Zhu2017` model, with the exception of the referenced geospatial parameters. The :cite:`Sanger2024` model needs only the LPI A and LPI B parameters, implemented here within the DistWater and DistCoast parameters in the R2D tool because the author did not have access to the user-interface code for the R2D tool.
 
