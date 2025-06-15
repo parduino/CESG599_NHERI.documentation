@@ -1,0 +1,418 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>S3 hark - Site Response 2 &mdash; CESG-599 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="R2D - Liquefaction" href="case_5.html" />
+    <link rel="prev" title="S3 hark - Site Response 1" href="case_3.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CESG-599
+              <img src="_static/CESG-599.gif" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="case_0.html">CESG599 - NHERI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_1.html">QuoFEM - Settlements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_2.html">EEUQ - Transfer Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_3.html">S<sup>3</sup> hark - Site Response 1</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">S<sup>3</sup> hark - Site Response 2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#problem-description">Problem Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solution-strategy">Solution Strategy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#opensees">OpenSees</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#soil-model">Soil model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pm4sand-model">PM4Sand Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#elasticisotropic-model">Elasticisotropic Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lateral-spreading">Lateral Spreading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#simcenter-tool-used">SimCenter Tool Used</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-application">Example Application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#analysis-processes">Analysis Processes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#earthquake-motion">Earthquake motion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#soil-condition">Soil condition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#result">Result</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#displacement">Displacement</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="case_5.html">R2D - Liquefaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_6.html">R2D - Landslides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_7.html">R2D - Hurricane Damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_8.html">HydroUQ - Celeris</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_r.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CESG-599</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">S<sup>3</sup> hark - Site Response 2</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/case_4.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="s3-hark-site-response-2">
+<span id="case-4"></span><h1>S<sup>3</sup> hark - Site Response 2<a class="headerlink" href="#s3-hark-site-response-2" title="Link to this heading"></a></h1>
+<p>Author: Chungen Tai</p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This page shows basic concepts of one-dimensional nonlinear site response analysis by using various soil material models (ex: Elastic, PM4Sand.) and the lateral spreading.</p>
+</section>
+<section id="problem-description">
+<h2>Problem Description<a class="headerlink" href="#problem-description" title="Link to this heading"></a></h2>
+<p>Site response analysis is commonly performed to analyze the propagation of seismic waves through soil. As shown in the below figure, one-dimensional response analyses, as a simplified method, assume that all boundaries are horizontal, and that the response of a soil deposit is predominately caused by SH-waves propagating vertically from the underlying bedrock. Ground surface response is usually the major output from these analyses, together with profile plots such as peak horizontal acceleration along the soil profile. When liquefiable soils are presenting, maximum shear strain and excess pore pressure ratio plots are also important.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="_images/case4_siteResponse.png"><img alt="_images/case4_siteResponse.png" src="_images/case4_siteResponse.png" style="width: 705.0px; height: 370.2px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 1. Site Response Analysis</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="solution-strategy">
+<h2>Solution Strategy<a class="headerlink" href="#solution-strategy" title="Link to this heading"></a></h2>
+<section id="opensees">
+<h3>OpenSees<a class="headerlink" href="#opensees" title="Link to this heading"></a></h3>
+<p>OpenSees (Open System for Earthquake Engineering Simulation) is an open-source software framework used for simulating the response of structural and geotechnical systems to earthquakes and other loading conditions. It is widely used in research and practical applications for the analysis and design of structures subjected to dynamic loading. S3hark created a GUI to help user doing nonlinear site response analysis easily.</p>
+</section>
+<section id="soil-model">
+<h3>Soil model<a class="headerlink" href="#soil-model" title="Link to this heading"></a></h3>
+</section>
+<section id="pm4sand-model">
+<h3>PM4Sand Model<a class="headerlink" href="#pm4sand-model" title="Link to this heading"></a></h3>
+<p>PM4Sand is a constitutive model used in geotechnical engineering to simulate the behavior of sand under various loading conditions, including seismic events. Developed by Boulanger and Ziotopoulou, this model captures the complex behaviors of sand such as cyclic mobility, dilatancy, and liquefaction. It’s particularly useful in finite element analysis for evaluating the performance of soil-structure systems during earthquakes. PM4Sand is known for its ability to represent the stress-strain behavior of sandy soils accurately, aiding in the design and analysis of foundations, slopes, and embankments in seismic regions. The model parameters are grouped into two categories: a primary set of six parameters (three properties, two flags, and atmospheric pressure) that are most important for model calibration, and a secondary set of parameters that may be modified from their default values in special circumstances. The three primary input properties are the sand’s apparent relative density <span class="math notranslate nohighlight">\(D_R\)</span>, the shear modulus coefficient <span class="math notranslate nohighlight">\(G_o\)</span>, and the contraction rate parameter <span class="math notranslate nohighlight">\(h_po\)</span>.
+Apparent relative density (<span class="math notranslate nohighlight">\(D_R\)</span>) can be calculated by correlation to penetration resistance.Commonly estimated based on CPT or SPT penetration resistances, such as the following relationships used by Idriss and Boulanger (2008):</p>
+<div class="math notranslate nohighlight">
+\[D_R = \frac{(N_1)_{60}}{C_d}\]</div>
+<p>Where</p>
+<p><span class="math notranslate nohighlight">\(D_R\)</span> = Apparent Relative density (%)</p>
+<p><span class="math notranslate nohighlight">\(C_d\)</span> = 46 (Idriss and Boulanger ,2008)</p>
+<p>Shear modulus coefficient is the primary variable controlling the small strain shear modulus, G_max. Should be chosen to match estimated or measured shear wave velocities.</p>
+<p>The shear modulus ( G_{max} ) can be described by the following equations:</p>
+<div class="math notranslate nohighlight">
+\[G_{max} = \rho V_s^2\]</div>
+<p>Usign following equation to calculate <span class="math notranslate nohighlight">\(G_0\)</span></p>
+<div class="math notranslate nohighlight">
+\[G_{max} = G_0 p_a \left(\frac{p}{p_a}\right)^{0.5}\]</div>
+<p>Contraction rate parameter <span class="math notranslate nohighlight">\(h_{po}\)</span> is one of primary variable that adjusts contraction rates and hence can be adjusted to obtain a target cyclic resistance ratio, as commonly estimated based on CPT or SPT penetration resistances and liquefaction correlations.</p>
+</section>
+<section id="elasticisotropic-model">
+<h3>Elasticisotropic Model<a class="headerlink" href="#elasticisotropic-model" title="Link to this heading"></a></h3>
+<p>In the context of geotechnical engineering and computational modeling, the “elastic model” refers to a mathematical representation of soil or rock behavior under loading conditions, where the material responds to stress with a proportional strain, following Hooke’s Law. This model assumes that the material returns to its original shape once the load is removed, provided the stress is within the elastic limit.We can get the shear modulus from shear wave velocity, and then use the following equation convert to elastic modulus,</p>
+<div class="math notranslate nohighlight">
+\[E= (2G)(1+\nu)\]</div>
+<p>Where
+<span class="math notranslate nohighlight">\(\nu\)</span> = Poisson’s ration (default is 0.3)</p>
+</section>
+<section id="lateral-spreading">
+<h3>Lateral Spreading<a class="headerlink" href="#lateral-spreading" title="Link to this heading"></a></h3>
+<p>Lateral spreading refers to the horizontal movement of soil, typically caused by liquefaction during an earthquake. When an earthquake occurs, seismic waves can cause loose, water-saturated, granular soils to temporarily lose their strength and behave like a liquid. This process is known as liquefaction. Once liquefaction occurs, the affected soil can flow or spread laterally, especially if there is a slope or free face (like a riverbank or retaining wall) nearby. Lateral spreading can cause significant ground displacement and can lead to damage of structures, utilities, and infrastructure. In this example, we will focus on the lateral movement cause by different slope angles.</p>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="_images/case4_lateralspreading.png"><img alt="_images/case4_lateralspreading.png" src="_images/case4_lateralspreading.png" style="width: 484.79999999999995px; height: 286.2px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 2. Lateral spreading</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="simcenter-tool-used">
+<h2>SimCenter Tool Used<a class="headerlink" href="#simcenter-tool-used" title="Link to this heading"></a></h2>
+<p>S<sup>3</sup> hark is the acronym of site-specific seismic hazard analysis and research kit. This tool focuses on simulating wave propagation along soil depth using finite element (FE) method. The intended audience for s3hark is researchers and practitioners interested in performing site-specific analysis of soil in response to earthquakes, and educators interested in teaching site response analysis in their classes. The tool provides a friendly interface for users to input and modify soil layers using tables, while the built soil profile and the FE mesh being visualized simultaneously. Results including acceleration, velocity, displacement, pore pressure, spectral acceleration, etc., are visualized for the soil profile and for each node as well, from which the user can comprehend the wave propagation and liquefaction status along the soil depth.</p>
+<p>Features of S<sup>3</sup> hark include:</p>
+<ol class="arabic simple">
+<li><p>2D and 3D elements for dynamic analysis of fluid saturated porous media</p></li>
+<li><p>Advanced linear / nonlinear soil material models</p></li>
+<li><p>Total stress / effective stress analysis</p></li>
+<li><p>Bi-directional motions</p></li>
+<li><p>Flat / slope free field analysis</p></li>
+<li><p>Finite rigidity of the bedrock</p></li>
+</ol>
+<p>Click on the icon of S<sup>3</sup> hark to open the application. Figure 3 illustrates the main window. It is split into the following areas:</p>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="_images/case4_window.png"><img alt="_images/case4_window.png" src="_images/case4_window.png" style="width: 836.0px; height: 495.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 3. S<sup>3</sup> hark HARK Main Window</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple">
+<li><p>Soil Column Graphic: The first graphic on the left of the panel shows a visualization of the soil column.</p></li>
+<li><p>FE Mesh Graphic: The second graphic on the left shows the finite element mesh and profile plots. Selecting any of the tabs on the right inside this graphic (i.e, PGA, γmax,maxDisp, maxRu, maxRuPWP) will show various results from the simulation at the mesh points.</p></li>
+</ol>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="_images/case4_plot.png"><img alt="_images/case4_plot.png" src="_images/case4_plot.png" style="width: 213.0px; height: 468.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 4. S<sup>3</sup> hark HARK FE Mesh Graphic</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic">
+<li><p>Operations Area: The right side of this area shows some information (e.g., total height and number of soil layers), includes the Ground Water Table (GWT) input field, and plus and minus buttons. If the user presses the plus button, a layer is added below the selected layer. If the minus button is pressed the selected layer is removed. The GWT input field allows the user to specify the level of the ground water table.</p></li>
+<li><p>Soil Layer Table: This table is where the user provides the characteristics of the soil layer, such as layer thickness, density, Vs30, material type, and element size in the finite element mesh.</p></li>
+<li><p>Tabbed Area: This area contains the three tabbed widgets described below.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Configure Tab: This tab allows the user to specify the path to the OpenSees executable and to a ground motion file.</p></li>
+<li><p>Layer Properties Tab: This tab allows the user to enter additional material properties for the selected soil layer.</p></li>
+<li><p>Response Tab: Once the site response analysis has been performed, this tab provides information about element and nodal time varying response quantities.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+<figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="_images/case4_response.png"><img alt="_images/case4_response.png" src="_images/case4_response.png" style="width: 731.5px; height: 213.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 5. S<sup>3</sup> hark HARK Response Tab</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple">
+<li><p>Analyze Button: This button shall be used to run the simulation locally. A progress bar will show the status of the analysis. This allows the user to review the ground motion predicted at the surface</p></li>
+</ol>
+</section>
+<section id="example-application">
+<h2>Example Application<a class="headerlink" href="#example-application" title="Link to this heading"></a></h2>
+<p>Treasure Island, situated atop sand fill strata overlaying Bay Mud within the San Francisco Bay, was subjected to seismic activity during the 1989 Loma Prieta Earthquake. Adjacent to Treasure Island lies Yerba Buena Island, characterized by its natural rock outcrop. Utilizing the site’s soil profile and seismic data recorded on Yerba Buena Island, we endeavor to analyze the site response of Treasure Island. This entails computing parameters such as peak horizontal acceleration and peak horizontal displacement along the soil profile. Furthermore, we aim to investigate the influence of lateral spread in varying slopes on the site’s response characteristics.
+For lateral spreading, we change the slope <span class="math notranslate nohighlight">\(\alpha\)</span>  as 0, 2, 5 to see the influence of it.</p>
+<section id="analysis-processes">
+<h3>Analysis Processes<a class="headerlink" href="#analysis-processes" title="Link to this heading"></a></h3>
+<p>There is the analysis process of site response analysis:</p>
+<ol class="arabic simple">
+<li><p>Input the earthquake motions: Covent the earthquake motion record into ‘.json’ file. Then, input the path into ‘Configure Layer’.</p></li>
+<li><p>Input ths soil parameters: This is the most important step in site response analysis. The soil parameters are obtained from theory or investigation reports. Then, type all of the soil parameters into the ‘Soil Layer Table’.</p></li>
+<li><p>Click “analysis” bottom: Click the button to run the analysis. The program will notify you when it is finished.</p></li>
+</ol>
+</section>
+<section id="earthquake-motion">
+<h3>Earthquake motion<a class="headerlink" href="#earthquake-motion" title="Link to this heading"></a></h3>
+<p>The motion recorded at Yerba Buena Island from the Loma Prieta earthquake is used in this sample. Figure 6 shows the acceleration, velocity, and displacement of this motion.</p>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="_images/case4_YERBAISL2_Records.png"><img alt="_images/case4_YERBAISL2_Records.png" src="_images/case4_YERBAISL2_Records.png" style="width: 600.0px; height: 600.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 6. Input ground motion (acceleration, velocity, and displacement)</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Figure 7 illustrates the spetrum of this motion.</p>
+<figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="_images/case4_YERBAISL2_RSpectra.png"><img alt="_images/case4_YERBAISL2_RSpectra.png" src="_images/case4_YERBAISL2_RSpectra.png" style="width: 600.0px; height: 600.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 7. Input ground motion spetrum (acceleration, velocity, and displacement)</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="soil-condition">
+<h3>Soil condition<a class="headerlink" href="#soil-condition" title="Link to this heading"></a></h3>
+<p>The following table shows the soil parameters in this site. Using PM4Sand to stimulate sand , and using Elasticisotropic to model clay.</p>
+<table class="docutils align-default" id="id8">
+<caption><span class="caption-text">Table1. Soil Profile Parameters</span><a class="headerlink" href="#id8" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 12.5%" />
+<col style="width: 12.5%" />
+<col style="width: 12.5%" />
+<col style="width: 12.5%" />
+<col style="width: 12.5%" />
+<col style="width: 12.5%" />
+<col style="width: 12.5%" />
+<col style="width: 12.5%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Layers</p></th>
+<th class="head"><p>Thickness(m)</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(V_s (m/s)\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\rho (kg/m^3)\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(G_o(kPa)\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(E (kPa)\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(D_R\)</span> (%)</p></th>
+<th class="head"><p>Model</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SAND1</p></td>
+<td><p>15</p></td>
+<td><p>175.3</p></td>
+<td><p>2.01</p></td>
+<td><p>0.69</p></td>
+<td><p>–</p></td>
+<td><p>0.33</p></td>
+<td><p>PM4Sand</p></td>
+</tr>
+<tr class="row-odd"><td><p>CLAY1</p></td>
+<td><p>14</p></td>
+<td><p>198.8</p></td>
+<td><p>1.68</p></td>
+<td><p>–</p></td>
+<td><p>172.8</p></td>
+<td><p>–</p></td>
+<td><p>Elasticisotropic</p></td>
+</tr>
+<tr class="row-even"><td><p>SAND2</p></td>
+<td><p>12</p></td>
+<td><p>300</p></td>
+<td><p>2.08</p></td>
+<td><p>1.33</p></td>
+<td><p>–</p></td>
+<td><p>0.77</p></td>
+<td><p>PM4Sand</p></td>
+</tr>
+<tr class="row-odd"><td><p>CLAY2</p></td>
+<td><p>32</p></td>
+<td><p>280</p></td>
+<td><p>2.08</p></td>
+<td><p>–</p></td>
+<td><p>423.8</p></td>
+<td><p>–</p></td>
+<td><p>Elasticisotropic</p></td>
+</tr>
+<tr class="row-even"><td><p>SAND3</p></td>
+<td><p>8</p></td>
+<td><p>380</p></td>
+<td><p>2.08</p></td>
+<td><p>1.46</p></td>
+<td><p>–</p></td>
+<td><p>0.62</p></td>
+<td><p>PM4Sand</p></td>
+</tr>
+<tr class="row-odd"><td><p>CLAY3</p></td>
+<td><p>8</p></td>
+<td><p>300</p></td>
+<td><p>2.08</p></td>
+<td><p>–</p></td>
+<td><p>486.6</p></td>
+<td><p>–</p></td>
+<td><p>Elasticisotropic</p></td>
+</tr>
+<tr class="row-even"><td><p>WRock</p></td>
+<td><p>5</p></td>
+<td><p>600</p></td>
+<td><p>2.16</p></td>
+<td><p>–</p></td>
+<td><p>2022.8</p></td>
+<td><p>–</p></td>
+<td><p>Elasticisotropic</p></td>
+</tr>
+<tr class="row-odd"><td><p>Rockbed</p></td>
+<td><p>–</p></td>
+<td><p>1830</p></td>
+<td><p>2.24</p></td>
+<td><p>–</p></td>
+<td><p>19526.7</p></td>
+<td><p>–</p></td>
+<td><p>Elasticisotropic</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="result">
+<h3>Result<a class="headerlink" href="#result" title="Link to this heading"></a></h3>
+<p>The following plots show maximun displacement in different slope angles.</p>
+</section>
+<section id="displacement">
+<h3>Displacement<a class="headerlink" href="#displacement" title="Link to this heading"></a></h3>
+<p>Figure 8 shows the result of maximun displacement, we can see that the displacement on the surface increases with increasing the slope.</p>
+<figure class="align-center" id="id9">
+<a class="reference internal image-reference" href="_images/case4_d.png"><img alt="_images/case4_d.png" src="_images/case4_d.png" style="width: 245.5px; height: 412.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 8. The maximum displacement in different slope</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Figure 9 illustrates the relationships between slope and the displacement on the surface.</p>
+<figure class="align-center" id="id10">
+<a class="reference internal image-reference" href="_images/case4_dd.png"><img alt="_images/case4_dd.png" src="_images/case4_dd.png" style="width: 501.0px; height: 497.4px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 9. The relationships between slope and the displacement on the surface</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="case_3.html" class="btn btn-neutral float-left" title="S3 hark - Site Response 1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="case_5.html" class="btn btn-neutral float-right" title="R2D - Liquefaction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, UW Computational Group.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

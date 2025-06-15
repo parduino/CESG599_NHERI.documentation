@@ -1,0 +1,638 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>R2D - Liquefaction &mdash; CESG-599 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="R2D - Landslides" href="case_6.html" />
+    <link rel="prev" title="S3 hark - Site Response 2" href="case_4.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CESG-599
+              <img src="_static/CESG-599.gif" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="case_0.html">CESG599 - NHERI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_1.html">QuoFEM - Settlements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_2.html">EEUQ - Transfer Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_3.html">S<sup>3</sup> hark - Site Response 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_4.html">S<sup>3</sup> hark - Site Response 2</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">R2D - Liquefaction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#author-morgan-sanger">Author: Morgan Sanger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#problem-description">Problem Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solution-strategy">Solution Strategy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#simcenter-tool-used">SimCenter Tool Used</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-application">Example Application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#zhu-et-al-2017">Zhu et al. (2017)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sanger-et-al-2024">Sanger et al. (2024)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#remarks">Remarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="case_6.html">R2D - Landslides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_7.html">R2D - Hurricane Damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_8.html">HydroUQ - Celeris</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_r.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CESG-599</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">R2D - Liquefaction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/case_5.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="r2d-liquefaction">
+<span id="case-5"></span><h1>R2D - Liquefaction<a class="headerlink" href="#r2d-liquefaction" title="Link to this heading"></a></h1>
+<section id="author-morgan-sanger">
+<h2>Author: Morgan Sanger<a class="headerlink" href="#author-morgan-sanger" title="Link to this heading"></a></h2>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This page describes basic concepts of geospatial liquefaction hazard modeling withing the umbrella of SimCenter tools.</p>
+</section>
+<section id="problem-description">
+<h2>Problem Description<a class="headerlink" href="#problem-description" title="Link to this heading"></a></h2>
+<p>Coseismic soil liquefaction is a phenomenon in which the strength and stiffness of a soil is reduced by earthquake shaking. Resilient communities and infrastructure networks, like lifelines or transportation systems, must be built to withstand and respond to hazards posed by coseismic soil liquefaction. Ideally, these predictions could be made:</p>
+<ul class="simple">
+<li><p>quickly, in near-real-time after an event;</p></li>
+<li><p>at high resolution, consistent with the scale of individual assets; and</p></li>
+<li><p>at map-scale, across the regional extent affected by large earthquakes.</p></li>
+</ul>
+<p>Common liquefaction models in practice require in-situ testing which cannot be continuously performed across large areas, thus presenting the need for “geospatial” liquefaction models. Prior tests of such models (e.g., <span id="id1">[<a class="reference internal" href="case_r.html#id4" title="J. Zhu, L. G. Baise, and E. M. Thompson. An updated geospatial liquefaction model for global application. Bulletin of the Seismological Society of America, 107(3):1365–1385, 2017.">ZBT17</a>]</span>) have shown both promising potential and severe shortcomings in predicting subsurface conditions with few geospatial predictors. There is a need to advance geospatial liquefaction modeling by integrating geotechnical data, liquefaction mechanics, artificial intelligence (AI), and many geospatial predictor variables to provide reliable regional liquefaction predictions for any earthquake event. When integrated with regional hazard assessment capabilities, geospatial liquefcation models will provide value throughout the life of infrastructure projects - from initial desk studies to refined project-specific hazard analyses - and will unlock insights beyond conventional practice, with opportunity to:</p>
+<ul class="simple">
+<li><p>prescribe event-specific emergency response and evacuation routes immediately after an earthquake,</p></li>
+<li><p>evaluate network reliability and infrastructure network resiliency using structural databases or other asset inventories, and</p></li>
+<li><p>understand the impacts of earthquake events of vulnerable communities using population demographic data.</p></li>
+</ul>
+</section>
+<section id="solution-strategy">
+<h2>Solution Strategy<a class="headerlink" href="#solution-strategy" title="Link to this heading"></a></h2>
+<p>The state-of-practice geospatial liquefaction model is the <span id="id2">[<a class="reference internal" href="case_r.html#id6" title="V. Rashidian and L. G. Baise. Regional efficacy of a global geospatial liquefaction model. Engineering geology, 272:105644, 2020.">RB20</a>]</span> model (updated version of the <span id="id3">[<a class="reference internal" href="case_r.html#id4" title="J. Zhu, L. G. Baise, and E. M. Thompson. An updated geospatial liquefaction model for global application. Bulletin of the Seismological Society of America, 107(3):1365–1385, 2017.">ZBT17</a>]</span> model), which uses logistic regression to predict probability of liquefaction based on five (5) geospatial variables and trained on a database of liquefaction case histories.</p>
+<p>In this problem, another modeling solution strategy is proposed, according to <span id="id4">[<a class="reference internal" href="case_r.html#id5" title="M. D. Sanger, M. Geyin, and B. W. Maurer. A global liquefaction model for rapid response and scenario modeling. Manuscript in preparation, 2024.">SGM24</a>]</span>. The <span id="id5">[<a class="reference internal" href="case_r.html#id5" title="M. D. Sanger, M. Geyin, and B. W. Maurer. A global liquefaction model for rapid response and scenario modeling. Manuscript in preparation, 2024.">SGM24</a>]</span> approach parses the problem into that which is empirical and best predicted by AI (the relationship between geospatial variables and subsurface traits) and that which is best predicted by mechanics (liquefaction response, conditioned on those traits). In this approach, the subsurface traits are characterized at point locations using available cone penetration testing (CPT) data. The liquefaction response at each CPT location is computed across a range of magnitude-scale peak ground accelerations (PGAM7.5) using state-of-practice liquefaction manifestation models (e.g., liquefaction potential index, LPI), thereby retaining the knowledge of liquefaction mechanics developed over the last 50+ years. The relationship between manifestation index and PGAM7.5 is represented as a functional form (Eqn 1) with two curve-fitting parameters: A and B (Fig 1). Therefore, the liquefaction response (i.e., A and B) at each CPT location becomes target variables of supervised learning AI models.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}MI = \left\{ \begin{array}{ll}
+0, &amp; \text{PGA}_{M7.5} &lt; 0.1g \\
+\arctan(B \cdot (\text{PGA}_{M7.5} - \frac{A}{B})^2) \cdot 100, &amp; \text{PGA}_{M7.5} \geq 0.1g
+\end{array} \right.\end{split}\]</div>
+<p><strong>Eqn 1.</strong> Manifestation index as a function of A, B, and PGAM7.5.</p>
+<figure class="align-center" id="id29">
+<a class="reference internal image-reference" href="_images/case5_manifestationcurve.png"><img alt="_images/case5_manifestationcurve.png" src="_images/case5_manifestationcurve.png" style="width: 390.0px; height: 195.65px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig 1.</strong> Example manifestation curve of LPI vs. PGAM7.5 for a single CPT.</span><a class="headerlink" href="#id29" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The AI model is trained to predict liquefaction response using a set of 37 geospatial predictor variables that serve as proxies for liquefaction. These predictor variables include metrics of surface topography and roughness, distance to and elevation above water bodies, and information about geology, geomorphology, and hydrology. By applying the trained AI model to these predictor datasets, the A and B parameters are predicted geospatially at 100-meter resolution. A crucial step in this approach is geostatistically updating the AI predictions via regression kriging near field measurements. The effect is that predictions near known subsurface conditions have lower model uncertainty, while predictions farther away rely on the AI model and have higher uncertainty. This method effectively pre-computes liquefaction response for all possible ground motions based on AI-predicted subsurface conditions. These predictions are stored as mapped parameters, ready for use with specific earthquake data, such as a PGAM7.5 raster in R2D.</p>
+<p>Model predictions were then tested against the leading geospatial model <span id="id6">[<a class="reference internal" href="case_r.html#id6" title="V. Rashidian and L. G. Baise. Regional efficacy of a global geospatial liquefaction model. Engineering geology, 272:105644, 2020.">RB20</a>]</span> in three case-history events using receiver operating characteristic and area under the curve analyses (Fig 2). The <span id="id7">[<a class="reference internal" href="case_r.html#id5" title="M. D. Sanger, M. Geyin, and B. W. Maurer. A global liquefaction model for rapid response and scenario modeling. Manuscript in preparation, 2024.">SGM24</a>]</span> AI model (before kriging) performed significantly better than <span id="id8">[<a class="reference internal" href="case_r.html#id6" title="V. Rashidian and L. G. Baise. Regional efficacy of a global geospatial liquefaction model. Engineering geology, 272:105644, 2020.">RB20</a>]</span> and was further improved by kriging (Fig 3).</p>
+<figure class="align-center" id="id30">
+<a class="reference internal image-reference" href="_images/case5_sanger2024-roc.png"><img alt="_images/case5_sanger2024-roc.png" src="_images/case5_sanger2024-roc.png" style="width: 392.0px; height: 384.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig 2.</strong> Receiver operator characteristic curves and area under the curve (AUC) analyses comparing <span id="id9">[<a class="reference internal" href="case_r.html#id6" title="V. Rashidian and L. G. Baise. Regional efficacy of a global geospatial liquefaction model. Engineering geology, 272:105644, 2020.">RB20</a>]</span> (“R&amp;B”), and the <span id="id10">[<a class="reference internal" href="case_r.html#id5" title="M. D. Sanger, M. Geyin, and B. W. Maurer. A global liquefaction model for rapid response and scenario modeling. Manuscript in preparation, 2024.">SGM24</a>]</span> <em>before</em> regression kriging (“LPI”).</span><a class="headerlink" href="#id30" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id31">
+<a class="reference internal image-reference" href="_images/case5_zhu2017.png"><img alt="_images/case5_zhu2017.png" src="_images/case5_zhu2017.png" style="width: 320.0px; height: 240.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>(a)</strong></span><a class="headerlink" href="#id31" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id32">
+<a class="reference internal image-reference" href="_images/case5_sanger2024-ai.png"><img alt="_images/case5_sanger2024-ai.png" src="_images/case5_sanger2024-ai.png" style="width: 324.0px; height: 240.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>(b)</strong></span><a class="headerlink" href="#id32" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id33">
+<a class="reference internal image-reference" href="_images/case5_sanger2024-krig.png"><img alt="_images/case5_sanger2024-krig.png" src="_images/case5_sanger2024-krig.png" style="width: 323.0px; height: 240.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>(c)</strong></span><a class="headerlink" href="#id33" title="Link to this image"></a></p>
+<div class="legend">
+<p><strong>Fig 3.</strong> Comparison between <strong>(a)</strong> Rashidian &amp; Baise (2020), and this model <strong>(b)</strong> before and <strong>(c)</strong> after regression kriging for the Feb. 2011 M6.1 Christchurch event.</p>
+</div>
+</figcaption>
+</figure>
+</section>
+<section id="simcenter-tool-used">
+<h2>SimCenter Tool Used<a class="headerlink" href="#simcenter-tool-used" title="Link to this heading"></a></h2>
+<p>The presented problem can be solved using SimCenter’s Regional Resilience Determination <a class="reference external" href="https://simcenter.designsafe-ci.org/research-tools/r2dtool/">R2D</a> Tool. A substantially complete description of the tool is provided in the <a class="reference external" href="https://nheri-simcenter.github.io/R2D-Documentation/common/user_manual/about/R2D/about.html">R2D Documentation</a>.</p>
+<p>The updated <span id="id11">[<a class="reference internal" href="case_r.html#id4" title="J. Zhu, L. G. Baise, and E. M. Thompson. An updated geospatial liquefaction model for global application. Bulletin of the Seismological Society of America, 107(3):1365–1385, 2017.">ZBT17</a>]</span> model (<span id="id12">[<a class="reference internal" href="case_r.html#id6" title="V. Rashidian and L. G. Baise. Regional efficacy of a global geospatial liquefaction model. Engineering geology, 272:105644, 2020.">RB20</a>]</span>) is implemented in the R2D tool (version 4.2.0), whereas the <span id="id13">[<a class="reference internal" href="case_r.html#id5" title="M. D. Sanger, M. Geyin, and B. W. Maurer. A global liquefaction model for rapid response and scenario modeling. Manuscript in preparation, 2024.">SGM24</a>]</span> model is not yet implemented in the R2D tool. In this project, the <span id="id14">[<a class="reference internal" href="case_r.html#id5" title="M. D. Sanger, M. Geyin, and B. W. Maurer. A global liquefaction model for rapid response and scenario modeling. Manuscript in preparation, 2024.">SGM24</a>]</span> model was implemented in the R2D tool using the <cite>applications.py</cite> file.</p>
+<p>The workflow for the <span id="id15">[<a class="reference internal" href="case_r.html#id4" title="J. Zhu, L. G. Baise, and E. M. Thompson. An updated geospatial liquefaction model for global application. Bulletin of the Seismological Society of America, 107(3):1365–1385, 2017.">ZBT17</a>]</span> model in the Earthquake Event Generator tool in R2D is as follows:</p>
+<p><strong>1. Define Analysis Grid</strong>: Define the analysis grid for the study area. Here, an area of downtown San Francisco is selected for the analysis. The grid is defined with a resolution of approximately 100 meters, the true model resolution of the <span id="id16">[<a class="reference internal" href="case_r.html#id5" title="M. D. Sanger, M. Geyin, and B. W. Maurer. A global liquefaction model for rapid response and scenario modeling. Manuscript in preparation, 2024.">SGM24</a>]</span> model.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/case5_EQGen1.png"><img alt="_images/case5_EQGen1.png" src="_images/case5_EQGen1.png" style="width: 800px;" />
+</a>
+</figure>
+<br><p><strong>2. Forecast Rupture Scenarios</strong>: Large events (&gt;M7) are forecasted for the study area to demonstrate the model performance under extreme conditions.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/case5_EQGen2.png"><img alt="_images/case5_EQGen2.png" src="_images/case5_EQGen2.png" style="width: 800px;" />
+</a>
+</figure>
+<br><p><strong>3. Select Earthquake Event</strong>: Select an earthquake event scenario. Here, the M8 N. San Andreas rupture event scenario is selected.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/case5_EQGen3.png"><img alt="_images/case5_EQGen3.png" src="_images/case5_EQGen3.png" style="width: 800px;" />
+</a>
+</figure>
+<br><p><strong>4. Select Intensity Measures</strong>: PGA and PGV are selected as the intensity measures for the analysis, both required for the <span id="id17">[<a class="reference internal" href="case_r.html#id4" title="J. Zhu, L. G. Baise, and E. M. Thompson. An updated geospatial liquefaction model for global application. Bulletin of the Seismological Society of America, 107(3):1365–1385, 2017.">ZBT17</a>]</span> model.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/case5_EQGen4.png"><img alt="_images/case5_EQGen4.png" src="_images/case5_EQGen4.png" style="width: 800px;" />
+</a>
+</figure>
+<br><p><strong>5. Select Ground Failure Model</strong>: Select the ground failure model. Here, the <span id="id18">[<a class="reference internal" href="case_r.html#id4" title="J. Zhu, L. G. Baise, and E. M. Thompson. An updated geospatial liquefaction model for global application. Bulletin of the Seismological Society of America, 107(3):1365–1385, 2017.">ZBT17</a>]</span> model is selected.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/case5_EQGen5.png"><img alt="_images/case5_EQGen5.png" src="_images/case5_EQGen5.png" style="width: 800px;" />
+</a>
+</figure>
+<br><p><strong>6. Run Hazard Simulation</strong>.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/case5_EQGen6.png"><img alt="_images/case5_EQGen6.png" src="_images/case5_EQGen6.png" style="width: 800px;" />
+</a>
+</figure>
+<br><p><strong>7. View Results</strong></p>
+</section>
+<section id="example-application">
+<h2>Example Application<a class="headerlink" href="#example-application" title="Link to this heading"></a></h2>
+<p>This example demonstrates the application of the <span id="id19">[<a class="reference internal" href="case_r.html#id4" title="J. Zhu, L. G. Baise, and E. M. Thompson. An updated geospatial liquefaction model for global application. Bulletin of the Seismological Society of America, 107(3):1365–1385, 2017.">ZBT17</a>]</span> liquefaction-induced ground failure model (really the <span id="id20">[<a class="reference internal" href="case_r.html#id6" title="V. Rashidian and L. G. Baise. Regional efficacy of a global geospatial liquefaction model. Engineering geology, 272:105644, 2020.">RB20</a>]</span> model) currently implemented in R2D, and the implementation of the next-generation <span id="id21">[<a class="reference internal" href="case_r.html#id5" title="M. D. Sanger, M. Geyin, and B. W. Maurer. A global liquefaction model for rapid response and scenario modeling. Manuscript in preparation, 2024.">SGM24</a>]</span> model described in the <strong>Solution Strategy</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In R2D, ground failure models are considered intermediate results that are accessible only through the Earthquake Event Generator tool, and they cannot be executed within the damage and loss assessment tools. Future development in R2D should consider (1) implementing ground failure models with other earthquake hazard source options (e.g., Shakemap Earthquake Scenario), (2) extending the implementation of the ground failure modeling beyond California, and (3) incorporating ground failure models into the damage and loss assessment tools.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The implementation of the <span id="id22">[<a class="reference internal" href="case_r.html#id4" title="J. Zhu, L. G. Baise, and E. M. Thompson. An updated geospatial liquefaction model for global application. Bulletin of the Seismological Society of America, 107(3):1365–1385, 2017.">ZBT17</a>]</span> and <span id="id23">[<a class="reference internal" href="case_r.html#id5" title="M. D. Sanger, M. Geyin, and B. W. Maurer. A global liquefaction model for rapid response and scenario modeling. Manuscript in preparation, 2024.">SGM24</a>]</span> models in the Earthquake Event Generator tool employs grid sampling of the geospatial parameters, which is not the most efficient method for large-scale applications. Future development in R2D should consider implementing the models as raster-based models for more efficient, higher resolution, spatially continuous predictions in accordance with the model development.</p>
+</div>
+<section id="zhu-et-al-2017">
+<h3>Zhu et al. (2017)<a class="headerlink" href="#zhu-et-al-2017" title="Link to this heading"></a></h3>
+<p><strong>CODE</strong></p>
+<p>The following code snippet shows the implementation of the <span id="id24">[<a class="reference internal" href="case_r.html#id4" title="J. Zhu, L. G. Baise, and E. M. Thompson. An updated geospatial liquefaction model for global application. Bulletin of the Seismological Society of America, 107(3):1365–1385, 2017.">ZBT17</a>]</span> model in the R2D tool using the <cite>applications.py</cite> file.</p>
+<details>
+<summary><u><b>Click to expand the full ZhuEtal2017 code</u></b></summary>
+<pre><code><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># Zhu et al. (2017) code</span>
+<span class="linenos">  2</span><span class="o">-----------------------------------------------------------</span>
+<span class="linenos">  3</span><span class="k">class</span><span class="w"> </span><span class="nc">ZhuEtal2017</span><span class="p">(</span><span class="n">Liquefaction</span><span class="p">):</span>
+<span class="linenos">  4</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">  5</span><span class="sd">    A map-based procedure to quantify liquefaction at a given location using logistic models by Zhu et al. (2017). Two models are provided:</span>
+<span class="linenos">  6</span>
+<span class="linenos">  7</span><span class="sd">    1. For distance to coast &lt; cutoff, **prob_liq** = f(**pgv**, **vs30**, **precip**, **dist_coast**, **dist_river**)</span>
+<span class="linenos">  8</span><span class="sd">    2. For distance to coast &gt;= cutoff, **prob_liq** = f(**pgv**, **vs30**, **precip**, **dist_coast**, **dist_river**, **gw_depth**)</span>
+<span class="linenos">  9</span>
+<span class="linenos"> 10</span><span class="sd">    Parameters</span>
+<span class="linenos"> 11</span><span class="sd">    ----------</span>
+<span class="linenos"> 12</span><span class="sd">    From upstream PBEE:</span>
+<span class="linenos"> 13</span><span class="sd">    pgv: float, np.ndarray or list</span>
+<span class="linenos"> 14</span><span class="sd">        [cm/s] peak ground velocity</span>
+<span class="linenos"> 15</span><span class="sd">    mag: float, np.ndarray or list</span>
+<span class="linenos"> 16</span><span class="sd">        moment magnitude</span>
+<span class="linenos"> 17</span><span class="sd">    pga: float, np.ndarray or list</span>
+<span class="linenos"> 18</span><span class="sd">        [g] peak ground acceleration, only to check threshold where prob_liq(pga&lt;0.1g)=0</span>
+<span class="linenos"> 19</span><span class="sd">    stations: list</span>
+<span class="linenos"> 20</span><span class="sd">        a list of dict containing the site infomation. Keys in the dict are &#39;ID&#39;,</span>
+<span class="linenos"> 21</span><span class="sd">        &#39;lon&#39;, &#39;lat&#39;, &#39;vs30&#39;, &#39;z1pt0&#39;, &#39;z2pt5&#39;, &#39;vsInferred&#39;, &#39;rRup&#39;, &#39;rJB&#39;, &#39;rX&#39;</span>
+<span class="linenos"> 22</span>
+<span class="linenos"> 23</span><span class="sd">    Geotechnical/geologic:</span>
+<span class="linenos"> 24</span><span class="sd">    vs30: float, np.ndarray or list</span>
+<span class="linenos"> 25</span><span class="sd">        [m/s] time-averaged shear wave velocity in the upper 30-meters</span>
+<span class="linenos"> 26</span><span class="sd">    precip: float, np.ndarray or list</span>
+<span class="linenos"> 27</span><span class="sd">        [mm] mean annual precipitation</span>
+<span class="linenos"> 28</span><span class="sd">    dist_coast: float, np.ndarray or list</span>
+<span class="linenos"> 29</span><span class="sd">        [km] distance to nearest coast</span>
+<span class="linenos"> 30</span><span class="sd">    dist_river: float, np.ndarray or list</span>
+<span class="linenos"> 31</span><span class="sd">        [km] distance to nearest river</span>
+<span class="linenos"> 32</span><span class="sd">    dist_water: float, np.ndarray or list</span>
+<span class="linenos"> 33</span><span class="sd">        [km] distance to nearest river, lake, or coast</span>
+<span class="linenos"> 34</span><span class="sd">    gw_depth: float, np.ndarray or list</span>
+<span class="linenos"> 35</span><span class="sd">        [m] groundwater table depth</span>
+<span class="linenos"> 36</span>
+<span class="linenos"> 37</span><span class="sd">    Fixed:</span>
+<span class="linenos"> 38</span><span class="sd">    # dist_water_cutoff: float, optional</span>
+<span class="linenos"> 39</span><span class="sd">    #     [km] distance to water cutoff for switching between global and coastal model, default = 20 km</span>
+<span class="linenos"> 40</span>
+<span class="linenos"> 41</span><span class="sd">    Returns</span>
+<span class="linenos"> 42</span><span class="sd">    -------</span>
+<span class="linenos"> 43</span><span class="sd">    prob_liq : float, np.ndarray</span>
+<span class="linenos"> 44</span><span class="sd">        probability for liquefaciton</span>
+<span class="linenos"> 45</span><span class="sd">    liq_susc_val : str, np.ndarray</span>
+<span class="linenos"> 46</span><span class="sd">        liquefaction susceptibility category value</span>
+<span class="linenos"> 47</span>
+<span class="linenos"> 48</span><span class="sd">    References</span>
+<span class="linenos"> 49</span><span class="sd">    ----------</span>
+<span class="linenos"> 50</span><span class="sd">    .. [1] Zhu, J., Baise, L.G., and Thompson, E.M., 2017, An Updated Geospatial Liquefaction Model for Global Application, Bulletin of the Seismological Society of America, vol. 107, no. 3, pp. 1365-1385.</span>
+<span class="linenos"> 51</span>
+<span class="linenos"> 52</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 53</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">stations</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 54</span>        <span class="bp">self</span><span class="o">.</span><span class="n">stations</span> <span class="o">=</span> <span class="n">stations</span>
+<span class="linenos"> 55</span>        <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="n">parameters</span>
+<span class="linenos"> 56</span>        <span class="bp">self</span><span class="o">.</span><span class="n">dist_to_water</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1">#(km)</span>
+<span class="linenos"> 57</span>        <span class="bp">self</span><span class="o">.</span><span class="n">dist_to_river</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1">#(km)</span>
+<span class="linenos"> 58</span>        <span class="bp">self</span><span class="o">.</span><span class="n">dist_to_coast</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1">#(km)</span>
+<span class="linenos"> 59</span>        <span class="bp">self</span><span class="o">.</span><span class="n">gw_depth</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1">#(m)</span>
+<span class="linenos"> 60</span>        <span class="bp">self</span><span class="o">.</span><span class="n">precip</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># (mm)</span>
+<span class="linenos"> 61</span>        <span class="bp">self</span><span class="o">.</span><span class="n">vs30</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1">#(m/s)</span>
+<span class="linenos"> 62</span>        <span class="bp">self</span><span class="o">.</span><span class="n">interpolate_spatial_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+<span class="linenos"> 63</span>
+<span class="linenos"> 64</span>    <span class="k">def</span><span class="w"> </span><span class="nf">interpolate_spatial_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+<span class="linenos"> 65</span>        <span class="c1"># site coordinate in CRS 4326</span>
+<span class="linenos"> 66</span>        <span class="n">lat_station</span> <span class="o">=</span> <span class="p">[</span><span class="n">site</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stations</span><span class="p">]</span>
+<span class="linenos"> 67</span>        <span class="n">lon_station</span> <span class="o">=</span> <span class="p">[</span><span class="n">site</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stations</span><span class="p">]</span>
+<span class="linenos"> 68</span>        <span class="c1"># dist_to_water</span>
+<span class="linenos"> 69</span>        <span class="k">if</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;DistWater&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Defined (</span><span class="se">\&quot;</span><span class="s2">distWater</span><span class="se">\&quot;</span><span class="s2">) in Site File (.csv)&quot;</span><span class="p">:</span>
+<span class="linenos"> 70</span>            <span class="bp">self</span><span class="o">.</span><span class="n">dist_to_water</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">site</span><span class="p">[</span><span class="s1">&#39;distWater&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stations</span><span class="p">])</span>
+<span class="linenos"> 71</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 72</span>            <span class="bp">self</span><span class="o">.</span><span class="n">dist_to_water</span> <span class="o">=</span> <span class="n">sampleRaster</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;DistWater&quot;</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;inputCRS&quot;</span><span class="p">],</span>\
+<span class="linenos"> 73</span>                    <span class="n">lon_station</span><span class="p">,</span> <span class="n">lat_station</span><span class="p">)</span>
+<span class="linenos"> 74</span>        <span class="c1"># dist_to_river</span>
+<span class="linenos"> 75</span>        <span class="k">if</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;DistRiver&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Defined (</span><span class="se">\&quot;</span><span class="s2">distRiver</span><span class="se">\&quot;</span><span class="s2">) in Site File (.csv)&quot;</span><span class="p">:</span>
+<span class="linenos"> 76</span>            <span class="bp">self</span><span class="o">.</span><span class="n">dist_to_river</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">site</span><span class="p">[</span><span class="s1">&#39;distRiver&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stations</span><span class="p">])</span>
+<span class="linenos"> 77</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 78</span>            <span class="bp">self</span><span class="o">.</span><span class="n">dist_to_river</span> <span class="o">=</span> <span class="n">sampleRaster</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;DistRiver&quot;</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;inputCRS&quot;</span><span class="p">],</span>\
+<span class="linenos"> 79</span>                    <span class="n">lon_station</span><span class="p">,</span> <span class="n">lat_station</span><span class="p">)</span>
+<span class="linenos"> 80</span>        <span class="c1"># dist_to_coast</span>
+<span class="linenos"> 81</span>        <span class="k">if</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;DistCoast&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Defined (</span><span class="se">\&quot;</span><span class="s2">distCoast</span><span class="se">\&quot;</span><span class="s2">) in Site File (.csv)&quot;</span><span class="p">:</span>
+<span class="linenos"> 82</span>            <span class="bp">self</span><span class="o">.</span><span class="n">dist_to_coast</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">site</span><span class="p">[</span><span class="s1">&#39;distCoast&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stations</span><span class="p">])</span>
+<span class="linenos"> 83</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 84</span>            <span class="bp">self</span><span class="o">.</span><span class="n">dist_to_coast</span> <span class="o">=</span> <span class="n">sampleRaster</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;DistCoast&quot;</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;inputCRS&quot;</span><span class="p">],</span>\
+<span class="linenos"> 85</span>                    <span class="n">lon_station</span><span class="p">,</span> <span class="n">lat_station</span><span class="p">)</span>
+<span class="linenos"> 86</span>        <span class="c1"># gw_water</span>
+<span class="linenos"> 87</span>        <span class="k">if</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;GwDepth&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Defined (</span><span class="se">\&quot;</span><span class="s2">gwDepth</span><span class="se">\&quot;</span><span class="s2">) in Site File (.csv)&quot;</span><span class="p">:</span>
+<span class="linenos"> 88</span>            <span class="bp">self</span><span class="o">.</span><span class="n">gw_depth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">site</span><span class="p">[</span><span class="s1">&#39;gwDepth&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stations</span><span class="p">])</span>
+<span class="linenos"> 89</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 90</span>            <span class="bp">self</span><span class="o">.</span><span class="n">gw_depth</span> <span class="o">=</span> <span class="n">sampleRaster</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;GwDepth&quot;</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;inputCRS&quot;</span><span class="p">],</span>\
+<span class="linenos"> 91</span>                    <span class="n">lon_station</span><span class="p">,</span> <span class="n">lat_station</span><span class="p">)</span>
+<span class="linenos"> 92</span>        <span class="c1"># precipitation</span>
+<span class="linenos"> 93</span>        <span class="k">if</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;Precipitation&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Defined (</span><span class="se">\&quot;</span><span class="s2">precipitation</span><span class="se">\&quot;</span><span class="s2">) in Site File (.csv)&quot;</span><span class="p">:</span>
+<span class="linenos"> 94</span>            <span class="bp">self</span><span class="o">.</span><span class="n">precip</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">site</span><span class="p">[</span><span class="s1">&#39;precipitation&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stations</span><span class="p">])</span>
+<span class="linenos"> 95</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 96</span>            <span class="bp">self</span><span class="o">.</span><span class="n">precip</span> <span class="o">=</span> <span class="n">sampleRaster</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;Precipitation&quot;</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;inputCRS&quot;</span><span class="p">],</span>\
+<span class="linenos"> 97</span>                    <span class="n">lon_station</span><span class="p">,</span> <span class="n">lat_station</span><span class="p">)</span>
+<span class="linenos"> 98</span>        <span class="bp">self</span><span class="o">.</span><span class="n">vs30</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">site</span><span class="p">[</span><span class="s1">&#39;vs30&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stations</span><span class="p">])</span>
+<span class="linenos"> 99</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sampling finished&quot;</span><span class="p">)</span>
+<span class="linenos">100</span>
+<span class="linenos">101</span>    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ln_im_data</span><span class="p">,</span> <span class="n">eq_data</span><span class="p">,</span> <span class="n">im_list</span><span class="p">,</span> <span class="n">output_keys</span><span class="p">,</span> <span class="n">additional_output_keys</span><span class="p">):</span>
+<span class="linenos">102</span>        <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;PGA&#39;</span> <span class="ow">in</span> <span class="n">im_list</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s1">&#39;PGV&#39;</span> <span class="ow">in</span> <span class="n">im_list</span><span class="p">):</span>
+<span class="linenos">103</span>            <span class="n">num_stations</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stations</span><span class="p">)</span>
+<span class="linenos">104</span>            <span class="n">num_scenarios</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">eq_data</span><span class="p">)</span>
+<span class="linenos">105</span>            <span class="n">PGV_col_id</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">im_list</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;PGV&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">106</span>            <span class="n">PGA_col_id</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">im_list</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;PGA&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">107</span>            <span class="k">for</span> <span class="n">scenario_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_scenarios</span><span class="p">):</span>
+<span class="linenos">108</span>                <span class="n">num_rlzs</span> <span class="o">=</span> <span class="n">ln_im_data</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="linenos">109</span>                <span class="n">im_data_scen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">num_stations</span><span class="p">,</span>\
+<span class="linenos">110</span>                                    <span class="nb">len</span><span class="p">(</span><span class="n">im_list</span><span class="p">)</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">output_keys</span><span class="p">),</span> <span class="n">num_rlzs</span><span class="p">])</span>
+<span class="linenos">111</span>                <span class="n">im_data_scen</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">im_list</span><span class="p">),:]</span> <span class="o">=</span> <span class="n">ln_im_data</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">]</span>
+<span class="linenos">112</span>                <span class="k">for</span> <span class="n">rlz_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_rlzs</span><span class="p">):</span>
+<span class="linenos">113</span>                    <span class="n">pgv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">ln_im_data</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">][:,</span><span class="n">PGV_col_id</span><span class="p">,</span><span class="n">rlz_id</span><span class="p">])</span>
+<span class="linenos">114</span>                    <span class="n">pga</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">ln_im_data</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">][:,</span><span class="n">PGA_col_id</span><span class="p">,</span><span class="n">rlz_id</span><span class="p">])</span>
+<span class="linenos">115</span>                    <span class="n">mag</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">eq_data</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="linenos">116</span>                    <span class="n">model_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">pgv</span><span class="p">,</span> <span class="n">pga</span><span class="p">,</span> <span class="n">mag</span><span class="p">)</span>
+<span class="linenos">117</span>                    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">output_keys</span><span class="p">):</span>
+<span class="linenos">118</span>                        <span class="n">im_data_scen</span><span class="p">[:,</span><span class="nb">len</span><span class="p">(</span><span class="n">im_list</span><span class="p">)</span><span class="o">+</span><span class="n">i</span><span class="p">,</span><span class="n">rlz_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_output</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+<span class="linenos">119</span>                <span class="n">ln_im_data</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">im_data_scen</span>
+<span class="linenos">120</span>            <span class="n">im_list</span> <span class="o">=</span> <span class="n">im_list</span> <span class="o">+</span> <span class="n">output_keys</span>
+<span class="linenos">121</span>            <span class="n">additional_output</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="linenos">122</span>            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">additional_output_keys</span><span class="p">:</span>
+<span class="linenos">123</span>                <span class="n">item</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="linenos">124</span>                <span class="k">if</span> <span class="n">item</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">125</span>                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Additional output </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> is not avaliable in the liquefaction trigging model &#39;ZhuEtal2017&#39;.&quot;</span><span class="p">)</span>
+<span class="linenos">126</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos">127</span>                    <span class="n">additional_output</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">key</span><span class="p">:</span><span class="n">item</span><span class="p">})</span>
+<span class="linenos">128</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">129</span>            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;At least one of &#39;PGA&#39; and &#39;PGV&#39; is missing in the selected intensity measures and the liquefaction trigging model &#39;ZhuEtal2017&#39; can not be computed.&quot;</span><span class="p">)</span>
+<span class="linenos">130</span>            <span class="c1"># print(f&quot;At least one of &#39;PGA&#39; and &#39;PGV&#39; is missing in the selected intensity measures and the liquefaction trigging model &#39;ZhuEtal2017&#39; can not be computed.&quot;\</span>
+<span class="linenos">131</span>            <span class="c1">#       , file=sys.stderr)</span>
+<span class="linenos">132</span>            <span class="c1"># sys.stderr.write(&quot;test&quot;)</span>
+<span class="linenos">133</span>            <span class="c1"># sys.exit(-1)</span>
+<span class="linenos">134</span>        <span class="k">return</span> <span class="n">ln_im_data</span><span class="p">,</span> <span class="n">eq_data</span><span class="p">,</span> <span class="n">im_list</span><span class="p">,</span> <span class="n">additional_output</span>
+<span class="linenos">135</span>
+<span class="linenos">136</span>    <span class="k">def</span><span class="w"> </span><span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pgv</span><span class="p">,</span> <span class="n">pga</span><span class="p">,</span> <span class="n">mag</span><span class="p">):</span>
+<span class="linenos">137</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;Model&quot;&quot;&quot;</span>
+<span class="linenos">138</span>        <span class="c1"># zero prob_liq</span>
+<span class="linenos">139</span>        <span class="n">zero_prob_liq</span> <span class="o">=</span> <span class="mf">1e-5</span> <span class="c1"># decimal</span>
+<span class="linenos">140</span>
+<span class="linenos">141</span>        <span class="c1"># distance cutoff for model</span>
+<span class="linenos">142</span>        <span class="n">model_transition</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1"># km</span>
+<span class="linenos">143</span>
+<span class="linenos">144</span>        <span class="c1"># initialize arrays</span>
+<span class="linenos">145</span>        <span class="n">x_logistic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">pgv</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="linenos">146</span>        <span class="n">prob_liq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">pgv</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="linenos">147</span>        <span class="n">liq_susc_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">pgv</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">*-</span><span class="mi">99</span>
+<span class="linenos">148</span>        <span class="n">liq_susc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">pgv</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="linenos">149</span>
+<span class="linenos">150</span>        <span class="c1"># magnitude correction, from Baise &amp; Rashidian (2020) and Allstadt et al. (2022)</span>
+<span class="linenos">151</span>        <span class="n">pgv_mag</span> <span class="o">=</span> <span class="n">pgv</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">mag</span><span class="o">-</span><span class="mi">6</span><span class="p">)))</span>
+<span class="linenos">152</span>        <span class="n">pga_mag</span> <span class="o">=</span> <span class="n">pga</span><span class="o">/</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mf">2.24</span><span class="o">/</span><span class="n">mag</span><span class="o">**</span><span class="mf">2.56</span><span class="p">)</span>
+<span class="linenos">153</span>
+<span class="linenos">154</span>        <span class="c1"># find where dist_water &lt;= cutoff for model of 20 km</span>
+<span class="linenos">155</span>        <span class="c1"># coastal model</span>
+<span class="linenos">156</span>        <span class="n">ind_coastal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist_to_water</span><span class="o">&lt;=</span><span class="n">model_transition</span>
+<span class="linenos">157</span>        <span class="c1"># global model</span>
+<span class="linenos">158</span>        <span class="c1"># ind_global = list(set(list(range(pgv.shape[0]))).difference(set(ind_coastal)))</span>
+<span class="linenos">159</span>        <span class="n">ind_global</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dist_to_water</span><span class="o">&lt;=</span><span class="n">model_transition</span><span class="p">)</span>
+<span class="linenos">160</span>
+<span class="linenos">161</span>        <span class="c1"># set cap of precip to 1700 mm</span>
+<span class="linenos">162</span>        <span class="bp">self</span><span class="o">.</span><span class="n">precip</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">precip</span><span class="o">&gt;</span><span class="mi">1700</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1700</span>
+<span class="linenos">163</span>
+<span class="linenos">164</span>        <span class="c1"># x = b0 + b1*var1 + ...</span>
+<span class="linenos">165</span>        <span class="c1"># if len(ind_global) &gt; 0:</span>
+<span class="linenos">166</span>        <span class="c1"># liquefaction susceptbility value, disregard pgv term</span>
+<span class="linenos">167</span>        <span class="n">liq_susc_val</span><span class="p">[</span><span class="n">ind_global</span><span class="p">]</span> <span class="o">=</span> \
+<span class="linenos">168</span>            <span class="mf">8.801</span> <span class="o">+</span> \
+<span class="linenos">169</span>            <span class="o">-</span><span class="mf">1.918</span>   <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vs30</span><span class="p">[</span><span class="n">ind_global</span><span class="p">])</span> <span class="o">+</span> \
+<span class="linenos">170</span>            <span class="mf">5.408e-4</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">precip</span><span class="p">[</span><span class="n">ind_global</span><span class="p">]</span> <span class="o">+</span> \
+<span class="linenos">171</span>            <span class="o">-</span><span class="mf">0.2054</span>  <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist_to_water</span><span class="p">[</span><span class="n">ind_global</span><span class="p">]</span> <span class="o">+</span> \
+<span class="linenos">172</span>            <span class="o">-</span><span class="mf">0.0333</span>  <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">gw_depth</span><span class="p">[</span><span class="n">ind_global</span><span class="p">]</span>
+<span class="linenos">173</span>        <span class="c1"># liquefaction susceptbility value, disregard pgv term</span>
+<span class="linenos">174</span>        <span class="n">liq_susc_val</span><span class="p">[</span><span class="n">ind_coastal</span><span class="p">]</span> <span class="o">=</span> \
+<span class="linenos">175</span>            <span class="mf">12.435</span> <span class="o">+</span> \
+<span class="linenos">176</span>            <span class="o">-</span><span class="mf">2.615</span>   <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vs30</span><span class="p">[</span><span class="n">ind_coastal</span><span class="p">])</span> <span class="o">+</span> \
+<span class="linenos">177</span>            <span class="mf">5.556e-4</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">precip</span><span class="p">[</span><span class="n">ind_coastal</span><span class="p">]</span> <span class="o">+</span> \
+<span class="linenos">178</span>            <span class="o">-</span><span class="mf">0.0287</span>  <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dist_to_coast</span><span class="p">[</span><span class="n">ind_coastal</span><span class="p">])</span> <span class="o">+</span> \
+<span class="linenos">179</span>            <span class="mf">0.0666</span>   <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist_to_river</span><span class="p">[</span><span class="n">ind_coastal</span><span class="p">]</span> <span class="o">+</span> \
+<span class="linenos">180</span>            <span class="o">-</span><span class="mf">0.0369</span>  <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist_to_river</span><span class="p">[</span><span class="n">ind_coastal</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dist_to_coast</span><span class="p">[</span><span class="n">ind_coastal</span><span class="p">])</span>
+<span class="linenos">181</span>        <span class="c1"># catch nan values</span>
+<span class="linenos">182</span>        <span class="n">liq_susc_val</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">liq_susc_val</span><span class="p">)]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">99.</span>
+<span class="linenos">183</span>        <span class="c1"># x-term for logistic model = liq susc val + pgv term</span>
+<span class="linenos">184</span>        <span class="n">x_logistic</span><span class="p">[</span><span class="n">ind_global</span><span class="p">]</span> <span class="o">=</span> <span class="n">liq_susc_val</span><span class="p">[</span><span class="n">ind_global</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.334</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">pgv_mag</span><span class="p">[</span><span class="n">ind_global</span><span class="p">])</span>
+<span class="linenos">185</span>        <span class="c1"># x-term for logistic model = liq susc val + pgv term</span>
+<span class="linenos">186</span>        <span class="n">x_logistic</span><span class="p">[</span><span class="n">ind_coastal</span><span class="p">]</span> <span class="o">=</span> <span class="n">liq_susc_val</span><span class="p">[</span><span class="n">ind_coastal</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.301</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">pgv_mag</span><span class="p">[</span><span class="n">ind_coastal</span><span class="p">])</span>
+<span class="linenos">187</span>
+<span class="linenos">188</span>        <span class="c1"># probability of liquefaction</span>
+<span class="linenos">189</span>        <span class="n">prob_liq</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x_logistic</span><span class="p">))</span> <span class="c1"># decimal</span>
+<span class="linenos">190</span>        <span class="n">prob_liq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">prob_liq</span><span class="p">,</span><span class="n">zero_prob_liq</span><span class="p">)</span> <span class="c1"># set prob to &gt; &quot;0&quot; to avoid 0% in log</span>
+<span class="linenos">191</span>
+<span class="linenos">192</span>        <span class="c1"># for pgv_mag &lt; 3 cm/s, set prob to &quot;0&quot;</span>
+<span class="linenos">193</span>        <span class="n">prob_liq</span><span class="p">[</span><span class="n">pgv_mag</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">zero_prob_liq</span>
+<span class="linenos">194</span>        <span class="c1"># for pga_mag &lt; 0.1 g, set prob to &quot;0&quot;</span>
+<span class="linenos">195</span>        <span class="n">prob_liq</span><span class="p">[</span><span class="n">pga_mag</span><span class="o">&lt;</span><span class="mf">0.1</span><span class="p">]</span> <span class="o">=</span> <span class="n">zero_prob_liq</span>
+<span class="linenos">196</span>        <span class="c1"># for vs30 &gt; 620 m/s, set prob to &quot;0&quot;</span>
+<span class="linenos">197</span>        <span class="n">prob_liq</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">vs30</span><span class="o">&gt;</span><span class="mi">620</span><span class="p">]</span> <span class="o">=</span> <span class="n">zero_prob_liq</span>
+<span class="linenos">198</span>
+<span class="linenos">199</span>        <span class="c1"># calculate sigma_mu</span>
+<span class="linenos">200</span>        <span class="n">sigma_mu</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">prob_liq</span>
+<span class="linenos">201</span>
+<span class="linenos">202</span>        <span class="c1"># determine liquefaction susceptibility category</span>
+<span class="linenos">203</span>        <span class="n">liq_susc</span><span class="p">[</span><span class="n">liq_susc_val</span><span class="o">&gt;-</span><span class="mf">1.15</span><span class="p">]</span>  <span class="o">=</span> <span class="n">liq_susc_enum</span><span class="p">[</span><span class="s1">&#39;very_high&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+<span class="linenos">204</span>        <span class="n">liq_susc</span><span class="p">[</span><span class="n">liq_susc_val</span><span class="o">&lt;=-</span><span class="mf">1.15</span><span class="p">]</span> <span class="o">=</span> <span class="n">liq_susc_enum</span><span class="p">[</span><span class="s1">&#39;high&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+<span class="linenos">205</span>        <span class="n">liq_susc</span><span class="p">[</span><span class="n">liq_susc_val</span><span class="o">&lt;=-</span><span class="mf">1.95</span><span class="p">]</span> <span class="o">=</span> <span class="n">liq_susc_enum</span><span class="p">[</span><span class="s1">&#39;moderate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+<span class="linenos">206</span>        <span class="n">liq_susc</span><span class="p">[</span><span class="n">liq_susc_val</span><span class="o">&lt;=-</span><span class="mf">3.15</span><span class="p">]</span> <span class="o">=</span> <span class="n">liq_susc_enum</span><span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+<span class="linenos">207</span>        <span class="n">liq_susc</span><span class="p">[</span><span class="n">liq_susc_val</span><span class="o">&lt;=-</span><span class="mf">3.20</span><span class="p">]</span> <span class="o">=</span> <span class="n">liq_susc_enum</span><span class="p">[</span><span class="s1">&#39;very_low&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+<span class="linenos">208</span>        <span class="n">liq_susc</span><span class="p">[</span><span class="n">liq_susc_val</span><span class="o">&lt;=-</span><span class="mf">38.1</span><span class="p">]</span> <span class="o">=</span> <span class="n">liq_susc_enum</span><span class="p">[</span><span class="s1">&#39;none&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+<span class="linenos">209</span>
+<span class="linenos">210</span>        <span class="c1"># liq_susc[prob_liq==zero_prob_liq] = &#39;none&#39;</span>
+<span class="linenos">211</span>
+<span class="linenos">212</span>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;liq_prob&quot;</span><span class="p">:</span><span class="n">prob_liq</span><span class="p">,</span> <span class="s2">&quot;liq_susc&quot;</span><span class="p">:</span><span class="n">liq_susc</span><span class="p">}</span>
+</pre></div>
+</div>
+</code></pre>
+</details><br><br><p><strong>RESULTS</strong></p>
+<figure class="align-center" id="id34">
+<a class="reference internal image-reference" href="_images/case5_zhu_pliq.png"><img alt="_images/case5_zhu_pliq.png" src="_images/case5_zhu_pliq.png" style="width: 485.25px; height: 495.75px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig 4.</strong> Results of the Zhu et al. (2017) model for probability of liquefaction given the selected M8 N. San Andreas rupture event scenario.</span><a class="headerlink" href="#id34" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="sanger-et-al-2024">
+<h3>Sanger et al. (2024)<a class="headerlink" href="#sanger-et-al-2024" title="Link to this heading"></a></h3>
+<p>The workflow for the <span id="id25">[<a class="reference internal" href="case_r.html#id5" title="M. D. Sanger, M. Geyin, and B. W. Maurer. A global liquefaction model for rapid response and scenario modeling. Manuscript in preparation, 2024.">SGM24</a>]</span> model follows the same steps as the <span id="id26">[<a class="reference internal" href="case_r.html#id4" title="J. Zhu, L. G. Baise, and E. M. Thompson. An updated geospatial liquefaction model for global application. Bulletin of the Seismological Society of America, 107(3):1365–1385, 2017.">ZBT17</a>]</span> model, with the exception of the referenced geospatial parameters. The <span id="id27">[<a class="reference internal" href="case_r.html#id5" title="M. D. Sanger, M. Geyin, and B. W. Maurer. A global liquefaction model for rapid response and scenario modeling. Manuscript in preparation, 2024.">SGM24</a>]</span> model needs only the LPI A and LPI B parameters, implemented here within the DistWater and DistCoast parameters in the R2D tool because the author did not have access to the user-interface code for the R2D tool.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/case5_EQGen10.png"><img alt="_images/case5_EQGen10.png" src="_images/case5_EQGen10.png" style="width: 800px;" />
+</a>
+</figure>
+<p><strong>CODE</strong></p>
+<p>In this example, the <span id="id28">[<a class="reference internal" href="case_r.html#id5" title="M. D. Sanger, M. Geyin, and B. W. Maurer. A global liquefaction model for rapid response and scenario modeling. Manuscript in preparation, 2024.">SGM24</a>]</span> model is implemented in the R2D tool using the <cite>applications.py</cite> file, overwriting the <cite>ZhuEtal2017</cite> class for quick integration with the R2D user-interface.</p>
+<details>
+<summary><u><b>Click to expand the full Sanger2024 code</u></b></summary>
+<pre><code><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># Sanger et al. (2024) code</span>
+<span class="linenos">  2</span><span class="o">-----------------------------------------------------------</span>
+<span class="linenos">  3</span><span class="k">class</span><span class="w"> </span><span class="nc">ZhuEtal2017</span><span class="p">(</span><span class="n">Liquefaction</span><span class="p">):</span>
+<span class="linenos">  4</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">  5</span><span class="sd">A map-based procedure to quantify liquefaction at a given location Sanger et al. (2024).</span>
+<span class="linenos">  6</span>
+<span class="linenos">  7</span><span class="sd">Parameters</span>
+<span class="linenos">  8</span><span class="sd">----------</span>
+<span class="linenos">  9</span><span class="sd">From upstream PBEE:</span>
+<span class="linenos"> 10</span><span class="sd">mag: float, np.ndarray or list</span>
+<span class="linenos"> 11</span><span class="sd">    moment magnitude</span>
+<span class="linenos"> 12</span><span class="sd">pga: float, np.ndarray or list</span>
+<span class="linenos"> 13</span><span class="sd">    [g] peak ground acceleration, only to check threshold where prob_liq(pga&lt;0.1g)=0</span>
+<span class="linenos"> 14</span><span class="sd">stations: list</span>
+<span class="linenos"> 15</span><span class="sd">    a list of dict containing the site infomation. Keys in the dict are &#39;ID&#39;,</span>
+<span class="linenos"> 16</span><span class="sd">    &#39;lon&#39;, &#39;lat&#39;, &#39;vs30&#39;, &#39;z1pt0&#39;, &#39;z2pt5&#39;, &#39;vsInferred&#39;, &#39;rRup&#39;, &#39;rJB&#39;, &#39;rX&#39;</span>
+<span class="linenos"> 17</span>
+<span class="linenos"> 18</span><span class="sd">Geotechnical:</span>
+<span class="linenos"> 19</span><span class="sd">LPI A: float, np.ndarray or list</span>
+<span class="linenos"> 20</span><span class="sd">LPI B: float, np.ndarray or list</span>
+<span class="linenos"> 21</span>
+<span class="linenos"> 22</span><span class="sd">Returns</span>
+<span class="linenos"> 23</span><span class="sd">-------</span>
+<span class="linenos"> 24</span><span class="sd">prob_liq : float, np.ndarray</span>
+<span class="linenos"> 25</span><span class="sd">    probability for liquefaciton (surface manifestation)</span>
+<span class="linenos"> 26</span>
+<span class="linenos"> 27</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 28</span><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">stations</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 29</span>    <span class="bp">self</span><span class="o">.</span><span class="n">stations</span> <span class="o">=</span> <span class="n">stations</span>
+<span class="linenos"> 30</span>    <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="n">parameters</span>
+<span class="linenos"> 31</span>    <span class="bp">self</span><span class="o">.</span><span class="n">LPI_A</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1">#</span>
+<span class="linenos"> 32</span>    <span class="bp">self</span><span class="o">.</span><span class="n">LPI_B</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1">#</span>
+<span class="linenos"> 33</span>    <span class="bp">self</span><span class="o">.</span><span class="n">interpolate_spatial_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+<span class="linenos"> 34</span>
+<span class="linenos"> 35</span><span class="k">def</span><span class="w"> </span><span class="nf">interpolate_spatial_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+<span class="linenos"> 36</span>    <span class="c1"># site coordinate in CRS 4326</span>
+<span class="linenos"> 37</span>    <span class="n">lat_station</span> <span class="o">=</span> <span class="p">[</span><span class="n">site</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stations</span><span class="p">]</span>
+<span class="linenos"> 38</span>    <span class="n">lon_station</span> <span class="o">=</span> <span class="p">[</span><span class="n">site</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stations</span><span class="p">]</span>
+<span class="linenos"> 39</span>    <span class="c1"># LPI_A</span>
+<span class="linenos"> 40</span>    <span class="bp">self</span><span class="o">.</span><span class="n">LPI_A</span> <span class="o">=</span> <span class="n">sampleRaster</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;DistWater&quot;</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;inputCRS&quot;</span><span class="p">],</span>\
+<span class="linenos"> 41</span>                <span class="n">lon_station</span><span class="p">,</span> <span class="n">lat_station</span><span class="p">)</span>
+<span class="linenos"> 42</span>    <span class="c1"># LPI_B</span>
+<span class="linenos"> 43</span>    <span class="bp">self</span><span class="o">.</span><span class="n">LPI_B</span> <span class="o">=</span> <span class="n">sampleRaster</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;DistCoast&quot;</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;inputCRS&quot;</span><span class="p">],</span>\
+<span class="linenos"> 44</span>                <span class="n">lon_station</span><span class="p">,</span> <span class="n">lat_station</span><span class="p">)</span>
+<span class="linenos"> 45</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sampling finished&quot;</span><span class="p">)</span>
+<span class="linenos"> 46</span>
+<span class="linenos"> 47</span><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ln_im_data</span><span class="p">,</span> <span class="n">eq_data</span><span class="p">,</span> <span class="n">im_list</span><span class="p">,</span> <span class="n">output_keys</span><span class="p">,</span> <span class="n">additional_output_keys</span><span class="p">):</span>
+<span class="linenos"> 48</span>    <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;PGA&#39;</span> <span class="ow">in</span> <span class="n">im_list</span><span class="p">):</span>
+<span class="linenos"> 49</span>        <span class="n">num_stations</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stations</span><span class="p">)</span>
+<span class="linenos"> 50</span>        <span class="n">num_scenarios</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">eq_data</span><span class="p">)</span>
+<span class="linenos"> 51</span>        <span class="n">PGA_col_id</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">im_list</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;PGA&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos"> 52</span>        <span class="k">for</span> <span class="n">scenario_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_scenarios</span><span class="p">):</span>
+<span class="linenos"> 53</span>            <span class="n">num_rlzs</span> <span class="o">=</span> <span class="n">ln_im_data</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="linenos"> 54</span>            <span class="n">im_data_scen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">num_stations</span><span class="p">,</span>\
+<span class="linenos"> 55</span>                                <span class="nb">len</span><span class="p">(</span><span class="n">im_list</span><span class="p">)</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">output_keys</span><span class="p">),</span> <span class="n">num_rlzs</span><span class="p">])</span>
+<span class="linenos"> 56</span>            <span class="n">im_data_scen</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">im_list</span><span class="p">),:]</span> <span class="o">=</span> <span class="n">ln_im_data</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">]</span>
+<span class="linenos"> 57</span>            <span class="k">for</span> <span class="n">rlz_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_rlzs</span><span class="p">):</span>
+<span class="linenos"> 58</span>                <span class="n">pga</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">ln_im_data</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">][:,</span><span class="n">PGA_col_id</span><span class="p">,</span><span class="n">rlz_id</span><span class="p">])</span>
+<span class="linenos"> 59</span>                <span class="n">mag</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">eq_data</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="linenos"> 60</span>                <span class="n">model_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">pga</span><span class="p">,</span> <span class="n">mag</span><span class="p">)</span>
+<span class="linenos"> 61</span>                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">output_keys</span><span class="p">):</span>
+<span class="linenos"> 62</span>                    <span class="n">im_data_scen</span><span class="p">[:,</span><span class="nb">len</span><span class="p">(</span><span class="n">im_list</span><span class="p">)</span><span class="o">+</span><span class="n">i</span><span class="p">,</span><span class="n">rlz_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_output</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+<span class="linenos"> 63</span>            <span class="n">ln_im_data</span><span class="p">[</span><span class="n">scenario_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">im_data_scen</span>
+<span class="linenos"> 64</span>        <span class="n">im_list</span> <span class="o">=</span> <span class="n">im_list</span> <span class="o">+</span> <span class="n">output_keys</span>
+<span class="linenos"> 65</span>        <span class="n">additional_output</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="linenos"> 66</span>        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">additional_output_keys</span><span class="p">:</span>
+<span class="linenos"> 67</span>            <span class="n">item</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="linenos"> 68</span>            <span class="k">if</span> <span class="n">item</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 69</span>                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Additional output </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> is not avaliable in the liquefaction trigging model &#39;SangerEtal2024&#39;.&quot;</span><span class="p">)</span>
+<span class="linenos"> 70</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 71</span>                <span class="n">additional_output</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">key</span><span class="p">:</span><span class="n">item</span><span class="p">})</span>
+<span class="linenos"> 72</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 73</span>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;PGA&#39; is missing in the selected intensity measures and the liquefaction trigging model &#39;SangerEtal2024&#39; can not be computed.&quot;</span><span class="p">)</span>
+<span class="linenos"> 74</span>    <span class="k">return</span> <span class="n">ln_im_data</span><span class="p">,</span> <span class="n">eq_data</span><span class="p">,</span> <span class="n">im_list</span><span class="p">,</span> <span class="n">additional_output</span>
+<span class="linenos"> 75</span>
+<span class="linenos"> 76</span><span class="k">def</span><span class="w"> </span><span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pga</span><span class="p">,</span> <span class="n">mag</span><span class="p">):</span>
+<span class="linenos"> 77</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Model&quot;&quot;&quot;</span>
+<span class="linenos"> 78</span>    <span class="c1"># magnitude correction, according to MSF Correction (SAND) Function according to Idriss and Boulanger (2008)</span>
+<span class="linenos"> 79</span>    <span class="n">MSF</span> <span class="o">=</span> <span class="mf">6.9</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mag</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.058</span>
+<span class="linenos"> 80</span>    <span class="k">if</span> <span class="n">MSF</span> <span class="o">&gt;</span> <span class="mf">1.8</span><span class="p">:</span>
+<span class="linenos"> 81</span>        <span class="n">MSF</span> <span class="o">=</span> <span class="mf">1.8</span>
+<span class="linenos"> 82</span>    <span class="n">pga_mag</span> <span class="o">=</span> <span class="n">pga</span> <span class="o">/</span> <span class="n">MSF</span>
+<span class="linenos"> 83</span>
+<span class="linenos"> 84</span>    <span class="c1"># Geospatial LPI A and LPI B</span>
+<span class="linenos"> 85</span>    <span class="c1"># Initialize an array for the calculated MI</span>
+<span class="linenos"> 86</span>    <span class="n">LPI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">pga_mag</span><span class="p">)</span>
+<span class="linenos"> 87</span>
+<span class="linenos"> 88</span>    <span class="c1"># Calculate MI for each element of the arrays</span>
+<span class="linenos"> 89</span>    <span class="n">mask_low</span> <span class="o">=</span> <span class="n">pga_mag</span> <span class="o">&lt;</span> <span class="mf">0.1</span>
+<span class="linenos"> 90</span>    <span class="n">mask_high</span> <span class="o">=</span> <span class="n">pga_mag</span> <span class="o">&gt;=</span> <span class="mf">0.1</span>
+<span class="linenos"> 91</span>    <span class="n">LPI</span><span class="p">[</span><span class="n">mask_low</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 92</span>    <span class="n">LPI</span><span class="p">[</span><span class="n">mask_high</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">LPI_A</span><span class="p">[</span><span class="n">mask_high</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">LPI_B</span><span class="p">[</span><span class="n">mask_high</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">pga_mag</span><span class="p">[</span><span class="n">mask_high</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">LPI_A</span><span class="p">[</span><span class="n">mask_high</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">LPI_B</span><span class="p">[</span><span class="n">mask_high</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="linenos"> 93</span>
+<span class="linenos"> 94</span>    <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+<span class="linenos"> 95</span>
+<span class="linenos"> 96</span>    <span class="c1"># Probability of liquefaction (manifestation at the surface) according to Geyin et al. (2020) (minor manifestation)</span>
+<span class="linenos"> 97</span>    <span class="n">LPI_beta</span><span class="o">=</span> <span class="mf">1.774</span>
+<span class="linenos"> 98</span>    <span class="n">LPI_theta</span><span class="o">=</span> <span class="mf">4.095</span>
+<span class="linenos"> 99</span>    <span class="n">prob_liq</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">LPI</span><span class="o">/</span><span class="n">LPI_theta</span><span class="p">)</span><span class="o">/</span><span class="n">LPI_beta</span><span class="p">)</span>
+<span class="linenos">100</span>
+<span class="linenos">101</span>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;liq_prob&quot;</span><span class="p">:</span><span class="n">prob_liq</span><span class="p">,</span> <span class="s2">&quot;liq_susc&quot;</span><span class="p">:</span><span class="n">LPI</span><span class="p">}</span>
+</pre></div>
+</div>
+</code></pre>
+</details><br><br><p><strong>RESULTS</strong></p>
+<figure class="align-center" id="id35">
+<a class="reference internal image-reference" href="_images/case5_sanger_lpi.png"><img alt="_images/case5_sanger_lpi.png" src="_images/case5_sanger_lpi.png" style="width: 484.5px; height: 494.25px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig 5.</strong>  Results of the Sanger et al. (2024) model for liquefaction potential index given the selected M8 N. San Andreas rupture event scenario.</span><a class="headerlink" href="#id35" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id36">
+<a class="reference internal image-reference" href="_images/case5_sanger_pliq.png"><img alt="_images/case5_sanger_pliq.png" src="_images/case5_sanger_pliq.png" style="width: 483.75px; height: 492.75px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig 6.</strong>  Results of the Sanger et al. (2024) model for probability of liquefaction given the selected M8 N. San Andreas rupture event scenario, using the Geyin and Maurer (2020) fragility function to map LPI to probability of surface manifestation (minor/all).</span><a class="headerlink" href="#id36" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<dl>
+<dt>Preliminary visualization of the results can be accomplished in the R2D VIZ tab using Graduated Symbols. However, the author recommends exporting the results to a GIS software for more detailed visualization and analysis.</dt><dd><figure class="align-center">
+<a class="reference internal image-reference" href="_images/case5_EQGen7.png"><img alt="_images/case5_EQGen7.png" src="_images/case5_EQGen7.png" style="width: 600px;" />
+</a>
+</figure>
+</dd>
+</dl>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note the division spacing issue that arises when the number of divisions is greater than 10. This has been alerted to the developers.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/case5_EQGen11.png"><img alt="_images/case5_EQGen11.png" src="_images/case5_EQGen11.png" style="width: 600px;" />
+</a>
+</figure>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="case_4.html" class="btn btn-neutral float-left" title="S3 hark - Site Response 2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="case_6.html" class="btn btn-neutral float-right" title="R2D - Landslides" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, UW Computational Group.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

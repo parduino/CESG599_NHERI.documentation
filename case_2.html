@@ -1,0 +1,776 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EEUQ - Transfer Function &mdash; CESG-599 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="S3 hark - Site Response 1" href="case_3.html" />
+    <link rel="prev" title="QuoFEM - Settlements" href="case_1.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CESG-599
+              <img src="_static/CESG-599.gif" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="case_0.html">CESG599 - NHERI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_1.html">QuoFEM - Settlements</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">EEUQ - Transfer Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#author-erick-martinez">Author: Erick Martinez</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#problem-description">Problem Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solution-strategy">Solution Strategy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fourier-transform">Fourier Transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transfer-function-equation">Transfer Function Equation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#simcenter-tool-used">SimCenter Tool Used</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-application">Example Application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#soil-profile">Soil Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uncertainty">Uncertainty</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#motion">Motion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pre-workflow-python-script">Pre-Workflow Python Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#workflow-in-ee-uq">Workflow in EE-UQ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#results">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#remarks">Remarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="case_3.html">S<sup>3</sup> hark - Site Response 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_4.html">S<sup>3</sup> hark - Site Response 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_5.html">R2D - Liquefaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_6.html">R2D - Landslides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_7.html">R2D - Hurricane Damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_8.html">HydroUQ - Celeris</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_r.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CESG-599</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">EEUQ - Transfer Function</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/case_2.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="eeuq-transfer-function">
+<span id="case-2"></span><h1>EEUQ - Transfer Function<a class="headerlink" href="#eeuq-transfer-function" title="Link to this heading"></a></h1>
+<section id="author-erick-martinez">
+<h2>Author: Erick Martinez<a class="headerlink" href="#author-erick-martinez" title="Link to this heading"></a></h2>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This page introduces the fundamental concept of transfer functions and their application in site response analysis.
+The project also examines the impact of uncertainty in input variables during this process, utilizing the SimCenter tool EE-UQ.
+Special attention is given to soil amplification factors. For more detailed information on transfer functions, users are encouraged to read <span id="id1">[<a class="reference internal" href="case_r.html#id9" title="S. L. Kramer. Geotechnical Earthquake Engineering. Pearson, 1996. ISBN 9783642196294.">Kra96</a>]</span>.</p>
+<p>A Jupyter Notebook for this example can be found within <a class="reference external" href="https://www.designsafe-ci.org/data/browser/projects/3318891375077944850-242ac118-0001-012/">DesignSafe PRJ-4604</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This example was prepared on a Mac system. Differences in the UI between Mac and other systems are possible, but should not affect the outcome.</p>
+</div>
+</section>
+<section id="problem-description">
+<h2>Problem Description<a class="headerlink" href="#problem-description" title="Link to this heading"></a></h2>
+<p>A transfer function acts as a filter that can amplify or de-amplify an incoming wave from a medium to produce the output signal in another medium. To simplify the idea of a transfer function, a spring-mass system can be used. As a motion is applied on the mass connected to a spring; a responsive outgoing wave will then be propagated through the mass and the spring. This outgoing motion will be a composite factor of the stiffness and elastic damping forces found within the spring-mass system.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more information, visit the <a class="reference external" href="https://demonstrations.wolfram.com/FreeVibrationsOfASpringMassDamperSystem/">Free Vibrations of a Spring-Mass-Damper System</a>.</p>
+</div>
+<p>This can be applied to earth systems in the form of ground motions. An example of this is an earthquake motion acting on a rock layer at a certain depth. This motion is then transferred through the soil profile and is reflected as a different motion at the surface. In order to determine the influence of a soil profile on the motion, three major components are required: thickness of layer (H), shear wave velocity (Vs), and damping ratio.</p>
+<p>It is important to ensure that this difference in motion is accounted for. When a structure is constructed, it has a specific resonance. Understanding this resonance is important because if an earthquake motion has similar peaks in frequency, causing amplification of the motion, the structure could have a significant and potentially disastrous behavior. While the incoming motion at the rock might have a different natural resonance, the motion at the surface might match that of the structure. The design of earthquake resistant structures relies on the accurate determination of transfer functions in sites. An example of this is shown below - where a motion was amplified from 0.03g to 0.15g due to the presence of soft clay.</p>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="_images/case2_Resonance_Building_Example_TF.png"><img alt="_images/case2_Resonance_Building_Example_TF.png" src="_images/case2_Resonance_Building_Example_TF.png" style="width: 544.8000000000001px; height: 381.6px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 1. Mexico City Earthquake Amplification.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>As with any engineering properties, there will always be the presence of uncertainty. A layer might have differential thicknesses in certain regions, causing the height to be non-uniform. Shear wave velocity can change very quickly depending on depth and composition of the materials within the layer. Damping can also be affected by changes in stratigraphy and composition. To account for this, uncertainty must be incorporated into a transfer function analysis. This inclusion will aid in the accuracy and reliability of site response analyses.</p>
+</section>
+<section id="solution-strategy">
+<h2>Solution Strategy<a class="headerlink" href="#solution-strategy" title="Link to this heading"></a></h2>
+<section id="fourier-transform">
+<h3>Fourier Transform<a class="headerlink" href="#fourier-transform" title="Link to this heading"></a></h3>
+<p>In earth systems, this relationship between incoming and outgoing wave can be evaluated through mathematically converting an input motion, typically an acceleration-time history, to a Fourier series using the Fast Fourier Transform (FFT). In the Fourier space, the motion is then multiplied by the transfer function, resulting in the outgoing Fourier motion. This can then be converted back into various plots, such as acceleration-time history and spectral acceleration vs. period, that allow for analysis of the outgoing motion. An analysis of this ground motion can provide frequencies of interest where ground accelerations would be highest/lowest, which can aid in site response analysis and planning.</p>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="_images/case2_TF_Rock_to_Soil1.png"><img alt="_images/case2_TF_Rock_to_Soil1.png" src="_images/case2_TF_Rock_to_Soil1.png" style="width: 430.40000000000003px; height: 460.40000000000003px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 2. Transfer Function from Rock to Soil.</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="transfer-function-equation">
+<h3>Transfer Function Equation<a class="headerlink" href="#transfer-function-equation" title="Link to this heading"></a></h3>
+<p>To calculate a transfer function, the equation below can be used. In a single layer soil profile, it is assumed that the impedance contrast between layers is zero. Using a tool like EE-UQ can help provide the ratio between the input and output motion and provides the uncertainty in those motions and variables.</p>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="_images/case2_TF_Equation.png"><img alt="_images/case2_TF_Equation.png" src="_images/case2_TF_Equation.png" style="width: 442.40000000000003px; height: 72.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Eqn. 1. Transfer Function Equation [Kramer, 1996]</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This equation changes based on the soil profile. Having multiple soil layers can lead to an impedance contrast. The equation also changes if the damping ratio is assumed to be zero. Kramer (1996) provides more information for the different instances.</p>
+</div>
+</section>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<p>A typical transfer function would look similar to the one provided below. In the figure below, there are various peaks of natural resonance for the transfer function, which is where the motion will have the greatest amplification/de-amplification.</p>
+<figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="_images/case2_TF_Nat_Freqs.png"><img alt="_images/case2_TF_Nat_Freqs.png" src="_images/case2_TF_Nat_Freqs.png" style="width: 372.0px; height: 246.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 3. Transfer Function from Rock to Soil.</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="simcenter-tool-used">
+<h2>SimCenter Tool Used<a class="headerlink" href="#simcenter-tool-used" title="Link to this heading"></a></h2>
+<p>To understand transfer functions, there are many tools available. One of these tools is the SimCenter Transfer Function Tool (TFT). This tool introduces users to transfer functions by providing the output motion at a site given the motion, thickness of layers, shear wave velocities, and damping ratio. TFT allows for easy analysis of amplification/de-amplification of ground motions based on specific sites.</p>
+<p>The Earthquake Engineering with Uncertainty Quantification Application (EE-UQ) is a SimCenter research application that also allows for site response predictions due to earthquake loading. In addition to basic transfer function quantification, it allows for the analysis of uncertainty in the predictions based on the uncertainty found within the input model, motion, etc. This workflow application allows the user to run analyses in the background and provides a simple user interface that facilitates its use.</p>
+</section>
+<section id="example-application">
+<h2>Example Application<a class="headerlink" href="#example-application" title="Link to this heading"></a></h2>
+<section id="soil-profile">
+<h3>Soil Profile<a class="headerlink" href="#soil-profile" title="Link to this heading"></a></h3>
+<p>In this example, we will analyze the amplification/deamplification effects of a ground motion caused by its propagation through the soil layer. The 10 meter soil layer has a shear wave velocity (Vs) of 500 m/s and a damping ratio of 3%.</p>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="_images/case2_CESG599_TF_image1.png"><img alt="_images/case2_CESG599_TF_image1.png" src="_images/case2_CESG599_TF_image1.png" style="width: 495.0px; height: 233.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 4. Soil Profile &amp; Material Properties.</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="uncertainty">
+<h3>Uncertainty<a class="headerlink" href="#uncertainty" title="Link to this heading"></a></h3>
+<p>Because of the presence of uncertainty in the soil properties, the transfer function will include uncertainty in its effects. Normal distribution values for each variable (H, Vs, damping) will be provided. This uncertainty will be quantified through multiple runs in EE-UQ and expressed as ratios of mean velocity and acceleration, along with standard deviation and skewness.</p>
+<p>The following normal distribution figures represent the uncertainty within each variable.</p>
+<figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="_images/case2_Combined_RV_1.png"><img alt="_images/case2_Combined_RV_1.png" src="_images/case2_Combined_RV_1.png" style="width: 675.6px; height: 171.20000000000002px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 5. Uncertainty in Each Variable (H, Vs, Damping).</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="motion">
+<h3>Motion<a class="headerlink" href="#motion" title="Link to this heading"></a></h3>
+<p>An earthquake motion will be applied to a rock, located at the bottom of a one-dimensional soil profile. The motion is shown below as an acceleration time history as well as a Fourier amplitude spectra (FAS).</p>
+<figure class="align-center" id="id8">
+<a class="reference internal image-reference" href="_images/case2_Input_Motion_TF.png"><img alt="_images/case2_Input_Motion_TF.png" src="_images/case2_Input_Motion_TF.png" style="width: 644.8000000000001px; height: 292.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 6. Input Ground Motion.</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="pre-workflow-python-script">
+<h3>Pre-Workflow Python Script<a class="headerlink" href="#pre-workflow-python-script" title="Link to this heading"></a></h3>
+<p>To complete a transfer function analysis in EE-UQ various Python files had to be generated. The following script calculates the transfer function of a soil layer and applies it to a given acceleration record.</p>
+<details>
+<summary><u><b>Click to expand the full Transfer Function Example code</u></b></summary>
+<pre><code><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ############################################################################################################</span>
+<span class="c1"># Title: Transfer Function Calculation</span>
+<span class="c1"># Description: This script calculates the transfer function of a soil layer and applies it to a given acceleration record.</span>
+<span class="c1"># Author: Pedro Arduino</span>
+<span class="c1"># UW Computational Geotechnical Group</span>
+<span class="c1"># Date: 2024</span>
+<span class="c1"># All Rights Reserved</span>
+<span class="c1"># ############################################################################################################</span>
+
+<span class="c1"># %%</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.fft</span><span class="w"> </span><span class="kn">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">ifft</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">integrate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">respSpectra</span><span class="w"> </span><span class="kn">import</span> <span class="n">resp_spectra</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TFunctionClass</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">damping</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">Vs</span><span class="p">):</span>
+        <span class="c1"># Define the variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_freq</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_time</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_acc</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_absFft</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_absSoilTF</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_absIFft</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_accT</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_vel</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_disp</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_velT</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_dispT</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Define soil layer parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_damping</span> <span class="o">=</span> <span class="n">damping</span> <span class="o">/</span> <span class="mf">100.0</span> <span class="c1"># damping from percentage to number</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_H</span> <span class="o">=</span> <span class="n">H</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_Vs</span> <span class="o">=</span> <span class="n">Vs</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculateResponse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">SoilTF</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_freq</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex_</span><span class="p">)</span>
+        <span class="n">absSoilTF</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_freq</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float_</span><span class="p">)</span>
+
+        <span class="c1"># Compute the Fourier amplitude spectrum</span>
+        <span class="n">fas</span> <span class="o">=</span> <span class="n">fft</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_acc</span><span class="p">)</span>
+        <span class="c1"># fas = fas[:self.nyquist_index]</span>
+        <span class="n">absfas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fas</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_absFft</span> <span class="o">=</span> <span class="n">absfas</span>
+
+        <span class="c1"># Compute transfer function of soil layer</span>
+        <span class="n">SoilTF</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calcSoilTf</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_absSoilTF</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">SoilTF</span><span class="p">)</span>
+
+        <span class="c1"># Compute surface soil response</span>
+        <span class="n">ifas</span> <span class="o">=</span> <span class="n">fas</span> <span class="o">*</span> <span class="n">SoilTF</span>
+        <span class="n">absfas2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">ifas</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_absIFft</span> <span class="o">=</span> <span class="n">absfas2</span>
+        <span class="n">accT</span> <span class="o">=</span> <span class="n">ifft</span><span class="p">(</span><span class="n">ifas</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_accT</span> <span class="o">=</span> <span class="n">accT</span><span class="o">.</span><span class="n">real</span>  <span class="c1"># Take only the real part</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">calcSoilTf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">tf</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_freq</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Frequency vector is not defined&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_freq</span><span class="p">:</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                * The uniform damped soil on rigid rock transfer function</span>
+<span class="sd">                *                             1</span>
+<span class="sd">                *  H = -------------------------------------------------</span>
+<span class="sd">                *       cos ( 2* PI * freq * H / (Vs(1+ i*damping))</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="n">kstar</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">f</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_Vs</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_damping</span> <span class="o">*</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">f</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_Vs</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span>
+                <span class="n">Vsstar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_Vs</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_damping</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_Vs</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span>
+                <span class="n">tf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">f</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_H</span> <span class="o">/</span> <span class="n">Vsstar</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">tf</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_nat_freq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">n_pt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_freq</span><span class="p">)</span>
+        <span class="n">N_freq</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">N_freqVal</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">dfreq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_freq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">n_pt</span>
+
+        <span class="n">TF_tan</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_freq</span><span class="p">)):</span>
+            <span class="n">TF_tan1</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_absSoilTF</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_absSoilTF</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">dfreq</span>
+            <span class="k">if</span> <span class="n">TF_tan1</span> <span class="o">*</span> <span class="n">TF_tan</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">TF_tan</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">N_freq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_freq</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">N_freqVal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_absSoilTF</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">TF_tan</span> <span class="o">=</span> <span class="n">TF_tan1</span>
+
+        <span class="k">return</span> <span class="n">N_freq</span><span class="p">,</span> <span class="n">N_freqVal</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_ratio</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">grav</span> <span class="o">=</span> <span class="mf">9.81</span> <span class="c1"># m/s2</span>
+        <span class="n">dT</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_time</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_time</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">accAux</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">m_acc</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">*</span><span class="n">grav</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_acc</span><span class="p">))]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_vel</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">cumtrapz</span><span class="p">(</span><span class="n">accAux</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="n">dT</span><span class="p">)</span>
+        <span class="c1"># self.mvel = np.insert(self.m_vel, 0, 0.0)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_disp</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">cumtrapz</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_vel</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="n">dT</span><span class="p">)</span>
+        <span class="c1"># mdisp = np.insert(self.m_disp, 0, 0.0)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_velT</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">cumtrapz</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">m_accT</span><span class="o">*</span><span class="n">grav</span><span class="p">),</span> <span class="n">dx</span><span class="o">=</span><span class="n">dT</span><span class="p">)</span>
+        <span class="c1"># self.mvel = np.insert(self.m_vel, 0, 0.0)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_dispT</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">cumtrapz</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_velT</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="n">dT</span><span class="p">)</span>
+        <span class="c1"># mdisp = np.insert(self.m_disp, 0, 0.0)</span>
+
+        <span class="n">ratioA</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_accT</span><span class="p">))</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_acc</span><span class="p">))</span>
+        <span class="n">ratioV</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_velT</span><span class="p">))</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_vel</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">ratioA</span><span class="p">,</span> <span class="n">ratioV</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">sin_record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+        <span class="n">n_points</span> <span class="o">=</span> <span class="mi">2000</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_dt</span> <span class="o">=</span> <span class="mf">0.02</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_acc</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_points</span>
+        <span class="n">accel</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_points</span><span class="p">):</span>
+            <span class="n">accel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">f</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_dt</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_acc</span> <span class="o">=</span> <span class="n">accel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_freq</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">sweep_record</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">n_points</span> <span class="o">=</span> <span class="mi">8000</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_dt</span> <span class="o">=</span> <span class="mf">0.002</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_acc</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_points</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_time</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_points</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_time</span><span class="p">)):</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_dt</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">m_time</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">m_acc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">25.0</span> <span class="o">*</span> <span class="n">time</span> <span class="o">+</span> <span class="mf">150.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">time</span> <span class="o">*</span> <span class="n">time</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">16.0</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_freq</span><span class="p">()</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_filename</span> <span class="o">=</span> <span class="n">file_name</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="c1"># Read file contents into a JSON object</span>
+                <span class="n">jsonObj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot read file </span><span class="si">{</span><span class="n">file_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">events</span> <span class="o">=</span> <span class="n">jsonObj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Events&quot;</span><span class="p">,</span> <span class="p">[])</span>
+
+        <span class="k">if</span> <span class="n">events</span><span class="p">:</span>
+            <span class="n">patterns</span> <span class="o">=</span> <span class="n">events</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pattern&quot;</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="n">timeseries</span> <span class="o">=</span> <span class="n">events</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;timeSeries&quot;</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="n">pattern_type</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">tsname</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;timeSeries&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+            <span class="n">units</span> <span class="o">=</span> <span class="n">events</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;units&quot;</span><span class="p">,</span> <span class="p">{})</span>
+            <span class="n">acc_unit</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="n">acc_type</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;acc&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">acc_type</span> <span class="o">==</span> <span class="s2">&quot;g&quot;</span><span class="p">:</span>
+                <span class="n">acc_unit</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="k">elif</span> <span class="n">acc_type</span> <span class="o">==</span> <span class="s2">&quot;m/s2&quot;</span><span class="p">:</span>
+                <span class="n">acc_unit</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">9.81</span>
+            <span class="k">elif</span> <span class="n">acc_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;cm/s2&quot;</span><span class="p">,</span> <span class="s2">&quot;gal&quot;</span><span class="p">,</span> <span class="s2">&quot;Gal&quot;</span><span class="p">]:</span>
+                <span class="n">acc_unit</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">981.0</span>
+
+            <span class="n">timeseries_data</span> <span class="o">=</span> <span class="n">timeseries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="n">dT</span> <span class="o">=</span> <span class="n">timeseries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dT&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">read_GM</span><span class="p">(</span><span class="n">timeseries_data</span><span class="p">,</span> <span class="n">dT</span><span class="p">,</span> <span class="n">acc_unit</span><span class="p">)</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_GM</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">acc_TH</span><span class="p">,</span> <span class="n">dT</span><span class="p">,</span> <span class="n">acc_unit</span><span class="p">):</span>
+        <span class="n">n_points</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">acc_TH</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_dt</span> <span class="o">=</span> <span class="n">dT</span>
+        <span class="c1"># self.m_acc = [acc_TH[ii].toDouble() * acc_unit for ii in range(n_points)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_acc</span> <span class="o">=</span> <span class="p">[</span><span class="n">acc_TH</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">*</span> <span class="n">acc_unit</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_points</span><span class="p">)]</span>
+
+        <span class="k">if</span> <span class="n">n_points</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">m_acc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_acc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_acc</span><span class="p">)</span> <span class="c1"># Convert to numpy array</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_freq</span><span class="p">()</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_freq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_dt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">m_dt</span> <span class="o">=</span> <span class="mf">0.005</span>
+            <span class="n">nfreq</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_dt</span><span class="o">*</span><span class="mi">10</span>
+            <span class="n">sample_freq</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_dt</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">nfreq</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_acc</span><span class="p">)</span>
+            <span class="n">sample_freq</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_dt</span>
+
+        <span class="c1"># self.m_freq = [0] * (len(self.m_acc) // 2 + 1)</span>
+        <span class="c1"># self.m_freq = [0] * (len(self.m_acc))   # m_freq as a list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nfreq</span><span class="p">)</span> <span class="c1"># m_freq as a numpy array</span>
+        <span class="n">sample_freq</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_dt</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">nyquist_freq</span> <span class="o">=</span> <span class="n">sample_freq</span> <span class="o">/</span> <span class="mf">2.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nyquist_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_freq</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_freq</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">m_freq</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">sample_freq</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_acc</span><span class="p">)</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># self.m_time = [0] * len(self.m_acc) # m_time as a list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_acc</span><span class="p">))</span> <span class="c1"># m_time as a numpy array</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_time</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">m_time</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_dt</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_acc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_acc</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;input&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_accT</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;output&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time [sec]&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Acc [g]&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_fft</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_freq</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">nyquist_index</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_absFft</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">nyquist_index</span><span class="p">],</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;input&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_freq</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">nyquist_index</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_absIFft</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">nyquist_index</span><span class="p">],</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;output&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency [Hz]&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Fourier Amplitude&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_tf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_freq</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">nyquist_index</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_absSoilTF</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">nyquist_index</span><span class="p">],</span> <span class="s1">&#39;b-&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency [Hz]&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;TF&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_spectra</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">n_points</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_acc</span><span class="p">)</span>
+        <span class="n">accAux</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">m_acc</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">*</span><span class="mf">9.81</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_points</span><span class="p">)]</span>
+        <span class="n">accTAux</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">m_accT</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">*</span><span class="mf">9.81</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_points</span><span class="p">)]</span>
+        <span class="n">periods</span><span class="p">,</span> <span class="n">psa</span> <span class="o">=</span> <span class="n">resp_spectra</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_time</span><span class="p">,</span> <span class="n">accAux</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+        <span class="n">periodsT</span><span class="p">,</span> <span class="n">psaT</span> <span class="o">=</span> <span class="n">resp_spectra</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m_time</span><span class="p">,</span> <span class="n">accTAux</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">periods</span><span class="p">,</span> <span class="n">psa</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;input&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">periodsT</span><span class="p">,</span> <span class="n">psaT</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;output&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Periods [s]&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;PSA [cm/s2]&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Define input parameters</span>
+    <span class="n">damping</span> <span class="o">=</span> <span class="mf">5.0</span>  <span class="c1"># damping ratio in %</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="mf">20.0</span>  <span class="c1"># layer height in m</span>
+    <span class="n">Vs</span> <span class="o">=</span> <span class="mf">200.0</span>  <span class="c1"># shear wave velocity in m/s</span>
+
+    <span class="n">TF</span> <span class="o">=</span> <span class="n">TFunctionClass</span><span class="p">(</span><span class="n">damping</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">Vs</span><span class="p">)</span>
+
+    <span class="c1"># Sinusoidal record</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># frequency in Hz</span>
+    <span class="n">TF</span><span class="o">.</span><span class="n">sin_record</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="c1"># Calculate response</span>
+    <span class="n">TF</span><span class="o">.</span><span class="n">calculateResponse</span><span class="p">()</span>
+
+    <span class="c1"># Calculate ratios</span>
+    <span class="n">ratioA</span><span class="p">,</span> <span class="n">ratioV</span> <span class="o">=</span> <span class="n">TF</span><span class="o">.</span><span class="n">calculate_ratio</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Acceleration Ratio: </span><span class="si">{</span><span class="n">ratioA</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Velocity Ratio: </span><span class="si">{</span><span class="n">ratioV</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Plot acceleration</span>
+    <span class="n">TF</span><span class="o">.</span><span class="n">plot_acc</span><span class="p">()</span>
+
+    <span class="c1"># Plot Fourier Transform</span>
+    <span class="n">TF</span><span class="o">.</span><span class="n">plot_fft</span><span class="p">()</span>
+
+    <span class="c1"># Plot Transfer Function</span>
+    <span class="n">TF</span><span class="o">.</span><span class="n">plot_tf</span><span class="p">()</span>
+
+    <span class="c1"># Plot Spectra</span>
+    <span class="n">TF</span><span class="o">.</span><span class="n">plot_spectra</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</code></pre>
+</details><br><br><p>This script performs post-processing by building response spectra from acceleration time history.</p>
+<details>
+<summary><u><b>Click to expand the full Response Spectra Python code</u></b></summary>
+<pre><code><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#########################################################</span>
+<span class="c1">#</span>
+<span class="c1"># Postprocessing python script</span>
+<span class="c1">#</span>
+<span class="c1"># Copyright: UW Computational Mechanics Group</span>
+<span class="c1">#            Pedro Arduino</span>
+<span class="c1">#</span>
+<span class="c1"># Participants: Alborz Ghofrani</span>
+<span class="c1">#               Long Chen</span>
+<span class="c1">#</span>
+<span class="c1">#-------------------------------------------------------</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">resp_spectra</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">nstep</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function builds response spectra from acceleration time history,</span>
+<span class="sd">    a should be a numpy array,T and nStep should be integers.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># add initial zero value to acceleration and change units</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># number of periods at which spectral values are to be computed</span>
+    <span class="n">nperiod</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="c1"># define range of considered periods by power of 10</span>
+    <span class="n">minpower</span> <span class="o">=</span> <span class="o">-</span><span class="mf">3.0</span>
+    <span class="n">maxpower</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="c1"># create vector of considered periods</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="n">minpower</span><span class="p">,</span> <span class="n">maxpower</span><span class="p">,</span> <span class="n">nperiod</span><span class="p">)</span>
+    <span class="c1"># incremental circular frequency</span>
+    <span class="n">dw</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">time</span>
+    <span class="c1"># vector of circular freq</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">nstep</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">dw</span><span class="p">,</span> <span class="n">dw</span><span class="p">)</span>
+    <span class="c1"># fast fourier Horm of acceleration</span>
+    <span class="n">afft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="c1"># arbitrary stiffness value</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mf">1000.0</span>
+    <span class="c1"># damping ratio</span>
+    <span class="n">damp</span> <span class="o">=</span> <span class="mf">0.05</span>
+    <span class="n">umax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nperiod</span><span class="p">)</span>
+    <span class="n">vmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nperiod</span><span class="p">)</span>
+    <span class="n">amax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nperiod</span><span class="p">)</span>
+    <span class="c1"># loop to compute spectral values at each period</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nperiod</span><span class="p">):</span>
+        <span class="c1"># compute mass and dashpot coeff to produce desired periods</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="p">((</span><span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">k</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">damp</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">m</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nstep</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+        <span class="c1"># compute transfer function</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">nstep</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">)):</span>
+            <span class="n">h</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="o">-</span><span class="n">m</span><span class="o">*</span><span class="n">w</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">*</span><span class="n">w</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="n">w</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span>
+            <span class="c1"># mirror image of Her function</span>
+            <span class="n">h</span><span class="p">[</span><span class="n">nstep</span><span class="o">+</span><span class="mi">1</span><span class="o">-</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="n">l</span><span class="p">])</span>
+
+        <span class="c1"># compute displacement in frequency domain using Her function</span>
+        <span class="n">qfft</span> <span class="o">=</span> <span class="o">-</span><span class="n">m</span><span class="o">*</span><span class="n">afft</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nstep</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nstep</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">u</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">*</span><span class="n">qfft</span><span class="p">[</span><span class="n">l</span><span class="p">]</span>
+
+        <span class="c1"># compute displacement in time domain (ignore imaginary part)</span>
+        <span class="n">utime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
+
+        <span class="c1"># spectral displacement, velocity, and acceleration</span>
+        <span class="n">umax</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">utime</span><span class="p">))</span>
+        <span class="n">vmax</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">*</span><span class="n">umax</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">amax</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">*</span><span class="n">vmax</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">p</span><span class="p">,</span> <span class="n">umax</span><span class="p">,</span> <span class="n">vmax</span><span class="p">,</span> <span class="n">amax</span>
+</pre></div>
+</div>
+</code></pre>
+</details><br><br></section>
+<section id="workflow-in-ee-uq">
+<h3>Workflow in EE-UQ<a class="headerlink" href="#workflow-in-ee-uq" title="Link to this heading"></a></h3>
+<p>The procedure for performing a transfer function analysis is shown below.</p>
+<p>A forward propagation problem will be performed. The UQ engine to be used is Dakota with parallel execution and saved working directories. The Latin Hypercube Sampling (LHS) method will be used with 10 samples and a seed of 913. The UQ tab should look similar to the one below.</p>
+<figure class="align-center" id="id9">
+<a class="reference internal image-reference" href="_images/case2_UQTab_Workflow_TF.png"><img alt="_images/case2_UQTab_Workflow_TF.png" src="_images/case2_UQTab_Workflow_TF.png" style="width: 733.1999999999999px; height: 423.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 7. Uncertainty Quantification.</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The General Information (GI) tab will not be utilized in this example since no structure will be used.</p>
+<p>For the simulation (SIM tab), the input script will be loaded using a CustomPy Model. Along with this, the number of response nodes will be 1 with a spatial dimension of 2. Each node will have 3 degrees of freedom (DOF) and the profile will have damping ratio of 2%. The centroid node value will be 1.</p>
+<figure class="align-center" id="id10">
+<a class="reference internal image-reference" href="_images/case2_SimTab_TF.png"><img alt="_images/case2_SimTab_TF.png" src="_images/case2_SimTab_TF.png" style="width: 734.4px; height: 422.4px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 8. Simulations.</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>In the Event (EVT) tab, a Multiple SimCenter load generator will be used. The motion of interest will be uploaded here as a JSON file and will have a factor of 1.</p>
+<p>In the Finite Element Modeling (FEM) tab, select a CustomPy-Simulation.</p>
+<p>In the Engineering Demand Parameter (EDP) tab, select a user defined generator. The response parameters will be the ratio of acceleration spectra and velocity spectra from the propagation from rock to the soil.</p>
+<figure class="align-center" id="id11">
+<a class="reference internal image-reference" href="_images/case2_EDPTab_Workflow_TF.png"><img alt="_images/case2_EDPTab_Workflow_TF.png" src="_images/case2_EDPTab_Workflow_TF.png" style="width: 733.8px; height: 421.8px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 9. Engineering Demand Parameters.</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The Random Variables (RV) tab is where the values of H, Vs, and damping are implemented in the analysis. The values seen above are to be input here. A normal distribution will be used for all of these variables.</p>
+<figure class="align-center" id="id12">
+<a class="reference internal image-reference" href="_images/case2_RVTab_Workflow_TF.png"><img alt="_images/case2_RVTab_Workflow_TF.png" src="_images/case2_RVTab_Workflow_TF.png" style="width: 733.8px; height: 421.2px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 10. Random Variables.</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The user can opt for running the analysis on their local device or in DesignSafe.</p>
+</section>
+<section id="results">
+<h3>Results<a class="headerlink" href="#results" title="Link to this heading"></a></h3>
+<p>When the run is completed, the mean values of ratioA and ratioV, as well as uncertainty values,should be provided. These values show the ratio of average amplification/de-amplification in acceleration in velocity of the ground motion at the rock and the motion at the surface. The positive value of the ratio shows amplification occurred due to the propagation of the motion through the soil layer.</p>
+<figure class="align-center" id="id13">
+<a class="reference internal image-reference" href="_images/case2_Results_Workflow_TF.png"><img alt="_images/case2_Results_Workflow_TF.png" src="_images/case2_Results_Workflow_TF.png" style="width: 733.8px; height: 420.59999999999997px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 11. Results</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Because the input variables (H, Vs, damping, motions) each have uncertainty, that uncertainty is carried on to the transfer function analysis. EE-UQ allows for uncertainty quantification which allows for an analysis of which variables might be most important or what the “worst-case scenario” could be when designing. The normalized normal distribution for the acceleration and velocity amplification ratios are shown below.</p>
+<figure class="align-center" id="id14">
+<a class="reference internal image-reference" href="_images/case2_Normalized_RatioA_histogram.png"><img alt="_images/case2_Normalized_RatioA_histogram.png" src="_images/case2_Normalized_RatioA_histogram.png" style="width: 384.0px; height: 288.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 12. Normalized Acceleration Amplification Factor Histogram</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id15">
+<a class="reference internal image-reference" href="_images/case2_Normalized_RatioV_histogram.png"><img alt="_images/case2_Normalized_RatioV_histogram.png" src="_images/case2_Normalized_RatioV_histogram.png" style="width: 384.0px; height: 288.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 13. Normalized Velocity Amplification Factor Histogram</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Due to the infinite possibilities of variability the three main variables (H, Vs, Damping) can have, we see that the normal distribution is not well suited for this analysis, specifically. EE-UQ allows for other methods of uncertainty quantification. Below is a Gaussian Mixture Model. This method is effective in measuring the probability of certain subpopulations within a larger population.</p>
+<figure class="align-center" id="id16">
+<a class="reference internal image-reference" href="_images/case2_Gaussian_Mixture_RatioA_histogram.png"><img alt="_images/case2_Gaussian_Mixture_RatioA_histogram.png" src="_images/case2_Gaussian_Mixture_RatioA_histogram.png" style="width: 384.0px; height: 288.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 14. Gaussian Mixture Model - Acceleration Amplification Ratio.</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id17">
+<a class="reference internal image-reference" href="_images/case2_Gaussian_Mixture_RatioV_histogram.png"><img alt="_images/case2_Gaussian_Mixture_RatioV_histogram.png" src="_images/case2_Gaussian_Mixture_RatioV_histogram.png" style="width: 384.0px; height: 288.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 15. Gaussian Mixture Model - Velocity Amplification Ratio.</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This situation is specific only to this example; normal distributions could very well suit another example.</p>
+</div>
+<p>By extrapolating the values from EE-UQ, the shape of the transfer function can be determined. The natural frequencies of the first 4 peaks in the transfer function are also shown below.</p>
+<figure class="align-center" id="id18">
+<a class="reference internal image-reference" href="_images/case2_TF_Nat_Freqs.png"><img alt="_images/case2_TF_Nat_Freqs.png" src="_images/case2_TF_Nat_Freqs.png" style="width: 434.0px; height: 287.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 16. Transfer Function.</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div style="display: flex; justify-content: center;"><table class="docutils align-default" id="id19">
+<caption><span class="caption-text">Table 1. Natural Frequencies in the Transfer Function</span><a class="headerlink" href="#id19" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Peak</p></th>
+<th class="head"><p>Amplification Factor at Natural Frequencies</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>20.49</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>7.03</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>4.20</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>2.98</p></td>
+</tr>
+</tbody>
+</table>
+</div><p>With the transfer function plotted, the input motion can be transformed using the transfer function to reflect the motion at the surface. The figure below reflects the large amplification that occurred. The value of the highest acceleration increased from ~0.4g in the rock to ~1.25g in the soil. This amplification is also reflected in other frequencies.</p>
+<figure class="align-center" id="id20">
+<a class="reference internal image-reference" href="_images/case2_Full_Results_TF.png"><img alt="_images/case2_Full_Results_TF.png" src="_images/case2_Full_Results_TF.png" style="width: 425.6px; height: 530.4px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 17. Amplification of Ground Motion.</span><a class="headerlink" href="#id20" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The spectral acceleration spectra can be also determined for each of the motions. These spectra can be used to determine if a structure will be affected by the amplification. A single story structure (~0.1 second period) might be at risk due to this amplification. Any periods with a large amplification ratios should be further analyzed to ensure the safety of the structure and site.</p>
+<figure class="align-center" id="id21">
+<a class="reference internal image-reference" href="_images/case2_SpectralAcc_Results_TF.png"><img alt="_images/case2_SpectralAcc_Results_TF.png" src="_images/case2_SpectralAcc_Results_TF.png" style="width: 287.2px; height: 358.40000000000003px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 18. Amplification in Spectral Acceleration.</span><a class="headerlink" href="#id21" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Link to this heading"></a></h2>
+<p>I’d like to thank everyone at SimCenter, specifically Sang-ri Yi, Frank McKenna, Jinyan Zhao, Aakash Bangalore Satish, and Barbaros Cetiner, for all of their effort and assistance they provided during the entire quarter. Navigating these tools and creating examples for them would’ve been a lot more stressful without their help.</p>
+<p>Transfer function is one of my favorite topics in geotechnical engineering. I’d really like to continue working with site response and performance based design so being able to create this example along with my class was great.</p>
+<p>Finally, I’d like to thank Prof. Arduino who made all of this possible. His determination and motivation was contagious throughout the academic quarter. There are many great professors but there is only one Pedro Arduino.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="case_1.html" class="btn btn-neutral float-left" title="QuoFEM - Settlements" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="case_3.html" class="btn btn-neutral float-right" title="S3 hark - Site Response 1" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, UW Computational Group.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,529 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HydroUQ - Celeris &mdash; CESG-599 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="References" href="case_r.html" />
+    <link rel="prev" title="R2D - Hurricane Damage" href="case_7.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CESG-599
+              <img src="_static/CESG-599.gif" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="case_0.html">CESG599 - NHERI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_1.html">QuoFEM - Settlements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_2.html">EEUQ - Transfer Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_3.html">S<sup>3</sup> hark - Site Response 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_4.html">S<sup>3</sup> hark - Site Response 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_5.html">R2D - Liquefaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_6.html">R2D - Landslides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_7.html">R2D - Hurricane Damage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">HydroUQ - Celeris</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#author-henry-j-watson-and-justin-bonus">Author: Henry J. Watson and Justin Bonus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#problem-description">Problem Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solution-strategy">Solution Strategy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#simcenter-tool-used">SimCenter Tool Used</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-application">Example Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#results">Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remarks">Remarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="case_r.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CESG-599</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">HydroUQ - Celeris</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/case_8.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="hydrouq-celeris">
+<span id="case-7"></span><h1>HydroUQ - Celeris<a class="headerlink" href="#hydrouq-celeris" title="Link to this heading"></a></h1>
+<section id="author-henry-j-watson-and-justin-bonus">
+<h2>Author: Henry J. Watson and Justin Bonus<a class="headerlink" href="#author-henry-j-watson-and-justin-bonus" title="Link to this heading"></a></h2>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>The northern shore of Puerto Rico faces both seismic and oceanic hazards, making it an important area for tsunami hazard assessment. This example focuses on the town of Loíza and evaluates tsunami wave impacts using an integrated modeling workflow. Building inventories were developed with a Jupyter Notebook using BRAILS++, and a subsequent Notebook added 3D representations of these structures to bathymetric data obtained from NOAA. The combined datasets were formatted for use in Celeris, an open-source, interactive coastal wave simulation software that solves the extended Boussinesq equations. Celeris is integrated into the SimCenter HydroUQ toolset available on DesignSafe and was used to simulate tsunami inundation in Loíza under a specified scenario.</p>
+</section>
+<section id="problem-description">
+<h2>Problem Description<a class="headerlink" href="#problem-description" title="Link to this heading"></a></h2>
+<p>Tsunamis are powerful waves frequently initiated by earthquakes. Modeling tsunami inundation is vital for creating tsunami evacuation routes and for long term planning of mitigation efforts in coastal communities.</p>
+<p>Tsunami risk analysis using R2D &lt;<a class="reference external" href="https://simcenter.designsafe-ci.org/research-tools/hydro-uq/">https://simcenter.designsafe-ci.org/research-tools/hydro-uq/</a>&gt;_ relies on inundation depth and flow velocity as primary intensity measures. These parameters are typically obtained from simulation results in the form of raster files covering the study area. The raster data is then combined with a building inventory to extract the inundation depth and velocity at each structure. Accurate modeling of these intensity measures is critical for reliable loss estimation. Therefore, the simulation must account for wave-structure interactions, among other important factors not detailed here. Two widely adopted approaches exist for representing these interactions:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Equivalent Surface Roughness: This method uses roughness values to capture the effect of buildings and vegetation on propagation of water through a community. This method is advantageous due to its simplicity and compatibility with widely available digital elevation models, which generally attempt to remove buildings and vegetation.</p></li>
+<li><p>Explicitly Represented Buildings: This method adds impermeable blocks to the digital elevation model corresponding to buildings. While real buildings do not behave as impermeable blocks during a tsunami, this method attempts to more directly model buildings’ effect on inundation. However, this method requires much higher resolution digital elevation models (and as a result, longer computing times) and an existing structural inventory.</p></li>
+</ul>
+</div></blockquote>
+<p>A study by Sadashiva et al. <span id="id1">[<a class="reference internal" href="case_r.html#id12" title="Vinod K. Shadashiva. Quantifying effects of explicit representation of buildings in tsunami inundation simulations. Iternational Journal of Disaster Risk Reduction, 2022.">Sha22</a>]</span> compared these methods and determined models using explicitly represented buildings provided more realistic tsunami flow patterns and reduced uncertainly in loss calculations as compared to models using equivalent surface roughness.</p>
+<p>While high resolution bathymetry and digital elevation models (DEMs) are becoming more available, many coastal communities like Loiza lack a complete structural inventory to be used in inundation modeling. Bridging this gap in available data is crucial for high accuracy inundation modeling and the associated risk and loss assessments.</p>
+</section>
+<section id="solution-strategy">
+<h2>Solution Strategy<a class="headerlink" href="#solution-strategy" title="Link to this heading"></a></h2>
+<p>Gathering and processing the data required for use with Celeris in this example occurs in three major steps:</p>
+<ol class="arabic">
+<li><p><strong>Creation of Building Inventory</strong></p>
+<blockquote>
+<div><p>Existing building inventories for this region of Puerto Rico are sparse. In our study area, no buildings were found in the National Structure Inventory (NSI). To address this data gap, we used <a class="reference external" href="https://simcenter.designsafe-ci.org/products/backend-components/brails/">BRAILS++</a> (Building Recognition using Artificial Intelligence at Large Scale), an AI-enabled tool developed and maintained by the NHERI SimCenter. BRAILS++ employs machine learning models trained on satellite imagery to identify building footprint geometries and locations. It then applies neural networks trained on Google Street View images to estimate building attributes such as number of stories, roof shape, and construction material.BRAILS++ can be run through Python, and for this project, a Jupyter Notebook was developed to:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Define the boundaries of the study area,</p></li>
+<li><p>Extract and save building footprint geometries using BRAILS++,</p></li>
+<li><p>Integrate any available data from the NSI,</p></li>
+<li><p>Retrieve Google Street View imagery for each building (when available), and</p></li>
+<li><p>Apply BRAILS++ classifiers to estimate the number of floors for buildings with Street View coverage.</p></li>
+</ul>
+</div></blockquote>
+<p>The following example uses BRAILS++ to create a building inventory for an approximately 800m by 800m area of Loiza, Puerto Rico. The area is centered at latitude 18.4323008 and longitude -65.8780065. The extent of the area is defined in degrees, with a radius of 400m in each direction.</p>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="_images/case8_Loiza_Inventory_map.png"><img alt="_images/case8_Loiza_Inventory_map.png" src="_images/case8_Loiza_Inventory_map.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 1.</strong> Building inventory of an approximately 800m by 800m area of Loiza, Puerto Rico.</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Number of floors is not estimated for buildings without StreetView data. As most of the buildings in this area are one floor, it is assumed that buildings with missing data are one floor.</p>
+</div>
+<p>Here is some example code that shows how an inventory can be created with BRAILS++:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">&#39;&#39;&#39; Install Brails++ &#39;&#39;&#39;</span>
+<span class="linenos"> 2</span><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">NHERI</span><span class="o">-</span><span class="n">SimCenter</span><span class="o">/</span><span class="n">BrailsPlusPlus</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="sd">&#39;&#39;&#39; Import Packages &#39;&#39;&#39;</span>
+<span class="linenos"> 5</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="linenos"> 6</span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="linenos"> 7</span><span class="kn">from</span><span class="w"> </span><span class="nn">brails</span><span class="w"> </span><span class="kn">import</span> <span class="n">Importer</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="sd">&#39;&#39;&#39; Define an extent &#39;&#39;&#39;</span>
+<span class="linenos">11</span><span class="n">lat</span> <span class="o">=</span> <span class="mf">18.4323008</span>
+<span class="linenos">12</span><span class="n">long</span> <span class="o">=</span> <span class="o">-</span><span class="mf">65.8780065</span>
+<span class="linenos">13</span><span class="n">r</span> <span class="o">=</span> <span class="mi">400</span> <span class="c1">#m</span>
+<span class="linenos">14</span><span class="c1"># convert r from meters to ~degrees in lat and long</span>
+<span class="linenos">15</span><span class="c1"># Assumed constant circumferance of earth at 40075 km</span>
+<span class="linenos">16</span><span class="n">r_lat</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="mi">360</span><span class="o">/</span><span class="p">(</span><span class="mi">40075</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+<span class="linenos">17</span><span class="n">r_long</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="mi">360</span><span class="o">/</span><span class="p">(</span><span class="mi">40075</span><span class="o">*</span><span class="mi">1000</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">lat</span><span class="p">)))</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="n">lower_lat</span> <span class="o">=</span> <span class="n">lat</span> <span class="o">-</span> <span class="n">r_lat</span>
+<span class="linenos">20</span><span class="n">lower_long</span> <span class="o">=</span> <span class="n">long</span> <span class="o">-</span> <span class="n">r_long</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="n">upper_lat</span> <span class="o">=</span> <span class="n">lat</span> <span class="o">+</span> <span class="n">r_lat</span>
+<span class="linenos">23</span><span class="n">upper_long</span> <span class="o">=</span> <span class="n">long</span> <span class="o">+</span> <span class="n">r_long</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="n">extent</span> <span class="o">=</span> <span class="p">(</span><span class="n">lower_long</span><span class="p">,</span> <span class="n">lower_lat</span><span class="p">,</span> <span class="n">upper_long</span><span class="p">,</span> <span class="n">upper_lat</span><span class="p">)</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="sd">&#39;&#39;&#39; Define a Brails++ Region Boundary Using the Extent &#39;&#39;&#39;</span>
+<span class="linenos">28</span><span class="n">location</span> <span class="o">=</span> <span class="n">extent</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="c1"># Create an Importer instance:</span>
+<span class="linenos">31</span><span class="n">importer</span> <span class="o">=</span> <span class="n">Importer</span><span class="p">()</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="c1"># region_data can also use location_name to define extent using:</span>
+<span class="linenos">34</span><span class="c1"># region_data = {&quot;type&quot;: &quot;locationName&quot;, &quot;data&quot;: &quot;Loiza, Puerto Rico&quot;}</span>
+<span class="linenos">35</span><span class="n">region_data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;locationPolygon&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">extent</span><span class="p">}</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span><span class="c1"># Initialize the region boundary class and give it the region data</span>
+<span class="linenos">38</span><span class="n">region_boundary_class</span> <span class="o">=</span> <span class="n">importer</span><span class="o">.</span><span class="n">get_class</span><span class="p">(</span><span class="s1">&#39;RegionBoundary&#39;</span><span class="p">)</span>
+<span class="linenos">39</span><span class="n">region_boundary_object</span> <span class="o">=</span> <span class="n">region_boundary_class</span><span class="p">(</span><span class="n">region_data</span><span class="p">)</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span><span class="sd">&#39;&#39;&#39; Generate Building Inventory &#39;&#39;&#39;</span>
+<span class="linenos">42</span><span class="c1"># Define footprint source:</span>
+<span class="linenos">43</span><span class="c1"># fpSource included in BRAILS are i) OpenStreetMaps,</span>
+<span class="linenos">44</span><span class="c1"># ii) Microsoft Global Building Footprints dataset, and iii) FEMA USA Structures.</span>
+<span class="linenos">45</span><span class="c1"># The keywords for these sources are OSM_FootprintScaper, MS_FootprintScaper,</span>
+<span class="linenos">46</span><span class="c1"># and USA_FootprintScaper, respectively.</span>
+<span class="linenos">47</span><span class="n">footprint_scaper</span> <span class="o">=</span> <span class="s1">&#39;OSM_FootprintScraper&#39;</span>
+<span class="linenos">48</span>
+<span class="linenos">49</span><span class="c1"># Initialize scaper class</span>
+<span class="linenos">50</span><span class="n">scraper_class</span> <span class="o">=</span> <span class="n">importer</span><span class="o">.</span><span class="n">get_class</span><span class="p">(</span><span class="n">footprint_scaper</span><span class="p">)</span>
+<span class="linenos">51</span>
+<span class="linenos">52</span><span class="c1"># define output units by passing to scraper class</span>
+<span class="linenos">53</span><span class="n">lengthunit</span> <span class="o">=</span> <span class="s1">&#39;m&#39;</span> <span class="c1"># Options are &#39;m&#39; or &#39;ft&#39;</span>
+<span class="linenos">54</span><span class="n">scraper</span> <span class="o">=</span> <span class="n">scraper_class</span><span class="p">({</span><span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="n">lengthunit</span><span class="p">})</span>
+<span class="linenos">55</span>
+<span class="linenos">56</span><span class="c1"># use get_footprints method to retreive footprints</span>
+<span class="linenos">57</span><span class="n">footprints</span> <span class="o">=</span> <span class="n">scraper</span><span class="o">.</span><span class="n">get_footprints</span><span class="p">(</span><span class="n">region_boundary_object</span><span class="p">)</span>
+<span class="linenos">58</span>
+<span class="linenos">59</span><span class="c1"># Check NSI database for exsisting stuctural data</span>
+<span class="linenos">60</span><span class="c1"># Initialize NSI Parser</span>
+<span class="linenos">61</span><span class="n">nsi_class</span> <span class="o">=</span> <span class="n">importer</span><span class="o">.</span><span class="n">get_class</span><span class="p">(</span><span class="s1">&#39;NSI_Parser&#39;</span><span class="p">)</span>
+<span class="linenos">62</span><span class="n">nsi</span> <span class="o">=</span> <span class="n">nsi_class</span><span class="p">()</span>
+<span class="linenos">63</span>
+<span class="linenos">64</span><span class="c1"># Run NSI Parser for the region boundary and combine with the footprints</span>
+<span class="linenos">65</span><span class="n">nsi_inventory</span> <span class="o">=</span> <span class="n">nsi</span><span class="o">.</span><span class="n">get_filtered_data_given_inventory</span><span class="p">(</span>
+<span class="linenos">66</span>    <span class="n">footprints</span><span class="p">,</span> <span class="n">lengthunit</span><span class="p">)</span>
+<span class="linenos">67</span><span class="n">_</span> <span class="o">=</span> <span class="n">nsi_inventory</span><span class="o">.</span><span class="n">write_to_geojson</span><span class="p">(</span><span class="s2">&quot;LoizaBuildingInventory.geojson&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Complete Jupyter notebook can be accessed in DesignSafe - Data Depot at <code class="docutils literal notranslate"><span class="pre">PRJ-4604/Losses_Damage_R2D/BrailsPlusPlus_HJW/Loiza/</span></code> under the name <cite>InventoryBRAILS_Loiza.ipynb</cite>.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>Gathering Existing Bathymetry/DEM:</strong></p>
+<blockquote>
+<div><p>Next, bathymetries with near-shore elevation data are required. The data used in this example is freely available through NOAA’s National Centers for Environmental Information at the <a class="reference external" href="https://www.ncei.noaa.gov/maps/bathymetry/">Bathymetric Data Viewer</a>  website . From this website, data is downloaded as a raster file from the <em>Continuously Updated DEM (CUDEM)</em> dataset at resolution of 1/9 arc-second (~3m).</p>
+<figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="_images/case8_NOAA_Example.png"><img alt="_images/case8_NOAA_Example.png" src="_images/case8_NOAA_Example.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 2.</strong> Procedure to obtain DEM using the NOAA website.</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The grid extract fuction allows for a box to be drawn by hand or for the extent to be specified with latitude and longitude. The extent of the DEM downloaded should provide a significant margin beyond the extent used to generate the building inventory.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This data generation workflow can be applied to any coastal location with sufficiently fine DEM/bathymetry models, but larger areas slow the inventory creation time.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>Combining Building Inventory With DEM:</strong></p>
+<blockquote>
+<div><p>At this stage of the process two important inputs have been gathered:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>A DEM of the study area with an approximate resolution of 3m, and</p></li>
+<li><p>A building inventory which contains footprint polygons and the estimated number of floors for each building.</p></li>
+</ul>
+</div></blockquote>
+<p>A resolution of 3m is too large for explicitly modeled buildings. Buildings will appear overly pixelated when added to a 3m DEM. To overcome this issue the DEM is upsampled by a factor of 2, to a resolution of ~1.5m.</p>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="_images/case8_DEM_no_buildings.png"><img alt="_images/case8_DEM_no_buildings.png" src="_images/case8_DEM_no_buildings.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 3.</strong> Unaltered DEM of Loiza coastline plotted by pixel.</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<br><p>The building inventory is then rasterized to a matching resolution of 1.5m. In this step it is assumed that story heights are equal to 3m. The outcome is a DEM in which all points within the footprint of a building are set to the elevation of the roof height, and all other points are set to an elevation of zero.</p>
+<figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="_images/case8_Loiza_Inventory.png"><img alt="_images/case8_Loiza_Inventory.png" src="_images/case8_Loiza_Inventory.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 4.</strong> Rasterized building inventory from a approximately 400m by 400m region of Loiza.</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<br><p>With the building inventory and DEM in compatible formats they can be added together and formatted to be compatible with Celeris.</p>
+<figure class="align-center" id="id8">
+<a class="reference internal image-reference" href="_images/case8_Combo_DEM_400m.png"><img alt="_images/case8_Combo_DEM_400m.png" src="_images/case8_Combo_DEM_400m.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 5 (a).</strong> Combined DEM and building inventory from a 400m by 400m region of Loiza.</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id9">
+<a class="reference internal image-reference" href="_images/case8_Combo_DEM_800m.png"><img alt="_images/case8_Combo_DEM_800m.png" src="_images/case8_Combo_DEM_800m.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 5 (b).</strong> Combined DEM and building inventory from a 800m by 800m region of Loiza.</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Inventory combination was implemented in a Jupyter Notebook that can be accessed in DesignSafe - Data Depot at <code class="docutils literal notranslate"><span class="pre">PRJ-3948/HydroUQ/Celeris/notebooks/</span></code> under the name <cite>CombinedBathymetry.ipynb</cite>. Current implementation requires manually aligning the inventory and DEM using an arbitrary offset.</p>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="simcenter-tool-used">
+<h2>SimCenter Tool Used<a class="headerlink" href="#simcenter-tool-used" title="Link to this heading"></a></h2>
+<p>This example runs Celeris on an RTX node in the <a class="reference external" href="https://tacc.utexas.edu/systems/frontera/">Texas Advanced Computing Center’s (TACC’s) supercomputer, Frontera</a>. Celeris was also run locally on a computer with a GPU. Celeris was used to simulate the inundation of Loiza.</p>
+</section>
+<section id="example-application">
+<h2>Example Application<a class="headerlink" href="#example-application" title="Link to this heading"></a></h2>
+<a href="_static/Celeris.zip" download>Download Celeris</a><p>Download the Celeris file (from above or from the <a class="reference external" href="https://github.com/NHERI-SimCenter/SimCenterBackendApplications">SimCenter BackEndApplications</a>) and place it on a computer with a GPU (e.g. on a Frontera rtx-dev allocation accessed through DesignSafe). Be sure the computer can also run a version of Python compatible with <a class="reference external" href="https://www.taichi-lang.org/">Taichi</a>, a Python package that allows for the use of a GPU to perfrom parallel computations.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Downloading Celeris from <em>SimCenterBackendApplications</em> on GitHub will not have the Loiza example. To run this example, download the relevant files here:</p>
+<a href="_static/Loiza.zip" download>Download Loiza</a><p>Place the file inside <em>SimCenterBackendApplications</em> at <code class="docutils literal notranslate"><span class="pre">SimCenterBackendApplications\modules\createEVENT\Celeris\examples</span></code>.</p>
+</div>
+<ol class="arabic">
+<li><p>Files defining bathymetries, waves, and other settings can be found at <code class="docutils literal notranslate"><span class="pre">Celeris\examples\Loiza</span></code>. The files containing the bathymetries generated are stored here as <em>bathy2.txt</em> and <em>bathy4.txt</em> for the 400m by 400m and the 800m by 800m inventories respectively. The file, <em>wave.txt</em>, was used for both bathymetries. The configuration (<em>config2.json</em> and <em>config4.json</em>) files contain the general settings required to run the model including the DEM resolution as <strong>“dx”</strong> and <strong>“dy”</strong>. Simulated wave gauges and a force sensor were placed at locations of interest in Loiza and are defined here under <strong>“locationOfTimeSeries”</strong>, and <strong>“force_sensor_begin”</strong> and <strong>“force_sensor_end”</strong>.</p>
+<blockquote>
+<div><blockquote>
+<div><figure class="align-center" id="id10">
+<a class="reference internal image-reference" href="_images/case8_Step_0.png"><img alt="_images/case8_Step_0.png" src="_images/case8_Step_0.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 6.</strong> <em>config2.json</em> with appropriate settings.</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><em>wave.txt</em> is a default wave file and has not been modified. To obtain meaningful results, a wave file from known historic wave heights and velocities should be used. If this data is unavailable, tsunami propagation to the near shore should be simulated using an associated probabilistic seismic event. See <span id="id2">[<a class="reference internal" href="case_r.html#id12" title="Vinod K. Shadashiva. Quantifying effects of explicit representation of buildings in tsunami inundation simulations. Iternational Journal of Disaster Risk Reduction, 2022.">Sha22</a>]</span> and <span id="id3">[<a class="reference internal" href="case_r.html#id13" title="Jonathan Griffin. An evaluation of onshore digital elevation models for modeling tsunami inundation zones. Frontiers in Earth Science, 2015.">Gri15</a>]</span> for more on tsunami source and propagation modeling.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are several other import settings in the configuration files not described in detail here.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>With all the proper files in place, Celeris can be run from the terminal. To do this, open a terminal and navigate to the <em>Celeris</em> folder.</p>
+<blockquote>
+<div><figure class="align-center" id="id11">
+<a class="reference internal image-reference" href="_images/case8_Step_2.png"><img alt="_images/case8_Step_2.png" src="_images/case8_Step_2.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 7.</strong> Celeris folder opened in a terminal.</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For this example, Celeris is running in a rtx-dev frontera allocation through DesignSafe.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Run the command: <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">setrun.py</span> <span class="pre">-d</span> <span class="pre">examples/Loiza</span> <span class="pre">-f</span> <span class="pre">config2.json</span> <span class="pre">-b</span> <span class="pre">bathy2.txt</span> <span class="pre">-w</span> <span class="pre">waves.txt</span></code>. This simulates the inundation of the 400m by 400m inventory. To simulate the inundation of the 800m by 800m inventory, instead use the input files, <code class="docutils literal notranslate"><span class="pre">bathy4.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">config4.json</span></code>.</p>
+<blockquote>
+<div><figure class="align-center" id="id12">
+<a class="reference internal image-reference" href="_images/case8_Step_3.png"><img alt="_images/case8_Step_3.png" src="_images/case8_Step_3.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 8.</strong> Example command in a terminal.</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id13">
+<a class="reference internal image-reference" href="_images/case8_Step_4.png"><img alt="_images/case8_Step_4.png" src="_images/case8_Step_4.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 9.</strong> Celeris running in a terminal.</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On a local machine, <code class="docutils literal notranslate"><span class="pre">python3</span></code> may need to be changed to <code class="docutils literal notranslate"><span class="pre">python</span></code>.</p>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="results">
+<h2>Results<a class="headerlink" href="#results" title="Link to this heading"></a></h2>
+<p>After Celeris finishes running, results will be saved in the <em>Celeris</em> folder.
+Still images from the simulation and a <em>.gif</em> animation will be saved to <code class="docutils literal notranslate"><span class="pre">Celeris/plots</span></code>. Depth and velocity data at each of the wave gauges will be saved to <code class="docutils literal notranslate"><span class="pre">Celeris/wave_gauge.csv</span></code> and <code class="docutils literal notranslate"><span class="pre">Celeris/velocity.csv</span></code>. Force data will be saved to <code class="docutils literal notranslate"><span class="pre">Celeris/forces.csv</span></code>.</p>
+<blockquote>
+<div><figure class="align-center" id="id14">
+<a class="reference internal image-reference" href="_images/case8_400_frame_65000.png"><img alt="_images/case8_400_frame_65000.png" src="_images/case8_400_frame_65000.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 10 (a).</strong> A frame from the simulation for the 400m by 400m inventory.</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id15">
+<a class="reference internal image-reference" href="_images/case8_800_frame_65000.png"><img alt="_images/case8_800_frame_65000.png" src="_images/case8_800_frame_65000.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 10 (b).</strong> A frame from the simulation for the 800m by 800m inventory.</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>In the animations it can be seen that most of the flooding does not result from water running up the beach. Instead it occurs as water flows up the river and overtops the banks.</p>
+<p>Links to the full simulation animations are available here:</p>
+<a href="_static/400_video.gif" download>View 400m animation</a><br>
+<a href="_static/800_video.gif" download>View 800m animation</a></div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>With the current method for formatting bathymetries for Celeris, the bathymetry is rotated 180 degrees, meaning north is down for these results.</p>
+</div>
+<p>For this example, six wave gauges and one force sensor were placed at various locations throughout the study area.  Three wave gages were placed offshore (wave gauges 0 through 2), one was placed in the nearby river (wave gauge 3), one was placed in school’s baseball field (wave gauge 4), and one was placed adjacent to the school (wave gauge 5). The force sensor was placed along one of the wings of the school. Gauge and sensor locations for both the 400m by 400m simulation and the 800m by 800m simulation are in approximately the same location (except for wave gauge 0 which had to be adjusted due to slight differances in the bathymetry boundaries).</p>
+<blockquote>
+<div><figure class="align-center" id="id16">
+<a class="reference internal image-reference" href="_images/case8_labeled_sensor_loctions.png"><img alt="_images/case8_labeled_sensor_loctions.png" src="_images/case8_labeled_sensor_loctions.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 11.</strong> Labeled gauge and sensor loctions.</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+<p>Wave gauges in Celeris measure both water depth and velocity, and the force sensor measures various components of force. The results of each are presented here:</p>
+<blockquote>
+<div><ul>
+<li><dl>
+<dt><strong>Water Depth:</strong></dt><dd><figure class="align-center" id="id17">
+<a class="reference internal image-reference" href="_images/case8_400_depth_plot.png"><img alt="_images/case8_400_depth_plot.png" src="_images/case8_400_depth_plot.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 12 (a).</strong> 400m by 400m water depth time series.</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id18">
+<a class="reference internal image-reference" href="_images/case8_800_depth_plot.png"><img alt="_images/case8_800_depth_plot.png" src="_images/case8_800_depth_plot.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 12 (b).</strong> 800m by 800m water depth time series.</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<br><p>Generally, the depth time series from the 400m and 800m cases match well. There are some minor differences in the noise of each. There is one major difference. At wave gauge 0 the depth in the 400m case is consistently ~1m greater than the 800m case. This difference is a result of the slight offset of the location of wave gauge 0 between the scenarios.</p>
+<p>In both cases wave gauge 0 provides a generally unaltered view of the incoming wave. Wave gauges 1, 2, and 3 show how the wave height changes as it approaches the shore and propagates up the river. Wave gauges 4 and 5 show the level of inundation nearby and adjacent to the school.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Velocity:</strong></dt><dd><figure class="align-center" id="id19">
+<a class="reference internal image-reference" href="_images/case8_400_velocity_plot.png"><img alt="_images/case8_400_velocity_plot.png" src="_images/case8_400_velocity_plot.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 13 (a).</strong> 400m by 400m velocity time series.</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id20">
+<a class="reference internal image-reference" href="_images/case8_800_velocity_plot.png"><img alt="_images/case8_800_velocity_plot.png" src="_images/case8_800_velocity_plot.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 13 (b).</strong> 800m by 800m velocity time series.</span><a class="headerlink" href="#id20" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<br><p>Like the depth results, the velocity time series are similar in both simulations with only one notable difference. The velocity at wave gauge 4 in the 400m by 400m case reverses earlier and for longer than in the 800m by 800m case. This may only be a difference in noise, but in rewatching the 400m animation there is a pulse of water that floods the baseball field, which is not present in the 800m animation. It is possible that this difference results from additional buildings dispersing this pulse before it reaches the baseball field.</p>
+</dd>
+</dl>
+</li>
+<li><p><strong>Forces:</strong></p>
+<blockquote>
+<div><p>In Celeris, forces are calculated as 4 different components:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><strong>CurrentUForce:</strong> This component of hydrodynamic force acts horizontally with respect to the bathymetry’s coordinate system (i.e. in the east/west direction).</p></li>
+<li><p><strong>CurrentVForce:</strong> This component of hydrodynamic force acts vertically with respect to the bathymetry’s coordinate system (i.e. in the north/south direction).</p></li>
+<li><p><strong>CurrentForce:</strong> This component of hydrodynamic force acts in the direction of the normal vector of the force sensor. It is positive when the force is opposed to the normal vector and zero otherwise (i.e. the water is retreating).</p></li>
+<li><p><strong>HydrostaticForce:</strong> This is the component of force associated with the hydrostatic pressure on the sensor. It acts parallel to CurrentForce.</p></li>
+</ol>
+</div></blockquote>
+<figure class="align-center" id="id21">
+<a class="reference internal image-reference" href="_images/case8_force_diagram.png"><img alt="_images/case8_force_diagram.png" src="_images/case8_force_diagram.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 14.</strong> A diagram of the hydrodynamic force components.</span><a class="headerlink" href="#id21" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Hydrodynamic forces are calculated assuming all fluid momentum is stopped by a wall parallel to the force sensor. Therefore, the force data is only meaningful when the force sensor is placed along the wall of a building that is not overtopped.</p>
+</div>
+<p>For simplicity, only HydrostaticForce and CurrentForce are plotted.</p>
+<figure class="align-center" id="id22">
+<a class="reference internal image-reference" href="_images/case8_400_force_plot.png"><img alt="_images/case8_400_force_plot.png" src="_images/case8_400_force_plot.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 15 (a).</strong> 400m by 400m force time history.</span><a class="headerlink" href="#id22" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id23">
+<a class="reference internal image-reference" href="_images/case8_800_force_plot.png"><img alt="_images/case8_800_force_plot.png" src="_images/case8_800_force_plot.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 15 (b).</strong> 800m by 800m force time history.</span><a class="headerlink" href="#id23" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<br><p>The hydrostatic force in each scenario likely only differs due to noise. In contrast, the peak CurrentForce in the 800m scenario is more than double the peak CurrentForce in the 400m scenario. It seems likely that the additional buildings between the river shore and school act to concentrate flow, increasing the current force on the sensor.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>All results presented here use a hypothetical wave and are therefore <strong>hypothetical.</strong> Any conclusion drawn from them should also be treated as such.</p>
+<p>For reliable results, use many waves with many associated seismic triggers. Sensitivity testing should be performed on each model input, including inventory size and bathymetry resolution.</p>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Many coastal regions most at risk to oceanic hazards like tsunamis, have limited structural data available.</p></li>
+<li><p>Structural data is essential for reliable inundation modeling and loss estimation.</p></li>
+<li><p>This data gap can be overcome using tools like BRAILS++, which are compatible with inundation modeling software, like Celeris.</p></li>
+<li><p>Likely impacts to critical infrastructure like schools and hospitals can then be quantified and planned for.</p></li>
+<li><p>While not implemented here, Celeris could be used to generate inundation inputs compatible with R2D for regional scale disaster mitigation studies.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="case_7.html" class="btn btn-neutral float-left" title="R2D - Hurricane Damage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="case_r.html" class="btn btn-neutral float-right" title="References" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, UW Computational Group.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

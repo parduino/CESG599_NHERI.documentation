@@ -1,0 +1,653 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>S3 hark - Site Response 1 &mdash; CESG-599 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="S3 hark - Site Response 2" href="case_4.html" />
+    <link rel="prev" title="EEUQ - Transfer Function" href="case_2.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CESG-599
+              <img src="_static/CESG-599.gif" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="case_0.html">CESG599 - NHERI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_1.html">QuoFEM - Settlements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_2.html">EEUQ - Transfer Function</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">S<sup>3</sup> hark - Site Response 1</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#author-jose-manuel-barreto-espinola">Author: José Manuel Barreto Espinola</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#problem-description">Problem Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solution-strategy">Solution Strategy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#simcenter-tool-used">SimCenter Tool Used</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-application">Example Application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#soil-condition">Soil Condition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#earthquake-condition">Earthquake Condition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#results">Results</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#peak-ground-acceleration"><em>Peak Ground Acceleration</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maximum-shear-strain"><em>Maximum Shear Strain</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maximum-displacement"><em>Maximum Displacement</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maximum-excess-pore-pressure-ratio"><em>Maximum Excess Pore Pressure Ratio</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ground-surface-response"><em>Ground Surface Response</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rock-motion"><em>Rock Motion</em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#remarks">Remarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="case_4.html">S<sup>3</sup> hark - Site Response 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_5.html">R2D - Liquefaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_6.html">R2D - Landslides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_7.html">R2D - Hurricane Damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_8.html">HydroUQ - Celeris</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_r.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CESG-599</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">S<sup>3</sup> hark - Site Response 1</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/case_3.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="s3-hark-site-response-1">
+<span id="case-3"></span><h1>S<sup>3</sup> hark - Site Response 1<a class="headerlink" href="#s3-hark-site-response-1" title="Link to this heading"></a></h1>
+<section id="author-jose-manuel-barreto-espinola">
+<h2>Author: José Manuel Barreto Espinola<a class="headerlink" href="#author-jose-manuel-barreto-espinola" title="Link to this heading"></a></h2>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>One-dimensional (1-D) site response analysis is a geotechnical engineering method used to evaluate how seismic waves propagate through soil layers from bedrock to the ground surface. This type of analysis is crucial for understanding the local effects of an earthquake on a particular site, enabling engineers to design structures that can better withstand seismic events.
+The primary goal of 1-D site response analysis is to predict how different soil layers will affect the amplitude, frequency content, and duration of seismic ground motions.</p>
+</section>
+<section id="problem-description">
+<h2>Problem Description<a class="headerlink" href="#problem-description" title="Link to this heading"></a></h2>
+<p>On this problem, we will perform a site response analysis on an specfic location subjected to a seven different earthquakes in order to analyze the propagation of seismic waves through soil and obtain the ground surface response. The ground surface response is typically the major output from these analyses, along with profile plots such as peak horizontal acceleration along the soil profile.</p>
+<p>In cases where liquefiable soils are present, maximum shear strain and excess pore pressure ratio plots are also important.</p>
+<p>In the figure below, we can observe a representation of the one-dimensional response analyses, which assume that all boundaries are horizontal and that the response of a soil deposit is predominately caused by SH-waves propagating vertically from the underlying bedrock.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="_images/Case3_siteResponse2.png"><img alt="_images/Case3_siteResponse2.png" src="_images/Case3_siteResponse2.png" style="width: 425.0px; height: 289.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 1. One-dimensional response analyses</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="solution-strategy">
+<h2>Solution Strategy<a class="headerlink" href="#solution-strategy" title="Link to this heading"></a></h2>
+<p>For this example it will be implement the Site-Specific Seismic Hazard Analysis and Research Kit (S<sup>3</sup> HARK) tool, which focuses on simulating wave propagation along soil depth using finite element (FE) method, to perform site-specific analysis of soil in response to earthquakes. This tool provides multiple nonlinear material models for simulating the soil behavior under earthquake loading, The available constitutive models are listed below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="n">ElasticIsotropic</span> <span class="p">(</span><span class="n">Elastic</span><span class="p">)</span><span class="o">.</span>
+<span class="o">*</span> <span class="n">PM4Sand</span><span class="o">.</span>
+<span class="o">*</span> <span class="n">PM4Silt</span><span class="o">.</span>
+<span class="o">*</span> <span class="n">PressureIndependendeMultiYield</span> <span class="p">(</span><span class="n">PIMY</span><span class="p">)</span><span class="o">.</span>
+<span class="o">*</span> <span class="n">PressureDependMultiYield</span> <span class="p">(</span><span class="n">PDMY</span><span class="p">)</span><span class="o">.</span>
+<span class="o">*</span> <span class="n">PressureDependMultiYield02</span> <span class="p">(</span><span class="n">PDMY02</span><span class="p">)</span><span class="o">.</span>
+<span class="o">*</span> <span class="n">Mazari</span> <span class="n">Dafalias</span><span class="o">.</span>
+<span class="o">*</span> <span class="n">J2CyclicBoundingSurface</span> <span class="p">(</span><span class="n">J2Bounding</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>For the porpuse of this example we will implement and provide basic definitions for two of these constitutive models:</p>
+<blockquote>
+<div><ul>
+<li><p><strong>PM4Sand Model:</strong> this constitutive model is developed to simulate the behavior of sandy soils under various loading conditions, especially during seismic events. It is specifically designed to capture the cyclic and dynamic behavior of sands, including the phenomena of liquefaction and cyclic mobility.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>What is Liquefaction?</strong></p>
+<p>Liquefaction occurs when seismic waves induce cyclic loading in saturated, loose, sandy soils, causing the soil grains to rearrange and densify. This rearrangement increases the pore water pressure within the soil, reducing the effective stress and consequently the soil’s shear strength. When the pore pressure approaches the overburden pressure, the soil behaves like a liquid, losing its ability to support loads.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>ElasticIsotropic Model:</strong> Often referred to simply as the Elastic model, this is one of the simplest constitutive models used in geotechnical and structural engineering. It is based on the assumption that the material behaves elastically and isotropically, meaning that the material’s properties are the same in all directions and that it returns to its original shape upon unloading</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="simcenter-tool-used">
+<h2>SimCenter Tool Used<a class="headerlink" href="#simcenter-tool-used" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Click on the icon of s<sup>3</sup> hark to open the application.</p></li>
+</ol>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="_images/Case3_Step1.png"><img alt="_images/Case3_Step1.png" src="_images/Case3_Step1.png" style="width: 582.4px; height: 371.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 3. S<sup>3</sup> hark executable icon.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic">
+<li><p>Operations Area: In the upper toolbar, you can see three options (Figure 4.):</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>In <strong>Height</strong>, you can choose the depth of your soil column.</p></li>
+<li><p>In <strong>GWT</strong>, you can choose the depth of the groundwater table of your specific site.</p></li>
+<li><p>In <strong>Total layer</strong>, you can modify the number of soil layers on your specific site. Click the “+” button to add a soil layer (a layer will be added below the selected layer) and the “-” button to delete a selected soil layer. Click several times to add more layers.</p></li>
+</ol>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="_images/Case3_Step2.png"><img alt="_images/Case3_Step2.png" src="_images/Case3_Step2.png" style="width: 602.5500000000001px; height: 274.95px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 4. Main window - Operations area</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
+<li><p>Soil Layer Table: In this table the user provides the characteristics of each soil layer, such as layer thickness, density, V<sub>s</sub>, material type, and element size in the finite element mesh (Figure 5.).</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Variables are assumed to have m, kPa, and kN units in the Site Response panel.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Soil Column Graphic: The first graphic on the left of the panel shows a visualization of the soil column (Figure 5.).</p></li>
+<li><p>Finite Element Mesh Graphic: The second graphic on the left shows the finite element mesh (Figure 5.).</p></li>
+<li><p>Configure Tab: This section shows the configuration options (Figure 5.).</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Under the <em>“OpenSees”</em> label, type the path of OpenSees executable. You can also select the executable from your local computer by clicking on the “+” button on the right of the input area.</p></li>
+<li><p>Under the <em>“Rock motion”</em> label, type the path of a ground motion  file. You can also select the  file from your local computer by clicking on the “+” button on the right of the input area.</p></li>
+<li><p>Under the <em>“Slope parameters”</em> label, we can modify the degree of inclination of our study terrain if this were the case.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The rock motion file must follow the SimCenter event format.</p>
+</div>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="_images/Case3_Step3.png"><img alt="_images/Case3_Step3.png" src="_images/Case3_Step3.png" style="width: 605.7px; height: 280.8px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 5. Main window - Soil layer table, graphics and configure tab.</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
+<li><p>Layer Properties Tab: This tab allows the user to enter additional material properties for the selected soil layer (Figure 6.).</p>
+<blockquote>
+<div><figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="_images/Case3_Step4.png"><img alt="_images/Case3_Step4.png" src="_images/Case3_Step4.png" style="width: 603.45px; height: 278.55px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 6. Main window - Layer properties tab.</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
+<li><p>Response Tab: Once the site response analysis has been performed, this tab provides information about element and nodal time varying response quantities (Figure 7.).</p>
+<blockquote>
+<div><figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="_images/Case3_Step5.png"><img alt="_images/Case3_Step5.png" src="_images/Case3_Step5.png" style="width: 607.0500000000001px; height: 279.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 7. Main window - Response tab.</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
+<li><p>Click the “Analyze” button on the right side of the upper toolbar to run the finite element analysis.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>You will see a progress bar displayed at the bottom of the right hand side of the app, which shows the percentage of steps perfomed (Figure 8.).</p></li>
+<li><p>Once the simulation is done, the <em>“Response”</em> tab and the <em>“PGA”</em> profile plot will be displayed. At the same time, a pop up window showing <em>“The analysis is done”</em> will show up. And when you click <em>“I know”</em>, the progress bar will disappear (Figure 8.).</p></li>
+</ul>
+<figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="_images/Case3_Step6.png"><img alt="_images/Case3_Step6.png" src="_images/Case3_Step6.png" style="width: 606.15px; height: 279.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 8. Main window - Analyze Done.</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>You can see the profile plots of the PGA, γ<sub>max</sub> , maximum displacement and maximum r<sub>u</sub> by clicking on the respective tabs on the right side of the Finite Element Mesh Graphic and the surface and ground motion by clicking the Response tab (Figure 8.).</p></li>
+</ul>
+<figure class="align-center" id="id8">
+<a class="reference internal image-reference" href="_images/Case3_Step7.png"><img alt="_images/Case3_Step7.png" src="_images/Case3_Step7.png" style="width: 607.0500000000001px; height: 280.8px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 9. Main window - Results.</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="example-application">
+<h2>Example Application<a class="headerlink" href="#example-application" title="Link to this heading"></a></h2>
+<section id="soil-condition">
+<h3>Soil Condition<a class="headerlink" href="#soil-condition" title="Link to this heading"></a></h3>
+<p>The soil column being analyzed is a 20.29 meters high sitting on rock. The ground water table is at 4.57 meters below the soil surface. In the column, there are a total of three layers. Each layer is meshed by elements with size of 0.20 meter in height. The soil profile is shown in Figure 10. and basic properties of soil layers are shown in Table 1. The first two layers are modeled by PM4Sand and the third layer is modeled by elastic isotropic material.</p>
+<figure class="align-center" id="id9">
+<a class="reference internal image-reference" href="_images/Case3_soil_profile.png"><img alt="_images/Case3_soil_profile.png" src="_images/Case3_soil_profile.png" style="width: 345.09999999999997px; height: 422.79999999999995px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 10. Soil profile representation</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<table class="docutils align-default" id="id10">
+<caption><span class="caption-text"><em>Table 1. Soil Profile Parameters</em></span><a class="headerlink" href="#id10" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Layers</p></th>
+<th class="head"><p>Thickness (m)</p></th>
+<th class="head"><p>V<sub>s</sub> (m/s)</p></th>
+<th class="head"><p>ρ<sub>unsat</sub> (kg/m<sup>3</sup>)</p></th>
+<th class="head"><p>ρ<sub>sat</sub> (kg/m<sup>3</sup>)</p></th>
+<th class="head"><p>G<sub>o,ref</sub> (MPa)</p></th>
+<th class="head"><p>D<sub>R</sub> (%)</p></th>
+<th class="head"><p>h<sub>po</sub></p></th>
+<th class="head"><p>v</p></th>
+<th class="head"><p>E<sub>50,ref</sub> (kPa)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ESU1</p></td>
+<td><p>0.91</p></td>
+<td><p>266.09</p></td>
+<td><p>2.08</p></td>
+<td><p>2.16</p></td>
+<td><p>335.16</p></td>
+<td><p>79.50</p></td>
+<td><p>0.52</p></td>
+<td><p>0.3</p></td>
+<td><p>167580.91</p></td>
+</tr>
+<tr class="row-odd"><td><p>ESU2</p></td>
+<td><p>17.4</p></td>
+<td><p>202.39</p></td>
+<td><p>2.00</p></td>
+<td><p>2.08</p></td>
+<td><p>76.61</p></td>
+<td><p>39.67</p></td>
+<td><p>0.52</p></td>
+<td><p>0.32</p></td>
+<td><p>14364.08</p></td>
+</tr>
+<tr class="row-even"><td><p>ESU3</p></td>
+<td><p>1.98</p></td>
+<td><p>380.39</p></td>
+<td><p>2.24</p></td>
+<td><p>2.32</p></td>
+<td><p>316.01</p></td>
+<td><p>85.98</p></td>
+<td></td>
+<td><p>0.25</p></td>
+<td><p>153216.83</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="earthquake-condition">
+<h3>Earthquake Condition<a class="headerlink" href="#earthquake-condition" title="Link to this heading"></a></h3>
+<p>Information on the seven ground motions to be used in this example is shown in Table 2, and in Figure 11, you can see the response spectrum of the 7 earthquakes in a single graph.</p>
+<table class="docutils align-default" id="id11">
+<caption><span class="caption-text"><em>Table 2. Ground Motion Parameters</em></span><a class="headerlink" href="#id11" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Motion</p></th>
+<th class="head"><p>PGA (g)</p></th>
+<th class="head"><p>dT (sec)</p></th>
+<th class="head"><p>Duration (sec)</p></th>
+<th class="head"><p>N° of steps</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Conception-L</p></td>
+<td><p>0.82</p></td>
+<td><p>0.01</p></td>
+<td><p>141.67</p></td>
+<td><p>28335.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>RSN727_SUPER</p></td>
+<td><p>0.96</p></td>
+<td><p>0.01</p></td>
+<td><p>22.20</p></td>
+<td><p>2221.00</p></td>
+</tr>
+<tr class="row-even"><td><p>Tohoku 41207-EW</p></td>
+<td><p>0.58</p></td>
+<td><p>0.01</p></td>
+<td><p>359.98</p></td>
+<td><p>35999.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tohoku Ishinomaki-NS</p></td>
+<td><p>0.77</p></td>
+<td><p>0.01</p></td>
+<td><p>299.98</p></td>
+<td><p>29999.00</p></td>
+</tr>
+<tr class="row-even"><td><p>RSN803_LOMAP_WVC270</p></td>
+<td><p>0.67</p></td>
+<td><p>0.01</p></td>
+<td><p>39.98</p></td>
+<td><p>7998.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>RSN4457_MONTENE</p></td>
+<td><p>0.68</p></td>
+<td><p>0.01</p></td>
+<td><p>40.39</p></td>
+<td><p>4040.00</p></td>
+</tr>
+<tr class="row-even"><td><p>RSN6911_DARFIELD_HORCN18E</p></td>
+<td><p>0.61</p></td>
+<td><p>0.01</p></td>
+<td><p>60.17</p></td>
+<td><p>12036.00</p></td>
+</tr>
+</tbody>
+</table>
+<figure class="align-center" id="id12">
+<a class="reference internal image-reference" href="_images/Case3_logSpectraCombined.png"><img alt="_images/Case3_logSpectraCombined.png" src="_images/Case3_logSpectraCombined.png" style="width: 480.0px; height: 480.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 11. Response spectrum.</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The rock motions, in SimCenter format, can be downloaded from the <a class="reference external" href="https://github.com/parduino/CESG599_NHERI.documentation/tree/main/source/static/motionsJSON">rock motions</a> folder (this can be found in the GitHub Repository).</p>
+</section>
+<section id="results">
+<h3>Results<a class="headerlink" href="#results" title="Link to this heading"></a></h3>
+<p>The following table shows the peak ground acceleration (PGA) and peak ground velocity (PGV) in the bedrock and on the ground surface corresponding to each of the seven earthquakes obtained from S<sup>3</sup> HARK.</p>
+<table class="docutils align-default" id="id13">
+<caption><span class="caption-text"><em>Table 3. Peak Ground Acceleration and Peak Ground Velocity</em></span><a class="headerlink" href="#id13" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>PGA (m/s<sup>2</sup>)</p></th>
+<th class="head"><p>PGA (m/s<sup>2</sup>)</p></th>
+<th class="head"><p>PGV (m/s)</p></th>
+<th class="head"><p>PGV (m/s)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Motion</p></td>
+<td><p>Rock</p></td>
+<td><p>Surface</p></td>
+<td><p>Rock</p></td>
+<td><p>Surface</p></td>
+</tr>
+<tr class="row-odd"><td><p>Conception-L</p></td>
+<td><p>8.00</p></td>
+<td><p>1.52</p></td>
+<td><p>1.28</p></td>
+<td><p>0.56</p></td>
+</tr>
+<tr class="row-even"><td><p>RSN727_SUPER</p></td>
+<td><p>7.85</p></td>
+<td><p>1.71</p></td>
+<td><p>0.47</p></td>
+<td><p>0.29</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tohoku 41207-EW</p></td>
+<td><p>5.59</p></td>
+<td><p>1.44</p></td>
+<td><p>0.61</p></td>
+<td><p>0.53</p></td>
+</tr>
+<tr class="row-even"><td><p>Tohoku Ishinomaki-NS</p></td>
+<td><p>7.09</p></td>
+<td><p>1.76</p></td>
+<td><p>9.26</p></td>
+<td><p>4.62</p></td>
+</tr>
+<tr class="row-odd"><td><p>RSN803_LOMAP_WVC270</p></td>
+<td><p>5.96</p></td>
+<td><p>1.64</p></td>
+<td><p>1.27</p></td>
+<td><p>0.76</p></td>
+</tr>
+<tr class="row-even"><td><p>RSN4457_MONTENE</p></td>
+<td><p>6.47</p></td>
+<td><p>1.93</p></td>
+<td><p>0.80</p></td>
+<td><p>0.86</p></td>
+</tr>
+<tr class="row-odd"><td><p>RSN6911_DARFIELD_HORCN18E</p></td>
+<td><p>5.84</p></td>
+<td><p>1.69</p></td>
+<td><p>1.4</p></td>
+<td><p>1.07</p></td>
+</tr>
+</tbody>
+</table>
+<p>The below images present the PGA, maximum shear strain, maximum displacement, maximum excess pore pressure ratio, ground surface response and rock motions results obtained from S<sup>3</sup> HARK.</p>
+<section id="peak-ground-acceleration">
+<h4><em>Peak Ground Acceleration</em><a class="headerlink" href="#peak-ground-acceleration" title="Link to this heading"></a></h4>
+<figure class="align-center" id="id14">
+<a class="reference internal image-reference" href="_images/Case3_PGA.png"><img alt="_images/Case3_PGA.png" src="_images/Case3_PGA.png" style="width: 576.0px; height: 324.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 12. Peak Ground Acceleration.</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="maximum-shear-strain">
+<h4><em>Maximum Shear Strain</em><a class="headerlink" href="#maximum-shear-strain" title="Link to this heading"></a></h4>
+<figure class="align-center" id="id15">
+<a class="reference internal image-reference" href="_images/Case3_Shear_strain.png"><img alt="_images/Case3_Shear_strain.png" src="_images/Case3_Shear_strain.png" style="width: 576.0px; height: 324.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 13. Maximum Shear Strain.</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="maximum-displacement">
+<h4><em>Maximum Displacement</em><a class="headerlink" href="#maximum-displacement" title="Link to this heading"></a></h4>
+<figure class="align-center" id="id16">
+<a class="reference internal image-reference" href="_images/Case3_Displacement.png"><img alt="_images/Case3_Displacement.png" src="_images/Case3_Displacement.png" style="width: 576.0px; height: 324.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 14. Maximum Displacement.</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="maximum-excess-pore-pressure-ratio">
+<h4><em>Maximum Excess Pore Pressure Ratio</em><a class="headerlink" href="#maximum-excess-pore-pressure-ratio" title="Link to this heading"></a></h4>
+<figure class="align-center" id="id17">
+<a class="reference internal image-reference" href="_images/Case3_Ru.png"><img alt="_images/Case3_Ru.png" src="_images/Case3_Ru.png" style="width: 576.0px; height: 324.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 15. Maximum Excess Pore Pressure Ratio (r<sub>u</sub> ).</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="ground-surface-response">
+<h4><em>Ground Surface Response</em><a class="headerlink" href="#ground-surface-response" title="Link to this heading"></a></h4>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Case3_Ground_surface_response_1.png"><img alt="_images/Case3_Ground_surface_response_1.png" src="_images/Case3_Ground_surface_response_1.png" style="width: 576.0px; height: 324.0px;" />
+</a>
+</figure>
+<figure class="align-center" id="id18">
+<a class="reference internal image-reference" href="_images/Case3_Ground_surface_response_2.png"><img alt="_images/Case3_Ground_surface_response_2.png" src="_images/Case3_Ground_surface_response_2.png" style="width: 576.0px; height: 324.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 16.1. Acceleration (m/s<sup>2</sup>).</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Case3_Ground_surface_response_3.png"><img alt="_images/Case3_Ground_surface_response_3.png" src="_images/Case3_Ground_surface_response_3.png" style="width: 576.0px; height: 324.0px;" />
+</a>
+</figure>
+<figure class="align-center" id="id19">
+<a class="reference internal image-reference" href="_images/Case3_Ground_surface_response_4.png"><img alt="_images/Case3_Ground_surface_response_4.png" src="_images/Case3_Ground_surface_response_4.png" style="width: 576.0px; height: 324.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 16.2. Velocity (m/s).</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Case3_Ground_surface_response_5.png"><img alt="_images/Case3_Ground_surface_response_5.png" src="_images/Case3_Ground_surface_response_5.png" style="width: 576.0px; height: 324.0px;" />
+</a>
+</figure>
+<figure class="align-center" id="id20">
+<a class="reference internal image-reference" href="_images/Case3_Ground_surface_response_6.png"><img alt="_images/Case3_Ground_surface_response_6.png" src="_images/Case3_Ground_surface_response_6.png" style="width: 576.0px; height: 324.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 16.3. Displacement (m).</span><a class="headerlink" href="#id20" title="Link to this image"></a></p>
+<div class="legend">
+<p>Figure 16. Ground Surface Response.</p>
+</div>
+</figcaption>
+</figure>
+</section>
+<section id="rock-motion">
+<h4><em>Rock Motion</em><a class="headerlink" href="#rock-motion" title="Link to this heading"></a></h4>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Case3_Input_rock_motion_1.png"><img alt="_images/Case3_Input_rock_motion_1.png" src="_images/Case3_Input_rock_motion_1.png" style="width: 576.0px; height: 324.0px;" />
+</a>
+</figure>
+<figure class="align-center" id="id21">
+<a class="reference internal image-reference" href="_images/Case3_Input_rock_motion_2.png"><img alt="_images/Case3_Input_rock_motion_2.png" src="_images/Case3_Input_rock_motion_2.png" style="width: 576.0px; height: 324.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 17.1. Acceleration (m/s<sup>2</sup>).</span><a class="headerlink" href="#id21" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Case3_Input_rock_motion_3.png"><img alt="_images/Case3_Input_rock_motion_3.png" src="_images/Case3_Input_rock_motion_3.png" style="width: 576.0px; height: 324.0px;" />
+</a>
+</figure>
+<figure class="align-center" id="id22">
+<a class="reference internal image-reference" href="_images/Case3_Input_rock_motion_4.png"><img alt="_images/Case3_Input_rock_motion_4.png" src="_images/Case3_Input_rock_motion_4.png" style="width: 576.0px; height: 324.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 17.2. Velocity (m/s).</span><a class="headerlink" href="#id22" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Case3_Input_rock_motion_5.png"><img alt="_images/Case3_Input_rock_motion_5.png" src="_images/Case3_Input_rock_motion_5.png" style="width: 576.0px; height: 324.0px;" />
+</a>
+</figure>
+<figure class="align-center" id="id23">
+<a class="reference internal image-reference" href="_images/Case3_Input_rock_motion_6.png"><img alt="_images/Case3_Input_rock_motion_6.png" src="_images/Case3_Input_rock_motion_6.png" style="width: 576.0px; height: 324.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 17.3. Displacement (m).</span><a class="headerlink" href="#id23" title="Link to this image"></a></p>
+<div class="legend">
+<p>Figure 17. Input Rock Motion.</p>
+</div>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
+<section id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the out_tcl folder, located on your computer (SimCenter -&gt; s3hark -&gt; out_tcl), you can find all the results of the analysis performed by Shark and plot them in the tool of your preference.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you perform more than one analysis, make sure to copy the results before running the next analysis, as s<sup>3</sup> hark will overwrite the new results on the old ones.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="case_2.html" class="btn btn-neutral float-left" title="EEUQ - Transfer Function" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="case_4.html" class="btn btn-neutral float-right" title="S3 hark - Site Response 2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, UW Computational Group.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

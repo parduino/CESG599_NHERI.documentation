@@ -1,0 +1,268 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>R2D - Landslides &mdash; CESG-599 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="R2D - Hurricane Damage" href="case_7.html" />
+    <link rel="prev" title="R2D - Liquefaction" href="case_5.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CESG-599
+              <img src="_static/CESG-599.gif" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="case_0.html">CESG599 - NHERI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_1.html">QuoFEM - Settlements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_2.html">EEUQ - Transfer Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_3.html">S<sup>3</sup> hark - Site Response 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_4.html">S<sup>3</sup> hark - Site Response 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_5.html">R2D - Liquefaction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">R2D - Landslides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#author-luis-angel-guerrero-hoyos">Author: Luis Angel Guerrero Hoyos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#problem-description">Problem Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solution-strategy">Solution Strategy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#simcenter-tool-used">SimCenter Tool Used</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-application">Example Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remarks">Remarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="case_7.html">R2D - Hurricane Damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_8.html">HydroUQ - Celeris</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_r.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CESG-599</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">R2D - Landslides</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/case_6.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="r2d-landslides">
+<span id="case-6"></span><h1>R2D - Landslides<a class="headerlink" href="#r2d-landslides" title="Link to this heading"></a></h1>
+<section id="author-luis-angel-guerrero-hoyos">
+<h2>Author: Luis Angel Guerrero Hoyos<a class="headerlink" href="#author-luis-angel-guerrero-hoyos" title="Link to this heading"></a></h2>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This page describes a preliminarly approach for landslide risk assesment which propose an initial workflow that must be developed in the future, so then it can implemented in the SimCenter tool R2D. An example, which uses Jibson (1993) model to predict Newmark sliding block displacements, is presented for a portion of the city of Seattle, WA. Resources from SimCenter M9 project are used in the example to estimate ground-motion intensity parameters.</p>
+</section>
+<section id="problem-description">
+<h2>Problem Description<a class="headerlink" href="#problem-description" title="Link to this heading"></a></h2>
+<p>Studying earthquake-induced landslides is vital for reducing risks, protecting lives and property, preserving the environment, and enhancing our scientific understanding of these natural disasters. Through comprehensive research and application of findings, societies can better prepare for and mitigate the impacts of these potentially devastating events.</p>
+<p>There are several models that can be implemented in a regional-based study so that, hazard values it can be estimated. Some researchers use the theory of Newmark Sliding Block <span id="id1">[<a class="reference internal" href="case_r.html#id11" title="N. M. Newmark. Effects of earthquakes on dams and embankments. Geotechnique, 15(2):139-160, 1965.">New65</a>]</span> to predict how much displacement would occur if an earthquake with a certain ground motion were to occurr. These models have developed correlations that depend on different intensity measurements as: Earthquake Magnitude (<span class="math notranslate nohighlight">\(M_w\)</span>), Peak Ground Acceleration (<span class="math notranslate nohighlight">\(PGA\)</span>), Peak Ground Velocity (<span class="math notranslate nohighlight">\(PGV\)</span>), Arias Intensity (<span class="math notranslate nohighlight">\(I_a\)</span>), Critical Acceleration (<span class="math notranslate nohighlight">\(a_c\)</span>), Normalized Critical Acceleration (<span class="math notranslate nohighlight">\(k_c\)</span>), Spectral Acceleration (<span class="math notranslate nohighlight">\(Sa\)</span>), Static Factor of Safety (<span class="math notranslate nohighlight">\(FS_{static}\)</span>), and Ground Sloping (<span class="math notranslate nohighlight">\(\beta\)</span>), as well as Soil Strength Parameters (<span class="math notranslate nohighlight">\(\gamma,\:c,\:\phi\)</span>).</p>
+<p>This models could be built-in within R2D tool so that we can estimate Damage and Losses against earthquake-induced landslides.</p>
+</section>
+<section id="solution-strategy">
+<h2>Solution Strategy<a class="headerlink" href="#solution-strategy" title="Link to this heading"></a></h2>
+<p>In this section,  we propose a preliminarly workflow that can be coded within R2D so we can estimate damage and losses as consequences of earthquake-induced landslides risk.</p>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="_images/case6_fig1.png"><img alt="_images/case6_fig1.png" src="_images/case6_fig1.png" style="width: 802.4000000000001px; height: 353.20000000000005px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 1. Proposed workflow for incorporating Landslide Risk Assesment into R2D.</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Here are some steps to consider:</p>
+<ol class="arabic simple">
+<li><p>Same as the BRAILS tool is embedded within R2D we would need to embed a tool that allows the user to get Digital Elevation Models (DEM) from publicaly available GIS services (e.g. <a class="reference external" href="https://apps.nationalmap.gov/lidar-explorer/#/">USGS portal</a>). newline Then, a slope raster can be generated for the selected area (geospatial packages must be installed in python dependencies: <a class="reference external" href="https://gdal.org/index.html">Gdal</a>, <a class="reference external" href="https://rasterio.readthedocs.io/en/stable/">Rasterio</a>).</p></li>
+<li><p>Intensity measurements can be estimated from the “Earthqueake Event Generation” tool. Reminder that some of the models use mesurements extracted from the time-history record, whereas others use spectral accelerations (extracted from the reponse spectrum).</p></li>
+<li><p>Soil Strength Parameters can be estimated from geological mapping and reference values correlations. So, a tool that allows the user to get geological GIS units must be built-in within R2D as well.</p></li>
+</ol>
+<p>Finally, after input parameters can be estimated for a certain model, the hazard values can be calculated as Newmark Displacement values.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All of the previous estimations have uncertainty and the model itself has its own uncertainty.</p>
+</div>
+</section>
+<section id="simcenter-tool-used">
+<h2>SimCenter Tool Used<a class="headerlink" href="#simcenter-tool-used" title="Link to this heading"></a></h2>
+<p>The goal is to implement the following protocol into R2D. However some Simcenter tools were used in order to develop the procedure.</p>
+<ol class="arabic simple">
+<li><p>The Simcenter Jupyter HUB was used to write the notebook that would help us to compute the hazard against landslide.</p></li>
+<li><p>Ground motions from SimCenter project M9 were used as a grid to which then, intensity measurements would be calculated.</p></li>
+</ol>
+</section>
+<section id="example-application">
+<h2>Example Application<a class="headerlink" href="#example-application" title="Link to this heading"></a></h2>
+<p>In this section we would like to analyze in a regional scale, what would be the response across a study area located in Seattle, WA, US. The idea is to estimate the predicted displacement in the study area if an earthquake with certain intensity measure (Arias Intensity <span class="math notranslate nohighlight">\(I_a\)</span>) were to occur. The model integrates the infinite slope approach to estimate the static factor of safety so then the Critical Acceleration <span class="math notranslate nohighlight">\(a_c\)</span> can be estimated. Finally with these parameters a Newmark displacement could be estimated using Randall W. Jibson correlation <span id="id2">[<a class="reference internal" href="case_r.html#id10" title="Randall W. Jibson. Predicting earthquake-induced landslide dsiplacements using newmark'ssliding block analysis. Transportation Research Board, 1411:17 p, 1993.">Jib93</a>]</span>:</p>
+<div class="math notranslate nohighlight">
+\[log(Dn) = 1.460\:log(I_a)-6.642\:a_c+1.546\:\:\:\:\:\:\:\:\:\:\:\:\:(1)\]</div>
+<p>Where:</p>
+<p><span class="math notranslate nohighlight">\(Dn\)</span> = Newmark Displacement [cm].</p>
+<p><span class="math notranslate nohighlight">\(I_a\)</span> = Areas Intensity [m/s].</p>
+<p><span class="math notranslate nohighlight">\(a_c\)</span> = Critical Acceleration [g].</p>
+<p>Also,</p>
+<div class="math notranslate nohighlight">
+\[a_c = (FS_{static}-1)\:sin(\beta)\:\:\:\:\:\:\:\:\:\:\:\:\:(2)\]</div>
+<p>Where:</p>
+<div class="math notranslate nohighlight">
+\[FS_{static} = \frac{2c}{\gamma\:z\:sin(\beta)} + cot(\beta)\:tan(\phi)\:\:\:\:\:\:\:\:\:\:\:\:\:(3)\]</div>
+<p><span class="math notranslate nohighlight">\(\beta\)</span> = Slope Angle [°].</p>
+<p><span class="math notranslate nohighlight">\(FS_{static}\)</span> = Static Factor of Safety [-].</p>
+<p><span class="math notranslate nohighlight">\(c\)</span> = Cohesion [kPa].</p>
+<p><span class="math notranslate nohighlight">\(\gamma\)</span> = Unit Weight [kN/m³].</p>
+<p><span class="math notranslate nohighlight">\(\phi\)</span> = Friction Angle [°].</p>
+<p><span class="math notranslate nohighlight">\(I_a\)</span> = Intensity measure time-history motion specific.</p>
+<p>A Jupyter Notebook has been developed to code the implementation of the previous model in the area of interest:</p>
+<ul>
+<li><div class="line-block">
+<div class="line">Get the Digital Elevation Model for the area of interest and perform the slope calculations: The <a class="reference external" href="https://apps.nationalmap.gov/lidar-explorer/#/">USGS portal</a> is used to download the LiDAR data in the area of interest. See Figure 2 to check the area of interest.</div>
+</div>
+<blockquote>
+<div><figure class="align-center" id="id7">
+<img alt="_images/case6_fig2.png" src="_images/case6_fig2.png" />
+<figcaption>
+<p><span class="caption-text">Figure 2. Raster DTM - downloaded from the USGS GIS Service.</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+<div class="line-block">
+<div class="line">Subsequently the Slope map is calculated using the <a class="reference external" href="https://gdal.org/index.html">Gdal</a> library. See Figure 3 to check the slope map in the area of interest, Seattle WA.</div>
+</div>
+<blockquote>
+<div><figure class="align-center" id="id8">
+<img alt="_images/case6_fig3.png" src="_images/case6_fig3.png" />
+<figcaption>
+<p><span class="caption-text">Figure 3. Raster Slope - computed with GDAL.</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
+<li><div class="line-block">
+<div class="line">Get the Intensity Measurements: The intensity values (Areas Intensity in this example) are computed using motions from the M9 project which is a suite of synthetic ground motions for a range of possible magnitude 9 earthquake rupture scenarios on the Cascadia megathrust.</div>
+</div>
+<blockquote>
+<div><figure class="align-center" id="id9">
+<img alt="_images/case6_fig4.png" src="_images/case6_fig4.png" />
+<figcaption>
+<p><span class="caption-text">Figure 4. Motions Grid - Legend indicates values of Arias Intensity [m/s].</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+<div class="line-block">
+<div class="line">The value of areas intensity will be given by the nearest neighbor motion in the grid. A raster with intensity measures is created from the grids. Figure 5 is an example of how the Arias intensity would look like after applying the nearest neighbor method. Most of this work is done using the package <a class="reference external" href="https://rasterio.readthedocs.io/en/stable/">Rasterio</a>.</div>
+</div>
+<blockquote>
+<div><figure class="align-center" id="id10">
+<img alt="_images/case6_fig5.png" src="_images/case6_fig5.png" />
+<figcaption>
+<p><span class="caption-text">Figure 5. Interpolation using Nearest Neighbor for Arias Intensity [m/s] values.</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Either Rasters and Motions should be self-consistent with a single spatial reference.</p>
+</div>
+<ul>
+<li><div class="line-block">
+<div class="line">Get the Soil Stregth Parameters: as it is for now, this measurement can be heuristically set by the user while the code is built.</div>
+</div>
+</li>
+</ul>
+<p>Finally, when all the inputs variables are estimated, we can implement the Randall W. Jibson model in the study area. Figure 4 displays the calculated Newmark Displacement for our area of interest Seattle.</p>
+<figure class="align-center" id="id11">
+<img alt="_images/case6_fig6.png" src="_images/case6_fig6.png" />
+<figcaption>
+<p><span class="caption-text">Figure 6. Randall W. Jibson calculated Newmark Displacement.</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>A <a class="reference external" href="https://github.com/parduino/CESG599_NHERI.documentation/tree/main/source/landslides-M9motions/">Jupyter Notebook</a> (‘hazardNewmark.ipynb’) was coded to simulate the process that could be implemented to R2D for earthquake-induced landslides hazard so the user could then estimate damage and losses. Please if refering to this notebook, careful read the instructions in the readme first. Find this work in the CESG599 repository. When trying to run this notebook, you must have access to the M9 project in DesignSafe machines.</p></li>
+<li><p>Earthquake induced landslides prediction may be a difficult task to adress, but there are models out there that can be implemented to predict the hazard and subsequently, this hazard can be used to predict damage amd losses. The idea is in this section is to provide a procedure that could ve developed within the SiimCenter R2D tool to predict the hazard and subsequently, to predict damage amd losses.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="case_5.html" class="btn btn-neutral float-left" title="R2D - Liquefaction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="case_7.html" class="btn btn-neutral float-right" title="R2D - Hurricane Damage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, UW Computational Group.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

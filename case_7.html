@@ -1,0 +1,439 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>R2D - Hurricane Damage &mdash; CESG-599 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="HydroUQ - Celeris" href="case_8.html" />
+    <link rel="prev" title="R2D - Landslides" href="case_6.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CESG-599
+              <img src="_static/CESG-599.gif" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="case_0.html">CESG599 - NHERI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_1.html">QuoFEM - Settlements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_2.html">EEUQ - Transfer Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_3.html">S<sup>3</sup> hark - Site Response 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_4.html">S<sup>3</sup> hark - Site Response 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_5.html">R2D - Liquefaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_6.html">R2D - Landslides</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">R2D - Hurricane Damage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#author-daniel-acosta-reyes">Author: Daniel Acosta Reyes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#problem-description">Problem Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solution-strategy">Solution Strategy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#simcenter-tool-used">SimCenter Tool Used</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-application">Example Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#results">Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remarks">Remarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="case_8.html">HydroUQ - Celeris</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_r.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CESG-599</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">R2D - Hurricane Damage</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/case_7.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="r2d-hurricane-damage">
+<span id="case-7"></span><h1>R2D - Hurricane Damage<a class="headerlink" href="#r2d-hurricane-damage" title="Link to this heading"></a></h1>
+<section id="author-daniel-acosta-reyes">
+<h2>Author: Daniel Acosta Reyes<a class="headerlink" href="#author-daniel-acosta-reyes" title="Link to this heading"></a></h2>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Hurricane Maria, a Category 5 storm, struck Puerto Rico on September 20, 2017, claiming over 3000 lives.
+This example assesses wind-induced damage for Vieques Island, Puerto Rico, using peak gust wind speed data from the National Institute of Standards and Technogology (NIST) and inventory of about 900 wood residential buildings. The inventory was created using a Python Notebook with BRAILS and formatted to a HAZUS-type damage assessment in R2D. The final R2D results include damage state and loss estimations.</p>
+</section>
+<section id="problem-description">
+<h2>Problem Description<a class="headerlink" href="#problem-description" title="Link to this heading"></a></h2>
+<p>Hurricanes are powerful tropical storms producing strong winds and heavy rains. The Saffir-Simpson Wind Scale, which categorizes hurricanes from 1 to 5 based on sustained wind speeds, helps estimate potential property damage <span id="id1">[<a class="reference internal" href="case_r.html#id3" title="H. S. Saffir. Hurricane wind and storm surge. The Military Engineering, pages 4-5, 1973.">Saf73</a>]</span>. Hurricanes in categories 3 and above are deemed major due to their significant destructive potential.</p>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="_images/case7_DA1_saffirScale.png"><img alt="_images/case7_DA1_saffirScale.png" src="_images/case7_DA1_saffirScale.png" style="width: 500px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 1.</strong> Saffir-Simpson Hurricane Scale. Soruce: TIGHE PA.</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Hurricane Maria (Category 5) destroyed several homes and health facilities in Puerto Rico, including <a class="reference external" href="https://www.menendez.senate.gov/newsroom/press/sens-menendez-wicker-reintroduce-vieques-recovery-and-redevelopment-act">the only healthcare center on Vieques Island</a>, exacerbating the island’s health crisis after decades-long military use.
+A recent study by Guerra-Velasquez <span id="id2">[<a class="reference internal" href="case_r.html#id2" title="G. R. Guerra Velázquez. Hurricane maría and public health in puerto rico: lessons learned to increase resiliency and prepare for future disasters. Annals of Global Health, 2022.">GV22</a>]</span> highlithed that infrastructure weaknesses made recovery more challenging and emphasize the need for increased resiliency and preparedness for future disasters.</p>
+</section>
+<section id="solution-strategy">
+<h2>Solution Strategy<a class="headerlink" href="#solution-strategy" title="Link to this heading"></a></h2>
+<p>The proposed solution gathers input data for a HAZUS-type damage and lossess analysis implemented in R2D. The dataset includes a baseline hazard, building inventory, and rulesets.</p>
+<ol class="arabic">
+<li><p><strong>Baseline Hazard:</strong> The hazard definition for this analysis is a raster file containing <a class="reference external" href="https://catalog.data.gov/dataset/hurricane-maria-wind-field-model-for-puerto-rico">Hurricane Maria Wind-Field Model for Puerto Rico</a> in miles per hour (mph).</p>
+<blockquote>
+<div><figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="_images/case7_DA2_raster.png"><img alt="_images/case7_DA2_raster.png" src="_images/case7_DA2_raster.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 2.</strong> Raster visualization of Hurricane Maria Wind-Field Model.</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
+<li><p><strong>Building Inventory:</strong> The building inventory for Puerto Rico is limited. However, using NHERI-SimCenter Building and Infrastructure Recognition using AI at Large-Scale <a class="reference external" href="https://github.com/NHERI-SimCenter/BRAILS">(BRAILS)</a> capabilities, it is possible to obtain building footprints and their associated attributes for a given location. Brails was implemented in a Jupyter Notebook to:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Obtain building footprints from open repositories (e.g., NSI)</p></li>
+<li><p>Fetch Google Street Views using Google API</p></li>
+<li><p>Import essential BRAILS modules such as NumberOfFloors, YearBuilt, and OccupancyClassifier</p></li>
+<li><p>Merge and create a Building Inventory Model (BIM) with required attributes for rulesets.</p></li>
+</ul>
+<p>A sample code to obtain bulding inventories is provided below. Make sure to <code class="docutils literal notranslate"><span class="pre">!pip</span> <span class="pre">install</span> <span class="pre">brails</span></code> before running.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39; Import modules &#39;&#39;&#39;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">brails.workflow.FootprintHandler</span><span class="w"> </span><span class="kn">import</span> <span class="n">FootprintHandler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">brails.workflow.NSIParser</span><span class="w"> </span><span class="kn">import</span> <span class="n">NSIParser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">brails.workflow.ImHandler</span><span class="w"> </span><span class="kn">import</span> <span class="n">ImageHandler</span>
+
+<span class="sd">&#39;&#39;&#39; Building parameters &#39;&#39;&#39;</span>
+<span class="c1"># Define query location:</span>
+<span class="n">name_key</span> <span class="o">=</span> <span class="s1">&#39;Vieques_2&#39;</span>
+<span class="n">location</span> <span class="o">=</span> <span class="n">Lajas</span><span class="p">,</span> <span class="n">Puerto</span> <span class="n">Rico</span>
+<span class="c1"># location = (lonmin, latmin, lonmax, latmax) # supports exten/bounding box format</span>
+
+<span class="c1"># Define footprint source:</span>
+<span class="c1"># fpSource included in BRAILS are i) OpenStreetMaps,</span>
+<span class="c1"># ii) Microsoft Global Building Footprints dataset, and iii) FEMA USA Structures.</span>
+<span class="c1"># The keywords for these sources are osm, ms, and usastr, respectively.</span>
+<span class="n">footprint_source</span> <span class="o">=</span> <span class="s1">&#39;osm&#39;</span>
+
+<span class="c1"># Length units for the attributes (used when relevant):</span>
+<span class="n">lengthunit</span> <span class="o">=</span> <span class="s1">&#39;m&#39;</span> <span class="c1"># Options are &#39;m&#39; or &#39;ft&#39;</span>
+
+<span class="c1"># File where the building inventory will be stored:</span>
+<span class="n">outputfile</span> <span class="o">=</span> <span class="s1">&#39;BuildingInventory.geojson&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name_key</span><span class="p">)</span>
+
+<span class="sd">&#39;&#39;&#39; Initialize and Run BRAILS modules &#39;&#39;&#39;</span>
+<span class="c1"># Initialize FootprintHandler:</span>
+<span class="n">fpHandler</span> <span class="o">=</span> <span class="n">FootprintHandler</span><span class="p">()</span>
+
+<span class="c1"># Run FootprintHandler to get the footprints for the entered location:</span>
+<span class="n">fpHandler</span><span class="o">.</span><span class="n">fetch_footprint_data</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">fpSource</span><span class="o">=</span><span class="n">footprint_source</span><span class="p">,</span>
+                            <span class="n">outputFile</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_Footprints.geojson&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name_key</span><span class="p">),</span>
+                            <span class="n">lengthUnit</span><span class="o">=</span><span class="n">lengthunit</span><span class="p">)</span>
+<span class="n">footprints</span> <span class="o">=</span> <span class="n">fpHandler</span><span class="o">.</span><span class="n">footprints</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Initialize NSIParser:</span>
+<span class="n">nsiParser</span> <span class="o">=</span> <span class="n">NSIParser</span><span class="p">()</span>
+
+<span class="c1"># Run NSIParser to merge the footprint data with NSI points:</span>
+<span class="n">nsiParser</span><span class="o">.</span><span class="n">GetNSIData</span><span class="p">(</span><span class="n">footprints</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="n">outputfile</span><span class="p">,</span> <span class="n">lengthUnit</span><span class="o">=</span><span class="n">lengthunit</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Complete Jupyter notebook can be accessed in DesignSafe - Data Depot at <code class="docutils literal notranslate"><span class="pre">PRJ-4604/Losses_Damage_R2D</span></code> under the name <cite>InventoryBRAILS-notebook.ipynb</cite>.</p>
+</div>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="_images/case7_DA3_footprints.png"><img alt="_images/case7_DA3_footprints.png" src="_images/case7_DA3_footprints.png" style="width: 600px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 3.</strong> Sample of 932 Building Footprints in Vieques, Puerto Rico, and BRAILS NumberOfFloors module generator.</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
+<li><p><strong>HAZUS Rulesets:</strong> <a class="reference external" href="https://www.fema.gov/flood-maps/products-tools/hazus">HAZUS</a> is a tool for risk modeling methodology that is implemented in R2D. To conduct damage and loss assessments, the software uses rulesets that parses building attributes such as occupancy, year built, roof height, and others. For this example, the HAZUS rulesets were obtained and modified from <a class="reference external" href="https://nheri-simcenter.github.io/R2D-Documentation/common/user_manual/examples/desktop/E8HurricaneWind/README.html">E8 - Hurricane Wind Example</a> in R2D documentation.</p></li>
+</ol>
+</section>
+<section id="simcenter-tool-used">
+<h2>SimCenter Tool Used<a class="headerlink" href="#simcenter-tool-used" title="Link to this heading"></a></h2>
+<p>This example uses the <em>Regional Resilience Determination Tool</em> (<strong>R2D</strong>) for wind damage and loss estimations in a residential area in Vieques, Puerto Rico, in order to assess the impact of wind forces and improve infrastructure resilience for future events.</p>
+</section>
+<section id="example-application">
+<h2>Example Application<a class="headerlink" href="#example-application" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Download files</p></td>
+<td><p><a class="reference external" href="https://github.com/dacost2/E17HurricaneMariaPR/archive/refs/heads/main.zip">Download</a></p></td>
+</tr>
+</tbody>
+</table>
+<p>Download example <strong>E17 - Hurricane Maria PR</strong> files and open R2D. In the <strong>File</strong> tab, <strong>Open</strong> the “input.json” file within the example.</p>
+<blockquote>
+<div><figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="_images/case7_DA4_E1.png"><img alt="_images/case7_DA4_E1.png" src="_images/case7_DA4_E1.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 4.</strong> R2D inut data.</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You will notice that all the inputs are autopopulated. Make sure to follow the next steps to verify they are in the correct units and using the right file references.</p>
+</div>
+<ol class="arabic">
+<li><p>In the <strong>GI</strong> panel, set the <strong>Analysis Name</strong>, <strong>Units</strong>, <strong>Asset Layers</strong>, and <strong>Output Settings</strong>.</p>
+<blockquote>
+<div><figure class="align-center" id="id8">
+<a class="reference internal image-reference" href="_images/case7_DA5_E2.png"><img alt="_images/case7_DA5_E2.png" src="_images/case7_DA5_E2.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 5.</strong> R2D <strong>GI</strong> Input and Output Settings.</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
+<li><p>For the <strong>HAZ</strong> Hazard Selection, select “Raster Defined Hazard” for an <strong>Event Type</strong>: “Hurricane”. The <strong>Intensity Measures of Raster</strong> is “Peak Gust Wind Speed - PWS” in mph.</p>
+<blockquote>
+<div><figure class="align-center" id="id9">
+<a class="reference internal image-reference" href="_images/case7_DA6_E3.png"><img alt="_images/case7_DA6_E3.png" src="_images/case7_DA6_E3.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 6.</strong> R2D <strong>HAZ</strong> Hazard Definition.</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
+<li><p>In the <strong>ASD</strong> panel, make sure the <strong>Regional Building Inventory</strong> is set to “GIS File to AIM”. Select the <strong>Assets to Analyze</strong> as intervals (e.g., 1-100) or go back to panel <strong>VIZ</strong> to manually select your assets by i) ‘click’ on the inventory layer; ii) push “Select” button (then drag selection in the map); iii) push “Add Assets” button.</p>
+<blockquote>
+<div><figure class="align-center" id="id10">
+<a class="reference internal image-reference" href="_images/case7_DA7_E4.png"><img alt="_images/case7_DA7_E4.png" src="_images/case7_DA7_E4.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 7 (a).</strong> R2D <strong>ASD</strong> Assets Selection by Intervals.</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id11">
+<a class="reference internal image-reference" href="_images/case7_DA8_E5.png"><img alt="_images/case7_DA8_E5.png" src="_images/case7_DA8_E5.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 7 (b).</strong> R2D <strong>VIZ</strong> Assets Selection in the Map.</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
+<li><p>The <strong>HTA</strong> panel requires a “Site Specified” calculation</p>
+<blockquote>
+<div><figure class="align-center" id="id12">
+<a class="reference internal image-reference" href="_images/case7_DA9_E6.png"><img alt="_images/case7_DA9_E6.png" src="_images/case7_DA9_E6.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 8.</strong> R2D <strong>HTA</strong> Building Mapping.</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
+<li><p>This example does not need a Building Modeling. Therefore, <strong>MOD</strong> set to “none”.</p>
+<blockquote>
+<div><figure class="align-center" id="id13">
+<a class="reference internal image-reference" href="_images/case7_DA10_E7.png"><img alt="_images/case7_DA10_E7.png" src="_images/case7_DA10_E7.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 9.</strong> R2D <strong>MOD</strong> Building Model.</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
+<li><p>The Building Analysis Method <strong>ANA</strong> will be “IMasEDP”.</p>
+<blockquote>
+<div><figure class="align-center" id="id14">
+<a class="reference internal image-reference" href="_images/case7_DA11_E8.png"><img alt="_images/case7_DA11_E8.png" src="_images/case7_DA11_E8.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 10.</strong> R2D <strong>ANA</strong> Building Analysis Method.</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
+<li><p><strong>Damage &amp; Loss Apllication</strong> is found in the <strong>DL</strong> panel. Here you select “Pelicun3” with <strong>Damage and Losss Method</strong> “HAZUS MH MU”. The Auto-population script referring to the specified ruleset is “auto_HU_PR.py” file.</p>
+<blockquote>
+<div><figure class="align-center" id="id15">
+<a class="reference internal image-reference" href="_images/case7_DA12_E9.png"><img alt="_images/case7_DA12_E9.png" src="_images/case7_DA12_E9.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 11.</strong> R2D <strong>DL</strong> Damage &amp; Loss Application.</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
+<li><p><strong>RUN</strong> the analysis. For the selection of 100 buildings, it should run in your local machine. For full inventory analysis, push <strong>RUN at DesignSafe</strong> button.</p>
+<blockquote>
+<div><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>For complete inventory: run in DesignDafe, Stampede2 - 20 min|96 Skylake (SKX) cores | 2 nodes with 48 processors per node | 280 buildings per task</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>SP</strong>, <strong>UQ</strong>, and <strong>RV</strong> panels are not used in this example.</p>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="results">
+<h2>Results<a class="headerlink" href="#results" title="Link to this heading"></a></h2>
+<p>Results will be retrieved from the <strong>RUN</strong> panel and manipulated in the visualization <strong>VIZ</strong> panel for mapping options.</p>
+<blockquote>
+<div><figure class="align-center" id="id16">
+<a class="reference internal image-reference" href="_images/case7_DA13_E10.png"><img alt="_images/case7_DA13_E10.png" src="_images/case7_DA13_E10.png" style="width: 400px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 12.</strong> R2D <strong>RES</strong> Regional Results Summary.</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+<p>The assessment gives two types of results:</p>
+<ol class="loweralpha simple">
+<li><p><strong>MostLikelyCriticalDamageState</strong>: The Damage State uses a scale from 0 to 4 that correspons to a qualitative damage description.</p></li>
+</ol>
+<table class="docutils align-default" id="id17">
+<caption><span class="caption-text">Damage State for Residential Buildings</span><a class="headerlink" href="#id17" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 33.3%" />
+<col style="width: 66.7%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Damage State</p></th>
+<th class="head"><p>Qualitative Damage Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p><em>No Damage or Very Minor Damage</em> - No visible damage from outside</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p><em>Minor Damage</em> - One broken window and moderate roof cover loss</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p><em>Moderate Damage</em> - Major roof cover damage</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p><em>Sever Damage</em> - Major window damage and roof cover loss</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p><em>Destruction</em> - Complete roof failure and/or failure of wall figremjobpane</p></td>
+</tr>
+</tbody>
+</table>
+<p><em>Ref.:</em> FEMA HAZUS Hurricane Technical Manual <a class="reference external" href="https://www.fema.gov/sites/default/files/documents/fema_hazus-hurricane-technical-manual-4.2.3_0.pdf">4.2.3</a></p>
+<ol class="loweralpha" start="2">
+<li><p><strong>mean_RepairCost_loss_ratio</strong>: The repair cost loss ratio is computed as a ratio of an estimated repair cost and wind-induced damage. The standard deviation of this variable is also provided as <em>std_RepairCost_loss_ratio</em>. This ratio goes on a scale from 0 to 1 and correlates with the <em>Damage State</em> (DS) variable. A typical breakdown corresponds to:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>DS0 - Loss ratio 0%</p></li>
+<li><p>DS1 - Loss ratio 2%</p></li>
+<li><p>DS2 - Loss ratio 10%</p></li>
+<li><p>DS3 - Loss ratio 50%</p></li>
+<li><p>DS4 - Loss ratio 100%</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<p>The results suggest that -of the 100 buildings assessed- most would suffer <cite>Severe Damage</cite> to <cite>Destruction</cite> given the inventory information.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Results Visualization</strong>: R2D offers QGIS capabilities to visualize regional trends and produce mapping products. <em>Fig. 13</em> shows an example of a map product using the QGIS module to create <em>HeatMaps</em> of the <strong>MostLikelyCriticalDamageState</strong> variable and the spatial distribution of the <strong>mean_RepairCost_loss_ratio</strong> for different intervals. Then, using the “New Layout” option you can create maps with legends, title, and other elements.
+See <a class="reference external" href="https://docs.qgis.org/3.34/en/docs/user_manual/">QGIS Documentation</a> for more.</p>
+</div>
+<figure class="align-center" id="id18">
+<a class="reference internal image-reference" href="_images/case7_DA14_Results.png"><img alt="_images/case7_DA14_Results.png" src="_images/case7_DA14_Results.png" style="width: 700px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Fig. 13.</strong> Mapping Visualization of Results Using QGIS in R2D.</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Hurricanes are increasingly happening with more intensity and force due to climate change.</p></li>
+<li><p>In locations such as Vieques, Puerto Rico, a comprehensive building inventory to assess huricane impact to infrastructure assets is limited. Assessing hazard exposure and consequences are key to increase resilience.</p></li>
+<li><p>R2D possess vast capabilities to adress this challenge, allowing researches to input hazard data and construct building inventories with BRAILS tools.</p></li>
+<li><p>This example provides strategies for creating building inventories in locations where data is scarce and implementing them in a format that could be used in R2D for regional analysis.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="case_6.html" class="btn btn-neutral float-left" title="R2D - Landslides" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="case_8.html" class="btn btn-neutral float-right" title="HydroUQ - Celeris" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, UW Computational Group.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

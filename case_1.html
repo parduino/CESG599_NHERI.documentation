@@ -1,0 +1,499 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuoFEM - Settlements &mdash; CESG-599 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="EEUQ - Transfer Function" href="case_2.html" />
+    <link rel="prev" title="CESG599 - NHERI" href="case_0.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CESG-599
+              <img src="_static/CESG-599.gif" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="case_0.html">CESG599 - NHERI</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">QuoFEM - Settlements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#author-kendra-mutch">Author: Kendra Mutch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#project-description">Project Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solution-strategy">Solution Strategy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#simcenter-tool-used">SimCenter Tool Used</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-applications">Example Applications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example-one-forward-propagation">Example One - Forward Propagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-two-sensitivity-analysis">Example Two - Sensitivity Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-three-parameter-calibration">Example Three - Parameter Calibration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#deterministic-calibration">Deterministic Calibration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bayesian-calibration">Bayesian Calibration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#remarks">Remarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="case_2.html">EEUQ - Transfer Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_3.html">S<sup>3</sup> hark - Site Response 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_4.html">S<sup>3</sup> hark - Site Response 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_5.html">R2D - Liquefaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_6.html">R2D - Landslides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_7.html">R2D - Hurricane Damage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_8.html">HydroUQ - Celeris</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case_r.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CESG-599</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">QuoFEM - Settlements</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/case_1.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="quofem-settlements">
+<span id="case-1"></span><h1>QuoFEM - Settlements<a class="headerlink" href="#quofem-settlements" title="Link to this heading"></a></h1>
+<section id="author-kendra-mutch">
+<h2>Author: Kendra Mutch<a class="headerlink" href="#author-kendra-mutch" title="Link to this heading"></a></h2>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>The goal of this project is to quantify settlement, parameters impacting settlement, and observe how uncertainty in input parameters impacts the ultimate settlement of a cohesive soil. These calculations are performed through use of the SimCenter QuoFEM tool. For more details on settlement calculations, the user is encounged to read <span id="id1">[<a class="reference internal" href="case_r.html#id8" title="R.D. Holtz, W.D. Kovacs, and T.C. Sheahan. An Introduction to Geotechnical Engineering. Prentice Hall, 2011. ISBN 978-0137011322.">HKS11</a>]</span>.</p>
+</section>
+<section id="project-description">
+<h2>Project Description<a class="headerlink" href="#project-description" title="Link to this heading"></a></h2>
+<p>Soil settlement is characterized by a change in the effective stress of soil, often driven by either a change in the ground water table, placement of fill/surchage load, or dissipation of excess pore water pressure. While a minimal amount of settlement is expected and may not prove hazardous, larger magnitudes of settlment, or differential settlement, can be detrimental to the integretity and functionality of a super-structure. Settlement of cohesive soil is especially hazardous, as the small pore space in fine grained soil restricts water from draining quickly through the voids. As a result, cohesive soil may continue to settle for a long period of time following the placement of a structure. Granular soil exhibits a significantly lower settlement hazard, as water tends to drain rapidly through the large pore space in the soil, meaning, much of the settlement of coarse grained soil is complete before construction ends. This project focuses on the hazard pertaining to the settlement of cohesive soil.</p>
+<p>When computing settlement, it is important to consider uncertainty and not accept a single predicted value as completely true to reality, as in-situ testing, lab testing, and various models used to determine soil paramters all contain uncertainty. Additionally, soil may differ vastly throughout a project site, with only a few samples taken to represent the whole site. This project uses the program QuoFEM to integrate standard settlement equations with uncertainty quantifiction tools.</p>
+<p>The example problems in this project will utilize the scenario, soil profile, and paramters depicted below (modified from S. Kramer CESG-562 class notes):</p>
+<p><strong>Scenario:</strong>
+<em>A site adjacent to San Francisco Bay is underlain by San Francisco Bay Mud. The site is to be readied for development by placement of 5ft of fill material, and the ultimamte settlement of the fill is of interest. The site conditions, shown below, indicate the presence of a crust of desiccated Bay Mud with thickness, h1, which is not expected to consolidate noticeably. The clay is underlain by a dense gravel, which will also not consolidate.</em></p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/case1_settlementProblem.png"><img alt="_images/case1_settlementProblem.png" src="_images/case1_settlementProblem.png" style="width: 350.1px; height: 216.9px;" />
+</a>
+</figure>
+<p>The table below presents the thickness of the compressible layer and the properties of the soil, including their mean values and corresponding coefficients of variation.</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Table 1 - Soil Profile Parameters</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Mean Value</p></th>
+<th class="head"><p>Coefficient of Variation (%)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>h1</p></td>
+<td><p>3 ft</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>h2</p></td>
+<td><p>25 ft</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-even"><td><p>Cc</p></td>
+<td><p>0.75</p></td>
+<td><p>20</p></td>
+</tr>
+<tr class="row-odd"><td><p>eo</p></td>
+<td><p>1.54</p></td>
+<td><p>7</p></td>
+</tr>
+<tr class="row-even"><td><p>Cr</p></td>
+<td><p>0.05</p></td>
+<td><p>20</p></td>
+</tr>
+<tr class="row-odd"><td><p>change in pre-consol pres.</p></td>
+<td><p>200 psf</p></td>
+<td><p>50</p></td>
+</tr>
+<tr class="row-even"><td><p>k</p></td>
+<td><p>10E-6 (cm/sec)</p></td>
+<td><p>200</p></td>
+</tr>
+<tr class="row-odd"><td><p>unit weight of fill</p></td>
+<td><p>130 pcf</p></td>
+<td><p>7</p></td>
+</tr>
+<tr class="row-even"><td><p>height of fill</p></td>
+<td><p>5 ft</p></td>
+<td><p>2</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="solution-strategy">
+<h2>Solution Strategy<a class="headerlink" href="#solution-strategy" title="Link to this heading"></a></h2>
+<p>The magnitude of settlement can be predicted using conventional consolidation theory, as outlined in the equations below:</p>
+<ol class="arabic">
+<li><p>If soil is normally consolidated, σp’ = σo’:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[H_{ult} = \frac{C_c}{1+e_o}log(\frac{σ_f'}{σ_o'})H_o\]</div>
+</div></blockquote>
+</li>
+<li><p>If soil is over consolidated, σp’ &gt; σo’ and σo’ + Δσ’ &lt; or = σp’:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[H_{ult} = \frac{C_r}{1+e_o}log(\frac{σ_f'}{σ_o'})H_o\]</div>
+</div></blockquote>
+</li>
+<li><p>If soil is over consolidated, σp’ &gt; σo’ and σo’ + Δσ’ &gt; σp’:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[H_{ult} = \frac{C_r}{1+e_o}log(\frac{σ_p'}{σ_o'})H_o + \frac{C_c}{1+e_o}log(\frac{σ_f'}{σ_p'})H_o\]</div>
+</div></blockquote>
+</li>
+</ol>
+<p>Where:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_{ult}\)</span> = Ultimate Settlement</p></li>
+<li><p><span class="math notranslate nohighlight">\(C_c\)</span> = Commpression Index</p></li>
+<li><p><span class="math notranslate nohighlight">\(e_o\)</span> = Void Ratio</p></li>
+<li><p><span class="math notranslate nohighlight">\(C_r\)</span> = Recompression Index</p></li>
+<li><p><span class="math notranslate nohighlight">\(σ_f'\)</span> = Final Vertical Effective Stress</p></li>
+<li><p><span class="math notranslate nohighlight">\(σ_o'\)</span> = Initial Vertical Effective Stress</p></li>
+<li><p><span class="math notranslate nohighlight">\(σ_p'\)</span> = Preconsolidation Pressure</p></li>
+<li><p><span class="math notranslate nohighlight">\(Δσ'\)</span> = Change in Vertical Effective Stress</p></li>
+<li><p><span class="math notranslate nohighlight">\(H_o\)</span> = Thickness of Compressible Layer</p></li>
+</ul>
+</div></blockquote>
+<p>For an accurate evaluation of ultimate settlement, it is recommended to subdivide the compressible layer into sublayers. These equations should be applied to each sublayer using corresponding estimations of initial and final effective stress, as well as material properties, particularly preconsolidation pressure.</p>
+<p>Though these equations provide a starting point for predicting settlement, they don’t capture uncertainty. To account for uncertainty, methods such as Forward Propagation, Sensitivity Analysis, and Parameter Calibration integrate standard equations with uncertainty quantification.</p>
+<p>Forward Propagation allows us to determine how uncertainty in soil parameters translates to uncertainty in ultimate settlement. This analysis method enables us to understand the effect of compounding uncertainty.</p>
+<p>Sensitivity Analysis allows us to determine which input parameters impact the resulting ultimate settlement most. Sensitivity Analysis may be performed in both Python and QuoFEM. A Python script performing Sensitivity Analysis may be found here. This script produces a <strong>tornado diagram</strong> (as depicted below), a visual representation of the change in magnitude of settlement resulting from the application of uncertainty to a single variable at a time. These results indicate that, for the given example and material properties, the compression index (Cc), unit weight of the fill (gamma_fill), and preconsolidation pressure are the most relevant parameters.</p>
+<p>Finally, Parameter Calibration, allows one to determine an unknown soil paramter, given a value (or set of values) of ultimate settlement. Two examples of parameter calibartion are discussed in the <strong>Example Applications</strong> section. One example utilizes Bayesian Calibration, while another example utilizes Deterministic Calibration.</p>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="_images/case1_TornadoDiagram.png"><img alt="_images/case1_TornadoDiagram.png" src="_images/case1_TornadoDiagram.png" style="width: 489.0px; height: 306.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 2. Tornado diagram.</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="simcenter-tool-used">
+<h2>SimCenter Tool Used<a class="headerlink" href="#simcenter-tool-used" title="Link to this heading"></a></h2>
+<p>In this project we use the SimCenter tool QuoFEM. QouFEM allows the integration of the finite element method and hazard compuatations with uncertainty quantification tools. Although the tool was originally developed for finite element applications, it can also be utilized with other solution methods. In this project, the settlement calculations are implemented in a simple Python script that propagates settlement evaluations through sublayers to determine the ultimate surface settlement. This python script can be easily uploaded in QuoFEM instead of specifying a FEM application.</p>
+<p>There are five different tabs in QuoFEM; four input tabs and one results tab. The four input tabs are outlined below:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>UQ tab</strong> - The UQ tab allows one to select the analysis method (Forward Propagation, Bayesian
+Callibration, Sensitivity Analysis, etc.). Additionally, one can specify a statistics model and the number
+of samples to run.</p></li>
+<li><p><strong>FEM tab</strong> - The FEM is where a python script is input, and a finite element method (such as Openseas) may
+be selected.</p></li>
+<li><p><strong>RV tab</strong> - The RV tab allows you define random variables and apply desired uncertainty and statistic distributions
+(normal distribution, uniform distribution etc.) to each variable.</p></li>
+<li><p><strong>EDP tab</strong> - The EDP tab allows one to define quantities of interest to compute (i.e., ultimate settlement).</p></li>
+</ul>
+<figure class="align-center" id="id4">
+<img alt="_images/case1_InputResultsTabs.png" src="_images/case1_InputResultsTabs.png" />
+<figcaption>
+<p><span class="caption-text">Fig. 3. QuoFEM interface.</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+<p>After entering parameters in the input tabs, one may choose run the project on their machine by simply clicking <strong>Run</strong> or to run the project in the cloud by selecting <strong>Run at Design Safe</strong>. When choosing to run a project in the cloud, one must login to Design Safe and specify a maximum run time. To ensure that the project does not expire while waiting in the queue, select a run time of at least 10 hours.</p>
+<p>The results tab contains both a <strong>Summary</strong> page and a <strong>Data Values</strong> page. The <strong>Summary</strong> page contains a brief
+outline of the values computed. The <strong>Data Values</strong> page contains a more comprehensive set of results and figures. There are various features within the <strong>Data Values</strong> page of the <strong>Results</strong> tab which may aid in analysis. Below is information about navigating the <strong>Data Values</strong> page to extract desired information:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>To View a Scatterplot of a Parameter vs. Run Number</strong> - left click once on any column.</p></li>
+<li><p><strong>To View a Cumulative Frequency Distribution for a Variable</strong> - First left click once on the column for the
+variable that you want to view a cumulative frequency distribution for. Then right click once on the same
+column.</p></li>
+<li><p><strong>To View a Histogram for a Variable</strong> - After following the steps to display a cumulative frequency
+distribution, left click on the same column once more to display the histogram.</p></li>
+<li><p><strong>To View a Scatterplot of One Variable vs. Another Variable</strong> - Right click once on one of the variables.
+This defines which variable will be on the x-axis. Then, left click once on the variable which you want
+plotted on the y-axis.</p></li>
+<li><p><strong>To Export the Data Table</strong> - Select the Save Table icon above the data, and choose a location for saving
+the table as a .csv file.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="example-applications">
+<h2>Example Applications<a class="headerlink" href="#example-applications" title="Link to this heading"></a></h2>
+<p>The following sections utilize the settlement scenario to demonstrate the various capabilities of QuoFEM in incorporating uncertainty quantification into the analysis. These capabilities include the propagation of uncertainty, deterministic and Bayesian calibration, as well as sensitivity analysis.</p>
+<section id="example-one-forward-propagation">
+<h3>Example One - Forward Propagation<a class="headerlink" href="#example-one-forward-propagation" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Open QuoFEM. By default, the <strong>UQ method</strong> is <strong>Forward Propagation</strong> and the <strong>UQ Engine</strong> is <strong>Dakota</strong>. In this example, we will use these defaults. Specify a <strong>Sample Number</strong> of 200 and a <strong>Seed Number</strong> of 949. Ensure the <strong>Parellel Execution</strong> and the <strong>Save Working dirs</strong> boxes are checked.</p></li>
+<li><p>Select the <strong>FEM</strong> tab. From the drop down menu, select <strong>Python</strong>. Navigate to the location of the <strong>Input Script</strong> and the <strong>Parameters Script</strong>. Both Python scripts are available at the below links:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>settlement.py</em></p></li>
+<li><p><em>params.py</em></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Select the <strong>RV</strong> tab. Enter the random variables (listed in the table in the problem description). Select <strong>Normal Distribution</strong> for each random variable, and enter the mean and standard deviation. The standard deviation must be calculated for each variable from the given coefficient of variation. The below table shows values which should be input for each random variable.</p>
+<blockquote>
+<div><table class="docutils align-default" id="id5">
+<caption><span class="caption-text">Random Variables</span><a class="headerlink" href="#id5" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 33.3%" />
+<col style="width: 33.3%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable Name</p></th>
+<th class="head"><p>Distribution</p></th>
+<th class="head"><p>Mean Value</p></th>
+<th class="head"><p>Standard Deviation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>h1</p></td>
+<td><p>Normal Distribution</p></td>
+<td><p>3</p></td>
+<td><p>0.15</p></td>
+</tr>
+<tr class="row-odd"><td><p>h2</p></td>
+<td><p>Normal Distribution</p></td>
+<td><p>25</p></td>
+<td><p>1.25</p></td>
+</tr>
+<tr class="row-even"><td><p>Cc</p></td>
+<td><p>Normal Distribution</p></td>
+<td><p>0.75</p></td>
+<td><p>0.15</p></td>
+</tr>
+<tr class="row-odd"><td><p>Cr</p></td>
+<td><p>Normal Distribution</p></td>
+<td><p>0.05</p></td>
+<td><p>0.01</p></td>
+</tr>
+<tr class="row-even"><td><p>eo</p></td>
+<td><p>Normal Distribution</p></td>
+<td><p>1.54</p></td>
+<td><p>0.1078</p></td>
+</tr>
+<tr class="row-odd"><td><p>Δσ’</p></td>
+<td><p>Normal Distribution</p></td>
+<td><p>200</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-even"><td><p>k</p></td>
+<td><p>Normal Distribution</p></td>
+<td><p>0.000001</p></td>
+<td><p>0.000002</p></td>
+</tr>
+<tr class="row-odd"><td><p>unit weight of fill</p></td>
+<td><p>Normal Distribution</p></td>
+<td><p>130</p></td>
+<td><p>9.1</p></td>
+</tr>
+<tr class="row-even"><td><p>height of fill</p></td>
+<td><p>Normal Distribution</p></td>
+<td><p>5</p></td>
+<td><p>0.1</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+<li><p>In the <strong>EDP</strong> tab, specify the variable of interest as <strong>Settlement</strong> and assign it a <strong>Length</strong> of <strong>1</strong>.</p></li>
+<li><p>Run the example either on your machine or in the cloud. For running in the cloud, see the <strong>SimCenter Tool Used</strong> section for additional details.</p></li>
+</ol>
+<p>The results for Forward Propagation are outlined below:</p>
+<figure class="align-center" id="id6">
+<img alt="_images/case1_ForwardPropagationResults.png" src="_images/case1_ForwardPropagationResults.png" />
+<figcaption>
+<p><span class="caption-text">Fig. 4. Forward propagation results.</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The results indicate that, given the mean parameters and standard deviation, a total settlement of 1.31 inches is expected with a standard deviation of 0.88 inches (CoV = 0.66). The corresponding histogram, based on Latin Hypercube Sampling (LHS), along with the associated normal distribution curve, is shown in the figure below:</p>
+<figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="_images/case1_propagation_Normalized_Settl_histogram.png"><img alt="_images/case1_propagation_Normalized_Settl_histogram.png" src="_images/case1_propagation_Normalized_Settl_histogram.png" style="width: 256.0px; height: 192.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 5. QuoFEM propagation histogram.</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="example-two-sensitivity-analysis">
+<h3>Example Two - Sensitivity Analysis<a class="headerlink" href="#example-two-sensitivity-analysis" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>In the UQ tab, select <strong>Sensitivity Analysis</strong> as the <strong>UQ Method</strong>. From the <strong>UQ Engine</strong> drop down, select <strong>SimCenterUQ</strong>. In the Method drop down, select <strong>Monte Carlo</strong>. For the <strong>Number of samples</strong>, enter 500, and for the <strong>Seed Number</strong>, enter 106.</p></li>
+<li><p>Select the <strong>FEM</strong> tab. From the <strong>FEM</strong> drop down, select <strong>Python</strong>. Locate the file path for the <strong>Input Script</strong> and the <strong>Paramters Script</strong>. Both Python scripts are available at the below links.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Input Script.py</em></p></li>
+<li><p><em>Parameters Script.py</em></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>In the <strong>RV</strong> tab, enter the same random variables as the Forward Propagation example.</p></li>
+<li><p>In the <strong>EDP</strong> tab, use the same inputs as the Forward Propagation example.</p></li>
+<li><p>Choose to run the example either on your machine in the cloud. For running in the cloud, see the <strong>SimCenter Tool Used</strong> section for additional details.</p></li>
+</ol>
+<p>The results for the Sensitivity Analysis in QuoFEM are outlined below. Uncertainty in preconsolidation pressure and compression index translate to the greatest uncertainty in the predicted settlement.  These findings are consistent with the results shown in the tornado diagram.</p>
+<figure class="align-center" id="id8">
+<a class="reference internal image-reference" href="_images/case1_Sensitivity2.png"><img alt="_images/case1_Sensitivity2.png" src="_images/case1_Sensitivity2.png" style="width: 275.4px; height: 177.6px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 6. QuoFEM sensitivity results.</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id9">
+<a class="reference internal image-reference" href="_images/case1_Sensitivity.png"><img alt="_images/case1_Sensitivity.png" src="_images/case1_Sensitivity.png" style="width: 1282.0px; height: 237.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 7. QuoFEM sensitivity results - most relevant parameters.</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="example-three-parameter-calibration">
+<h3>Example Three - Parameter Calibration<a class="headerlink" href="#example-three-parameter-calibration" title="Link to this heading"></a></h3>
+<p>Two parameter calibration strategies available in QuoFEM are explored: i) Deterministic calibration and ii) Bayesian calibration. In both cases, parameters are identified to match assumed field settlement data at several locations, with an average total settlement of 0.88 inches.</p>
+<section id="deterministic-calibration">
+<h4>Deterministic Calibration<a class="headerlink" href="#deterministic-calibration" title="Link to this heading"></a></h4>
+<p>Two deterministic calibration methods are used: i)NL2SOL and ii)OPT++GaussNewton).</p>
+<p>When testing the two different deterministic calibration algorithms supported in QuoFEM, we found that they provided vastly different results. This indicates that there are multiple combinations of the compression index (Cc) and preconsolidation pressure that can be considered optimal. To further explore this issue, the figure below shows a settlement field for varying values of Cc and preconsolidation pressure. It is evident that the settlement field is nonlinear due to the logarithmic nature of the solution equation. Additionally, when examining points with constant settlement (e.g., 0.88 or 1.316 inches), the red lines indicate that multiple combinations of compression index (Cc) and preconsolidation pressure yield the same settlement with the black dots representing two solutions obtained using the two deterministic calibration methoods in QuoFEM.  Clearly, for this scenario, deterministic calibration cannot identify a single optimal value, making Bayesian calibration necessary.</p>
+<figure class="align-center" id="id10">
+<a class="reference internal image-reference" href="_images/case1_SettlementField.png"><img alt="_images/case1_SettlementField.png" src="_images/case1_SettlementField.png" style="width: 512.0px; height: 384.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 8. Settlement field as a function of Cc and Precon pressure.</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="bayesian-calibration">
+<h4>Bayesian Calibration<a class="headerlink" href="#bayesian-calibration" title="Link to this heading"></a></h4>
+<p>This is a classic scenario where Bayesian methods can be preferred instead of deterministic methods - Bayesian methods show that there is not just one best parameter value but several values are almost equally good. This issue frequently arises when we have many parameters to be calibrated with not much data. A single best parameter value is usually ?unidentifiable? in such cases</p>
+<ol class="arabic">
+<li><p>Open QuoFEM. In the <strong>UQ</strong> tab, change the <strong>UQ method</strong> to <strong>Bayesain Callibration</strong> and change the <strong>UQ Engine</strong> to <strong>UCSD-UQ</strong>. For the model, select <strong>Non-hierarchical</strong>. Enter a <strong>Sample</strong> number of 500 and <strong>Seed</strong> number of 85. For the <strong>Calibration Data File</strong>, navigate to <strong>data_2.txt</strong>. This text file may be downloaded at the below link:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>data_2.txt</em></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>In the <strong>FEM</strong> tab, navigate to the location of the <strong>Input Script</strong> and <strong>Parameter Script</strong>. The Bayesian Calibration Python scripts may be downloaded at the below links:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Settlement_2.py</em></p></li>
+<li><p><em>params.py</em></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>In the <strong>RV</strong> tab, enter the same random variables as the Forward Propagation example.</p></li>
+<li><p>In the EDP tab, add two variables of interset. The first variable is <strong>settlement</strong> with a <strong>Length</strong> of <strong>1</strong>, and the second variable is a <strong>dummy</strong> variable with a <strong>Length</strong> of 1.</p></li>
+<li><p>Choose to run the example either on your machine in the cloud. For running in the cloud, see the <strong>SimCenter Tool Used</strong> section for additional details.</p></li>
+</ol>
+<p>The results for Bayesian Calibration are outlined below:</p>
+<figure class="align-default">
+<img alt="_images/case1_BayesianResults1.png" src="_images/case1_BayesianResults1.png" />
+</figure>
+<figure class="align-center" id="id11">
+<img alt="_images/case1_BayesianResults2.png" src="_images/case1_BayesianResults2.png" />
+<figcaption>
+<p><span class="caption-text">Fig. 9. QuoFEM Bayesian calibration results.</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>The figure shows Cc and Precon pressure are the most relevant parameters.</p>
+<p>A more in-depth analysis using prior and posterior distributions reveals that the posterior distributions from the Bayesian calibration process result in more accurate and less uncertain settlement estimations. The figure below illustrates these distributions.</p>
+<figure class="align-center" id="id12">
+<a class="reference internal image-reference" href="_images/case1_calibration_PriorPost.png"><img alt="_images/case1_calibration_PriorPost.png" src="_images/case1_calibration_PriorPost.png" style="width: 560.0px; height: 503.99999999999994px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 10. Prior and posterior distributions from Bayesian calibration.</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
+<section id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Link to this heading"></a></h2>
+<p>By accounting for uncertainty in settlement, chances of highly underpredicting or overpredicting settlement are reduced.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="case_0.html" class="btn btn-neutral float-left" title="CESG599 - NHERI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="case_2.html" class="btn btn-neutral float-right" title="EEUQ - Transfer Function" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, UW Computational Group.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
