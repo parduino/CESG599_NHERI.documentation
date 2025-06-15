@@ -16,7 +16,7 @@ Problem Description
 
 Tsunamis are powerful waves frequently initiated by earthquakes. Modeling tsunami inundation is vital for creating tsunami evacuation routes and for long term planning of mitigation efforts in coastal communities.
 
-Analyzing tsunami risk with `R2D <https://simcenter.designsafe-ci.org/research-tools/hydro-uq/>`_ uses inundation depth as the tsunami intensity measure. It uses a raster file of inundation depth over the study area with a building inventory to determine the inundation depth at each building. Creating an accurate model of inundation depth is paramount to the reliability of loss calculations. As a result, the model must include building-wave interactions (along with many other factors not discussed here). There are two widely used approaches to capturing this interaction:
+Tsunami risk analysis using R2D <https://simcenter.designsafe-ci.org/research-tools/hydro-uq/>_ relies on inundation depth and flow velocity as primary intensity measures. These parameters are typically obtained from simulation results in the form of raster files covering the study area. The raster data is then combined with a building inventory to extract the inundation depth and velocity at each structure. Accurate modeling of these intensity measures is critical for reliable loss estimation. Therefore, the simulation must account for wave-structure interactions, among other important factors not detailed here. Two widely adopted approaches exist for representing these interactions:
 
     * Equivalent Surface Roughness: This method uses roughness values to capture the effect of buildings and vegetation on propagation of water through a community. This method is advantageous due to its simplicity and compatibility with widely available digital elevation models, which generally attempt to remove buildings and vegetation.
     * Explicitly Represented Buildings: This method adds impermeable blocks to the digital elevation model corresponding to buildings. While real buildings do not behave as impermeable blocks during a tsunami, this method attempts to more directly model buildings’ effect on inundation. However, this method requires much higher resolution digital elevation models (and as a result, longer computing times) and an existing structural inventory.
@@ -31,13 +31,16 @@ Gathering and processing the data required for use with Celeris in this example 
 
 #. **Creation of Building Inventory** 
 
-    Existing building inventories in this region of Puerto Rico are very limited. In our study area, zero existing buildings were found in the National Structure Inventory (NSI). This missing data can be generated using the AI-enabled tool called `BRAILS++ <https://simcenter.designsafe-ci.org/products/backend-components/brails/>`_  (*Building Recognition using Artificial Intelligence at Large Scale*) from NHERI SimCenter. BRAILS++ uses machine learning models trained on satellite imagery to determine building footprint geometry and locations. Then it uses neural networks trained on Google Street View data to estimate features of the buildings in the inventory (e.g. number of stories, roof shape, construction material, etc.). BRAILS++ is available to be run using Python and for the purposes of this project a Jupyter Notebook was developed that:
+    Existing building inventories for this region of Puerto Rico are sparse. In our study area, no buildings were found in the National Structure Inventory (NSI). To address this data gap, we used `BRAILS++ <https://simcenter.designsafe-ci.org/products/backend-components/brails/>`_ (Building Recognition using Artificial Intelligence at Large Scale), an AI-enabled tool developed and maintained by the NHERI SimCenter. BRAILS++ employs machine learning models trained on satellite imagery to identify building footprint geometries and locations. It then applies neural networks trained on Google Street View images to estimate building attributes such as number of stories, roof shape, and construction material.BRAILS++ can be run through Python, and for this project, a Jupyter Notebook was developed to:
         
-        * Defines the boundaries of our study area,
-        * Collects and saves footprint geometry using BRAILS++,
-        * Supplements the inventory with any data available within the NSI,
-        * Gathers Google StreetView images for each building (when available), and
-        * Implements a BRAILS++ classifier to estimate the number of floors at each building with available StreetView imagery
+        * Define the boundaries of the study area,
+        * Extract and save building footprint geometries using BRAILS++,
+        * Integrate any available data from the NSI,
+        * Retrieve Google Street View imagery for each building (when available), and
+        * Apply BRAILS++ classifiers to estimate the number of floors for buildings with Street View coverage.
+
+
+    The following example uses BRAILS++ to create a building inventory for an approximately 800m by 800m area of Loiza, Puerto Rico. The area is centered at latitude 18.4323008 and longitude -65.8780065. The extent of the area is defined in degrees, with a radius of 400m in each direction.
 
     
     .. figure:: ./images/case8_Loiza_Inventory_map.png
